@@ -1,65 +1,41 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<Available> availableaFromJson(String str) => List<Available>.from(json.decode(str).map((x) => Available.fromJson(x)));
+part 'available.g.dart'; // 👈 generated file
 
-String availableaToJson(List<Available> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable(explicitToJson: true)
 class Available {
+  final String id;
+  final String doctorId;
+  final String days;
+  final String times;
+  final bool? isActive;
+  final String? createdBy;
+  final DateTime? createdTime;
+  final String? updatedBy;
+  final DateTime? updatedTime;
+  final String? queryFlag;
+  final bool getTimeByDay;
+  final List<Available> timeList;
+
   Available({
-    this.id,
-    this.doctorid,
-    this.days,
-    this.times,
-    this.isactive,
-    this.createdby,
-    this.createdtime,
-    this.updatedby,
-    this.updatedtime,
+    required this.id,
+    required this.doctorId,
+    required this.days,
+    required this.times,
+    this.isActive,
+    this.createdBy,
+    this.createdTime,
+    this.updatedBy,
+    this.updatedTime,
     this.queryFlag,
-    this.getTimeByDay,
-    this.timeList,
+    this.getTimeByDay = false,
+    this.timeList = const [],
   });
 
-  String id;
-  dynamic doctorid;
-  String days;
-  String times;
-  dynamic isactive;
-  dynamic createdby;
-  dynamic createdtime;
-  dynamic updatedby;
-  dynamic updatedtime;
-  dynamic queryFlag;
-  bool getTimeByDay;
-  List<Available> timeList;
+  /// 🔹 JSON → Model
+  factory Available.fromJson(Map<String, dynamic> json) =>
+      _$AvailableFromJson(json);
 
-  factory Available.fromJson(Map<String, dynamic> json) => Available(
-    id: json["Id"] == null ? null : json["Id"],
-    doctorid: json["Doctorid"],
-    days: json["Days"] == null ? null : json["Days"],
-    times: json["Times"] == null ? null : json["Times"],
-    isactive: json["Isactive"],
-    createdby: json["Createdby"],
-    createdtime: json["Createdtime"],
-    updatedby: json["Updatedby"],
-    updatedtime: json["Updatedtime"],
-    queryFlag: json["QueryFlag"],
-    getTimeByDay: json["GetTimeByDay"],
-    timeList: json["TimeList"] == null ? null : List<Available>.from(json["TimeList"].map((x) => Available.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id == null ? null : id,
-    "Doctorid": doctorid,
-    "Days": days == null ? null : days,
-    "Times": times == null ? null : times,
-    "Isactive": isactive,
-    "Createdby": createdby,
-    "Createdtime": createdtime,
-    "Updatedby": updatedby,
-    "Updatedtime": updatedtime,
-    "QueryFlag": queryFlag,
-    "GetTimeByDay": getTimeByDay,
-    "TimeList": timeList == null ? null : List<dynamic>.from(timeList.map((x) => x.toJson())),
-  };
+  /// 🔹 Model → JSON
+  Map<String, dynamic> toJson() => _$AvailableToJson(this);
 }

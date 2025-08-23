@@ -1,61 +1,37 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<LabTestByCategory> labTestByCategoryFromJson(String str) => List<LabTestByCategory>.from(json.decode(str).map((x) => LabTestByCategory.fromJson(x)));
+part 'lab_test_by_category.g.dart';
 
-String labTestByCategoryToJson(List<LabTestByCategory> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class LabTestByCategory {
+  final String id;
+  final String testId;
+  final String testName;
+  final String testAmount;
+  final bool? testStatus;
+  final String testCategory;
+  final String? createdBy;
+  final DateTime? createdAt;
+  final String? updatedBy;
+  final DateTime? updateDate;
+  final String catTestName;
+
   LabTestByCategory({
-    this.id,
-    this.testid,
-    this.testname,
-    this.testamount,
-    this.teststatus,
-    this.testcategory,
-    this.createby,
+    required this.id,
+    required this.testId,
+    required this.testName,
+    required this.testAmount,
+    this.testStatus,
+    required this.testCategory,
+    this.createdBy,
     this.createdAt,
-    this.updateby,
-    this.updatedate,
-    this.catTestName,
+    this.updatedBy,
+    this.updateDate,
+    required this.catTestName,
   });
 
-  String id;
-  String testid;
-  String testname;
-  String testamount;
-  dynamic teststatus;
-  String testcategory;
-  dynamic createby;
-  dynamic createdAt;
-  dynamic updateby;
-  dynamic updatedate;
-  String catTestName;
+  factory LabTestByCategory.fromJson(Map<String, dynamic> json) =>
+      _$LabTestByCategoryFromJson(json);
 
-  factory LabTestByCategory.fromJson(Map<String, dynamic> json) => LabTestByCategory(
-    id: json["Id"],
-    testid: json["Testid"],
-    testname: json["Testname"],
-    testamount: json["Testamount"],
-    teststatus: json["Teststatus"],
-    testcategory: json["Testcategory"],
-    createby: json["Createby"],
-    createdAt: json["CreatedAt"],
-    updateby: json["Updateby"],
-    updatedate: json["Updatedate"],
-    catTestName: json["catTestName"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Testid": testid,
-    "Testname": testname,
-    "Testamount": testamount,
-    "Teststatus": teststatus,
-    "Testcategory": testcategory,
-    "Createby": createby,
-    "CreatedAt": createdAt,
-    "Updateby": updateby,
-    "Updatedate": updatedate,
-    "catTestName": catTestName,
-  };
+  Map<String, dynamic> toJson() => _$LabTestByCategoryToJson(this);
 }

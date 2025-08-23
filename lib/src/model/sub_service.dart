@@ -1,81 +1,45 @@
-// To parse this JSON data, do
-//
-//     final subService = subServiceFromJson(jsonString);
+import 'package:json_annotation/json_annotation.dart';
 
-import 'dart:convert';
+part 'sub_service.g.dart';
 
-List<SubService> subServiceFromJson(String str) => List<SubService>.from(json.decode(str).map((x) => SubService.fromJson(x)));
-
-String subServiceToJson(List<SubService> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class SubService {
+  final String id;
+  final String serviceCenterName;
+  final String serviceCenterAddress;
+  final String latitude;
+  final String longitude;
+  final String phone;
+  final String email;
+  final String ownerName;
+  final dynamic status;
+  final dynamic createdBy;
+  final dynamic createdAt;
+  final String serviceType;
+  final String serviceTypeName;
+  final String serviceTags;
+  final dynamic queryFlag;
+
   SubService({
-    this.id,
-    this.servicecentername,
-    this.serviceceneraddress,
-    this.latitude,
-    this.longitude,
-    this.phone,
-    this.email,
-    this.ownername,
+    required this.id,
+    required this.serviceCenterName,
+    required this.serviceCenterAddress,
+    required this.latitude,
+    required this.longitude,
+    required this.phone,
+    required this.email,
+    required this.ownerName,
     this.status,
-    this.createdby,
-    this.createdat,
-    this.servicetype,
-    this.servicetypeName,
-    this.servicetags,
-    this.qeryflug,
+    this.createdBy,
+    this.createdAt,
+    required this.serviceType,
+    required this.serviceTypeName,
+    required this.serviceTags,
+    this.queryFlag,
   });
 
-  String id;
-  String servicecentername;
-  String serviceceneraddress;
-  String latitude;
-  String longitude;
-  String phone;
-  String email;
-  String ownername;
-  dynamic status;
-  dynamic createdby;
-  dynamic createdat;
-  String servicetype;
-  String servicetypeName;
-  String servicetags;
-  dynamic qeryflug;
+  factory SubService.fromJson(Map<String, dynamic> json) =>
+      _$SubServiceFromJson(json);
 
-  factory SubService.fromJson(Map<String, dynamic> json) => SubService(
-    id: json["Id"],
-    servicecentername: json["Servicecentername"],
-    serviceceneraddress: json["Serviceceneraddress"],
-    latitude: json["Latitude"],
-    longitude: json["Longitude"],
-    phone: json["Phone"],
-    email: json["Email"],
-    ownername: json["Ownername"],
-    status: json["Status"],
-    createdby: json["Createdby"],
-    createdat: json["Createdat"],
-    servicetype: json["Servicetype"],
-    servicetypeName: json["ServicetypeName"],
-    servicetags: json["Servicetags"],
-    qeryflug: json["qeryflug"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Servicecentername": servicecentername,
-    "Serviceceneraddress": serviceceneraddress,
-    "Latitude": latitude,
-    "Longitude": longitude,
-    "Phone": phone,
-    "Email": email,
-    "Ownername": ownername,
-    "Status": status,
-    "Createdby": createdby,
-    "Createdat": createdat,
-    "Servicetype": servicetype,
-    "ServicetypeName": servicetypeName,
-    "Servicetags": servicetags,
-    "qeryflug": qeryflug,
-  };
+  Map<String, dynamic> toJson() => _$SubServiceToJson(this);
 }

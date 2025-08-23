@@ -1,97 +1,55 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<PatientAppointment> patientAppointmentFromJson(String str) => List<PatientAppointment>.from(json.decode(str).map((x) => PatientAppointment.fromJson(x)));
+part 'patient_appointment.g.dart';
 
-String patientAppointmentToJson(List<PatientAppointment> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class PatientAppointment {
+  final String id;
+  final String patientUid;
+  final String patientName;
+  final String doctorId;
+  final String dates;
+  final String timeId;
+  final String reasons;
+  final String? payMethod;
+  final String status;
+  final String? createdBy;
+  final String createdTime;
+  final String? updatedBy;
+  final String? updatedTime;
+  final String doctorName;
+  final String speciality;
+  final String doctorDept;
+  final String appointmentTime;
+  final String gender;
+  final String age;
+  final String queryFlag;
+
   PatientAppointment({
-    this.id,
-    this.patientuid,
-    this.patientName,
-    this.doctorid,
-    this.dates,
-    this.timeid,
-    this.reasons,
-    this.paymethod,
-    this.status,
-    this.createdby,
-    this.createdtime,
-    this.updatedby,
-    this.updatedtime,
-    this.doctorName,
-    this.speciality,
-    this.doctorDept,
-    this.appointmentTime,
-    this.gender,
-    this.age,
-    this.queryFlag,
+    required this.id,
+    required this.patientUid,
+    required this.patientName,
+    required this.doctorId,
+    required this.dates,
+    required this.timeId,
+    required this.reasons,
+    this.payMethod,
+    required this.status,
+    this.createdBy,
+    required this.createdTime,
+    this.updatedBy,
+    this.updatedTime,
+    required this.doctorName,
+    required this.speciality,
+    required this.doctorDept,
+    required this.appointmentTime,
+    required this.gender,
+    required this.age,
+    required this.queryFlag,
   });
 
-  String id;
-  String patientuid;
-  String patientName;
-  String doctorid;
-  String dates;
-  String timeid;
-  String reasons;
-  dynamic paymethod;
-  String status;
-  dynamic createdby;
-  String createdtime;
-  dynamic updatedby;
-  dynamic updatedtime;
-  String doctorName;
-  String speciality;
-  String doctorDept;
-  String appointmentTime;
-  String gender;
-  String age;
-  String queryFlag;
+  factory PatientAppointment.fromJson(Map<String, dynamic> json) =>
+      _$PatientAppointmentFromJson(json);
 
-  factory PatientAppointment.fromJson(Map<String, dynamic> json) => PatientAppointment(
-    id: json["Id"],
-    patientuid: json["Patientuid"],
-    patientName: json["PatientName"],
-    doctorid: json["Doctorid"],
-    dates: json["Dates"],
-    timeid: json["Timeid"],
-    reasons: json["Reasons"],
-    paymethod: json["Paymethod"],
-    status: json["Status"],
-    createdby: json["Createdby"],
-    createdtime: json["Createdtime"],
-    updatedby: json["Updatedby"],
-    updatedtime: json["Updatedtime"],
-    doctorName: json["doctorName"],
-    speciality: json["speciality"],
-    doctorDept: json["doctorDept"],
-    appointmentTime: json["appointmentTime"],
-    gender: json["Gender"],
-    age: json["Age"],
-    queryFlag: json["QueryFlag"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Patientuid": patientuid,
-    "PatientName": patientName,
-    "Doctorid": doctorid,
-    "Dates": dates,
-    "Timeid": timeid,
-    "Reasons": reasons,
-    "Paymethod": paymethod,
-    "Status": status,
-    "Createdby": createdby,
-    "Createdtime": createdtime,
-    "Updatedby": updatedby,
-    "Updatedtime": updatedtime,
-    "doctorName": doctorName,
-    "speciality": speciality,
-    "doctorDept": doctorDept,
-    "appointmentTime": appointmentTime,
-    "Gender": gender,
-    "Age": age,
-    "QueryFlag": queryFlag,
-  };
+  Map<String, dynamic> toJson() => _$PatientAppointmentToJson(this);
 }

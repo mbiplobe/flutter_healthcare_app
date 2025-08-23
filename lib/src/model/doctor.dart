@@ -1,129 +1,68 @@
-// To parse this JSON data, do
-//
-//     final doctor = doctorFromJson(jsonString);
 
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<Doctor> doctorFromJson(String str) => List<Doctor>.from(json.decode(str).map((x) => Doctor.fromJson(x)));
+part 'doctor.g.dart';
 
-String doctorToJson(List<Doctor> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class Doctor {
+  final String id;
+  final String name;
+  final String department;
+  final String specialist;
+  final String phone;
+  final String education;
+  final String? experience;
+  final String about;
+  final String fees;
+  final DateTime? joinDate;
+  final String photo;
+  final String? gender;
+  final bool? isActive;
+  final String? createdBy;
+  final DateTime? createdTime;
+  final String? updatedBy;
+  final DateTime? updatedTime;
+  final int? sortBy;
+  final bool? isView;
+  final String? viewBy;
+  final DateTime? viewTime;
+  final String doctorRating;
+  final String location;
+  final String latitude;
+  final String longitude;
+  final String? jsonDetails;
+  final String? queryFlag;
+
   Doctor({
-    this.id,
-    this.name,
-    this.department,
-    this.specialist,
-    this.phone,
-    this.education,
+    required this.id,
+    required this.name,
+    required this.department,
+    required this.specialist,
+    required this.phone,
+    required this.education,
     this.experience,
-    this.about,
-    this.fees,
-    this.joindate,
-    this.photo,
+    required this.about,
+    required this.fees,
+    this.joinDate,
+    required this.photo,
     this.gender,
-    this.isactive,
-    this.createdby,
-    this.createdtime,
-    this.updatedby,
-    this.updatedtime,
-    this.sortby,
-    this.isview,
-    this.viewby,
-    this.viewtime,
-    this.doctroRating,
-    this.location,
-    this.latitude,
-    this.longitude,
+    this.isActive,
+    this.createdBy,
+    this.createdTime,
+    this.updatedBy,
+    this.updatedTime,
+    this.sortBy,
+    this.isView,
+    this.viewBy,
+    this.viewTime,
+    required this.doctorRating,
+    required this.location,
+    required this.latitude,
+    required this.longitude,
     this.jsonDetails,
     this.queryFlag,
   });
 
-  String id;
-  String name;
-  String department;
-  String specialist;
-  String phone;
-  String education;
-  dynamic experience;
-  String about;
-  String fees;
-  dynamic joindate;
-  String photo;
-  dynamic gender;
-  dynamic isactive;
-  dynamic createdby;
-  dynamic createdtime;
-  dynamic updatedby;
-  dynamic updatedtime;
-  dynamic sortby;
-  dynamic isview;
-  dynamic viewby;
-  dynamic viewtime;
-  String doctroRating;
-  String location;
-  String latitude;
-  String longitude;
-  dynamic jsonDetails;
-  dynamic queryFlag;
-
-  factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
-    id: json["Id"],
-    name: json["Name"],
-    department: json["Department"],
-    specialist: json["Specialist"],
-    phone: json["phone"],
-    education: json["Education"],
-    experience: json["Experience"],
-    about: json["About"],
-    fees: json["Fees"],
-    joindate: json["Joindate"],
-    photo: json["Photo"],
-    gender: json["Gender"],
-    isactive: json["Isactive"],
-    createdby: json["Createdby"],
-    createdtime: json["Createdtime"],
-    updatedby: json["Updatedby"],
-    updatedtime: json["Updatedtime"],
-    sortby: json["Sortby"],
-    isview: json["Isview"],
-    viewby: json["Viewby"],
-    viewtime: json["Viewtime"],
-    doctroRating: json["DoctroRating"],
-    location: json["Location"],
-    latitude: json["Latitude"],
-    longitude: json["Longitude"],
-    jsonDetails: json["JsonDetails"],
-    queryFlag: json["QueryFlag"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Name": name,
-    "Department": department,
-    "Specialist": specialist,
-    "phone": phone,
-    "Education": education,
-    "Experience": experience,
-    "About": about,
-    "Fees": fees,
-    "Joindate": joindate,
-    "Photo": photo,
-    "Gender": gender,
-    "Isactive": isactive,
-    "Createdby": createdby,
-    "Createdtime": createdtime,
-    "Updatedby": updatedby,
-    "Updatedtime": updatedtime,
-    "Sortby": sortby,
-    "Isview": isview,
-    "Viewby": viewby,
-    "Viewtime": viewtime,
-    "DoctroRating": doctroRating,
-    "Location": location,
-    "Latitude": latitude,
-    "Longitude": longitude,
-    "JsonDetails": jsonDetails,
-    "QueryFlag": queryFlag,
-  };
+  factory Doctor.fromJson(Map<String, dynamic> json) => _$DoctorFromJson(json);
+  Map<String, dynamic> toJson() => _$DoctorToJson(this);
 }

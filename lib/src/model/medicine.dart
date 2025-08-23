@@ -1,97 +1,53 @@
-// To parse this JSON data, do
-//
-//     final medicine = medicineFromJson(jsonString);
+import 'package:json_annotation/json_annotation.dart';
 
-import 'dart:convert';
+part 'medicine.g.dart';
 
-List<Medicine> medicineFromJson(String str) => List<Medicine>.from(json.decode(str).map((x) => Medicine.fromJson(x)));
-
-String medicineToJson(List<Medicine> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class Medicine {
+  final String id;
+  final String medicineName;
+  final String medicineCompany;
+  final String medicineType;
+  final String medicineTypeName;
+  final String productCategory;
+  final String productCategoryName;
+  final String medicinePrice;
+  final String medicineImage;
+  final String uom;
+  final String stockQnty;
+  final String? createdBy;
+  final DateTime? createdAt;
+  final String? updatedBy;
+  final DateTime? updatedAt;
+  final bool? status;
+  final String? queryFlag;
+  final String imageUrl;
+  final String medicineDesc;
+
   Medicine({
-    this.id,
-    this.medicinename,
-    this.medicinecompany,
-    this.medicinetype,
-    this.medicinetypename,
-    this.productcategory,
-    this.productcategoryname,
-    this.medicineprice,
-    this.medicineimage,
-    this.uom,
-    this.stockqnty,
-    this.createdby,
-    this.createdat,
-    this.updateby,
-    this.updatedat,
+    required this.id,
+    required this.medicineName,
+    required this.medicineCompany,
+    required this.medicineType,
+    required this.medicineTypeName,
+    required this.productCategory,
+    required this.productCategoryName,
+    required this.medicinePrice,
+    required this.medicineImage,
+    required this.uom,
+    required this.stockQnty,
+    this.createdBy,
+    this.createdAt,
+    this.updatedBy,
+    this.updatedAt,
     this.status,
     this.queryFlag,
-    this.imageUrl,
-    this.medicineDesc,
+    required this.imageUrl,
+    required this.medicineDesc,
   });
 
-  String id;
-  String medicinename;
-  String medicinecompany;
-  String medicinetype;
-  String medicinetypename;
-  String productcategory;
-  String productcategoryname;
-  String medicineprice;
-  String medicineimage;
-  String uom;
-  String stockqnty;
-  dynamic createdby;
-  dynamic createdat;
-  dynamic updateby;
-  dynamic updatedat;
-  dynamic status;
-  dynamic queryFlag;
-  String imageUrl;
-  String medicineDesc;
+  factory Medicine.fromJson(Map<String, dynamic> json) =>
+      _$MedicineFromJson(json);
 
-  factory Medicine.fromJson(Map<String, dynamic> json) => Medicine(
-    id: json["Id"],
-    medicinename: json["Medicinename"],
-    medicinecompany: json["Medicinecompany"],
-    medicinetype: json["Medicinetype"],
-    medicinetypename: json["Medicinetypename"],
-    productcategory: json["Productcategory"],
-    productcategoryname: json["Productcategoryname"],
-    medicineprice: json["Medicineprice"],
-    medicineimage: json["Medicineimage"],
-    uom: json["Uom"],
-    stockqnty: json["Stockqnty"],
-    createdby: json["Createdby"],
-    createdat: json["Createdat"],
-    updateby: json["Updateby"],
-    updatedat: json["Updatedat"],
-    status: json["Status"],
-    queryFlag: json["QueryFlag"],
-    imageUrl: json["ImageUrl"],
-    medicineDesc: json["MedicineDesc"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Medicinename": medicinename,
-    "Medicinecompany": medicinecompany,
-    "Medicinetype": medicinetype,
-    "Medicinetypename": medicinetypename,
-    "Productcategory": productcategory,
-    "Productcategoryname": productcategoryname,
-    "Medicineprice": medicineprice,
-    "Medicineimage": medicineimage,
-    "Uom": uom,
-    "Stockqnty": stockqnty,
-    "Createdby": createdby,
-    "Createdat": createdat,
-    "Updateby": updateby,
-    "Updatedat": updatedat,
-    "Status": status,
-    "QueryFlag": queryFlag,
-    "ImageUrl": imageUrl,
-    "MedicineDesc": medicineDesc,
-  };
+  Map<String, dynamic> toJson() => _$MedicineToJson(this);
 }

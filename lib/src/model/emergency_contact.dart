@@ -1,69 +1,45 @@
-// To parse this JSON data, do
-//
-//     final emergency = emergencyFromJson(jsonString);
+import 'package:json_annotation/json_annotation.dart';
 
-import 'dart:convert';
+part 'emergency_contact.g.dart';
 
-Emergency emergencyFromJson(String str) => Emergency.fromJson(json.decode(str));
-
-String emergencyToJson(Emergency data) => json.encode(data.toJson());
-
+@JsonSerializable(explicitToJson: true)
 class Emergency {
+  final String userid;
+  final String address;
+  final String userphone;
+  final String postcode;
+  final String createdBy;
+  final DateTime? createdAt;
+  final List<EmergencyContactList> emergencyList;
+
   Emergency({
-    this.userid,
-    this.address,
-    this.userphone,
-    this.postcode,
-    this.createdby,
-    this.createdat,
-    this.emergencyList,
+    required this.userid,
+    required this.address,
+    required this.userphone,
+    required this.postcode,
+    required this.createdBy,
+    this.createdAt,
+    this.emergencyList = const [],
   });
 
-  String userid;
-  String address;
-  String userphone;
-  String postcode;
-  String createdby;
-  String createdat;
-  List<EmergencyContactList> emergencyList;
+  factory Emergency.fromJson(Map<String, dynamic> json) =>
+      _$EmergencyFromJson(json);
 
-  factory Emergency.fromJson(Map<String, dynamic> json) => Emergency(
-    userid: json["Userid"],
-    address: json["Address"],
-    userphone: json["Userphone"],
-    postcode: json["postcode"],
-    createdby: json["Createdby"],
-    createdat: json["Createdat"],
-    emergencyList: List<EmergencyContactList>.from(json["EmergencyList"].map((x) => EmergencyContactList.fromJson(x))),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Userid": userid,
-    "Address": address,
-    "Userphone": userphone,
-    "postcode": postcode,
-    "Createdby": createdby,
-    "Createdat": createdat,
-    "EmergencyList": List<dynamic>.from(emergencyList.map((x) => x.toJson())),
-  };
+  Map<String, dynamic> toJson() => _$EmergencyToJson(this);
 }
 
+@JsonSerializable()
 class EmergencyContactList {
+  final String emergencyContactPerson;
+  final String emergencyContactPhone;
+
   EmergencyContactList({
-    this.emergencycontactperson,
-    this.emergencycontactphone,
+    required this.emergencyContactPerson,
+    required this.emergencyContactPhone,
   });
 
-  String emergencycontactperson;
-  String emergencycontactphone;
+  factory EmergencyContactList.fromJson(Map<String, dynamic> json) =>
+      _$EmergencyContactListFromJson(json);
 
-  factory EmergencyContactList.fromJson(Map<String, dynamic> json) => EmergencyContactList(
-    emergencycontactperson: json["Emergencycontactperson"],
-    emergencycontactphone: json["Emergencycontactphone"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Emergencycontactperson": emergencycontactperson,
-    "Emergencycontactphone": emergencycontactphone,
-  };
+  Map<String, dynamic> toJson() => _$EmergencyContactListToJson(this);
 }

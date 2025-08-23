@@ -1,85 +1,47 @@
-// To parse this JSON data, do
-//
-//     final service = serviceFromJson(jsonString);
+import 'package:json_annotation/json_annotation.dart';
 
-import 'dart:convert';
+part 'service.g.dart';
 
-List<Service> serviceFromJson(String str) => List<Service>.from(json.decode(str).map((x) => Service.fromJson(x)));
-
-String serviceToJson(List<Service> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class Service {
-    Service({
-        this.id,
-        this.name,
-        this.description,
-        this.icon,
-        this.type,
-        this.isactive,
-        this.createdby,
-        this.createdtime,
-        this.updatedby,
-        this.updatedtime,
-        this.sortby,
-        this.isview,
-        this.viewby,
-        this.viewtime,
-        this.jsonDetails,
-        this.queryFlag,
-    });
+  final String id;
+  final String name;
+  final String description;
+  final dynamic icon;
+  final dynamic type;
+  final dynamic isActive;
+  final dynamic createdBy;
+  final dynamic createdTime;
+  final dynamic updatedBy;
+  final dynamic updatedTime;
+  final dynamic sortBy;
+  final dynamic isView;
+  final dynamic viewBy;
+  final dynamic viewTime;
+  final dynamic jsonDetails;
+  final dynamic queryFlag;
 
-    String id;
-    String name;
-    String description;
-    dynamic icon;
-    dynamic type;
-    dynamic isactive;
-    dynamic createdby;
-    dynamic createdtime;
-    dynamic updatedby;
-    dynamic updatedtime;
-    dynamic sortby;
-    dynamic isview;
-    dynamic viewby;
-    dynamic viewtime;
-    dynamic jsonDetails;
-    dynamic queryFlag;
+  Service({
+    required this.id,
+    required this.name,
+    required this.description,
+    this.icon,
+    this.type,
+    this.isActive,
+    this.createdBy,
+    this.createdTime,
+    this.updatedBy,
+    this.updatedTime,
+    this.sortBy,
+    this.isView,
+    this.viewBy,
+    this.viewTime,
+    this.jsonDetails,
+    this.queryFlag,
+  });
 
-    factory Service.fromJson(Map<String, dynamic> json) => Service(
-        id: json["Id"],
-        name: json["Name"],
-        description: json["Description"],
-        icon: json["Icon"],
-        type: json["Type"],
-        isactive: json["Isactive"],
-        createdby: json["Createdby"],
-        createdtime: json["Createdtime"],
-        updatedby: json["Updatedby"],
-        updatedtime: json["Updatedtime"],
-        sortby: json["Sortby"],
-        isview: json["Isview"],
-        viewby: json["Viewby"],
-        viewtime: json["Viewtime"],
-        jsonDetails: json["JsonDetails"],
-        queryFlag: json["QueryFlag"],
-    );
+  factory Service.fromJson(Map<String, dynamic> json) =>
+      _$ServiceFromJson(json);
 
-    Map<String, dynamic> toJson() => {
-        "Id": id,
-        "Name": name,
-        "Description": description,
-        "Icon": icon,
-        "Type": type,
-        "Isactive": isactive,
-        "Createdby": createdby,
-        "Createdtime": createdtime,
-        "Updatedby": updatedby,
-        "Updatedtime": updatedtime,
-        "Sortby": sortby,
-        "Isview": isview,
-        "Viewby": viewby,
-        "Viewtime": viewtime,
-        "JsonDetails": jsonDetails,
-        "QueryFlag": queryFlag,
-    };
+  Map<String, dynamic> toJson() => _$ServiceToJson(this);
 }

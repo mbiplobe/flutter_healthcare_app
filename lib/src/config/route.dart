@@ -2,27 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/pages/detail_page.dart';
 import 'package:flutter_healthcare_app/src/pages/doctor_consultant_page.dart';
 import 'package:flutter_healthcare_app/src/pages/splash_page.dart';
-import 'package:flutter_healthcare_app/src/widgets/coustom_route.dart';
+import 'package:go_router/go_router.dart';
 
-class Routes {
-  static Map<String, WidgetBuilder> getRoute() {
-    return <String, WidgetBuilder>{
-      '/': (_) => SplashPage(),
-      '/HomePage': (_) => DoctorConsultantPage(),
-    };
-  }
 
-  static Route onGenerateRoute(RouteSettings settings) {
-    final List<String> pathElements = settings.name.split('/');
-    if (pathElements[0] != '' || pathElements.length == 1) {
-      return null;
-    }
-    switch (pathElements[1]) {
-      case "DetailPage":
-        return CustomRoute<bool>(
-            builder: (BuildContext context) => DetailPage(
-                  doctor: settings.arguments,
-                ));
-    }
-  }
+final GoRouter router = GoRouter(
+  routes: [
+    GoRoute(
+      path: AppRoutes.splashRoute,
+      builder: (context, state) =>  SplashPage(),
+    ),
+    GoRoute(
+      path: AppRoutes.homeRoute,
+      builder: (context, state) => DoctorConsultantPage(),
+    ),
+
+     GoRoute(
+      path: '/DetailPage',
+      builder: (context, state) {
+        final doctor = state.extra;
+        return DetailPage(doctor: doctor);
+      },
+    ),
+  ],
+  errorBuilder: (context, state) {
+    return Scaffold(
+      body: Center(
+        child: Text(' ${state.error}'),
+      ),
+    );
+  },
+);
+
+class AppRoutes {
+  static const splashRoute = "/";
+  static const homeRoute = '/HomePage';
+  static const detailsRoute = "/DetailPage";
 }

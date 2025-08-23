@@ -1,33 +1,21 @@
-// To parse this JSON data, do
-//
-//     final resgistrationResponse = resgistrationResponseFromJson(jsonString);
+import 'package:json_annotation/json_annotation.dart';
 
-import 'dart:convert';
+part 'registration_response.g.dart';
 
-RegistrationResponse resgistrationResponseFromJson(String str) => RegistrationResponse.fromJson(json.decode(str));
+@JsonSerializable()
+class RegistrationResponse {
+  final bool success;
+  final String message;
+  final String id;
 
-String resgistrationResponseToJson(RegistrationResponse data) => json.encode(data.toJson());
-
-class   RegistrationResponse {
   RegistrationResponse({
-    this.success,
-    this.message,
-    this.id,
+    required this.success,
+    required this.message,
+    required this.id,
   });
 
-  bool success;
-  String message;
-  String id;
+  factory RegistrationResponse.fromJson(Map<String, dynamic> json) =>
+      _$RegistrationResponseFromJson(json);
 
-  factory RegistrationResponse.fromJson(Map<String, dynamic> json) => RegistrationResponse(
-    success: json["Success"],
-    message: json["Message"],
-    id: json["Id"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Success": success,
-    "Message": message,
-    "Id": id,
-  };
+  Map<String, dynamic> toJson() => _$RegistrationResponseToJson(this);
 }

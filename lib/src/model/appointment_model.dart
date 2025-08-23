@@ -1,47 +1,27 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<Appointment> appointmentFromJson(String str) => List<Appointment>.from(json.decode(str).map((x) => Appointment.fromJson(x)));
+part 'appointment_model.g.dart';
 
-String appointmentToJson(List<Appointment> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+@JsonSerializable()
+class AppointmentModel {
+  final String name;
+  final String date;      
+  final String time;      
+  final int age;          
+  final String gender;
+  final String appointmentId;
+  final String reason;
 
-class Appointment {
-  Appointment({
-    this.name,
-    this.date,
-    this.time,
-    this.age,
-    this.gender,
-    this.appointmentId,
-    this.reason
+  AppointmentModel({
+    required this.name,
+    required this.date,
+    required this.time,
+    required this.age,
+    required this.gender,
+    required this.appointmentId,
+    required this.reason,
   });
 
-  String name;
-  String date;
-  String time;
-  String age;
-  String gender;
-  String appointmentId;
-  String reason;
-
-  factory Appointment.fromJson(Map<String, dynamic> json) => Appointment(
-    name: json["name"],
-    date: json["date"],
-    time: json["time"],
-    age: json["age"],
-    gender: json["gender"],
-    appointmentId: json["appointmentId"],
-      reason: json["reason"]
-
-  );
-
-  Map<String, dynamic> toJson() => {
-    "name": name,
-    "date": date,
-    "time": time,
-    "age": age,
-    "gender": gender,
-    "appointmentId": appointmentId,
-    "reason":reason
-
-  };
+  factory AppointmentModel.fromJson(Map<String, dynamic> json) => _$AppointmentModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AppointmentModelToJson(this);
 }

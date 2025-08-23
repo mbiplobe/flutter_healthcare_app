@@ -1,16 +1,28 @@
-class Registration{
-  String username;
-  String firstname;
-  String lastname;
-  String useremail;
-  String userphone;
-  String userpass;
-  String address;
-  String gender;
-  String dob;
+import 'package:json_annotation/json_annotation.dart';
 
-  Registration(this.username, this.firstname, this.lastname, this.useremail,
-      this.userphone, this.userpass, this.address, this.gender, this.dob);
+part 'registration.g.dart';
 
+@JsonSerializable()
+class Registration {
+  final String username;
+  final String firstName;
+  final String lastName;
+  final String userEmail;
+  final String userPhone;
+  final String userPass;
+  final String address;
+  final String gender;
+  final String dob;
 
+  Registration({
+    required this.username,
+    required this.firstName,
+    required this.lastName,
+    required this.userEmail,
+    required this.userPhone,
+    required this.userPass,
+    required this.address,
+    required this.gender,
+    required this.dob,
+  });
 }

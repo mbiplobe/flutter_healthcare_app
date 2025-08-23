@@ -1,49 +1,31 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<LabTestCategory> labTestCategoryFromJson(String str) => List<LabTestCategory>.from(json.decode(str).map((x) => LabTestCategory.fromJson(x)));
+part 'lab_test_category.g.dart';
 
-String labTestCategoryToJson(List<LabTestCategory> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class LabTestCategory {
+  final String id;
+  final String catId;
+  final String catTestType;
+  final String catTestName;
+  final String? createdBy;
+  final DateTime? createdAt;
+  final String? updatedBy;
+  final DateTime? updateDate;
+
   LabTestCategory({
-    this.id,
-    this.catid,
-    this.cattesttype,
-    this.cattestname,
-    this.createby,
+    required this.id,
+    required this.catId,
+    required this.catTestType,
+    required this.catTestName,
+    this.createdBy,
     this.createdAt,
-    this.updateby,
-    this.updatedate,
+    this.updatedBy,
+    this.updateDate,
   });
 
-  String id;
-  String catid;
-  String cattesttype;
-  String cattestname;
-  dynamic createby;
-  dynamic createdAt;
-  dynamic updateby;
-  dynamic updatedate;
+  factory LabTestCategory.fromJson(Map<String, dynamic> json) =>
+      _$LabTestCategoryFromJson(json);
 
-  factory LabTestCategory.fromJson(Map<String, dynamic> json) => LabTestCategory(
-    id: json["Id"],
-    catid: json["Catid"],
-    cattesttype: json["Cattesttype"],
-    cattestname: json["Cattestname"],
-    createby: json["Createby"],
-    createdAt: json["CreatedAt"],
-    updateby: json["Updateby"],
-    updatedate: json["Updatedate"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Catid": catid,
-    "Cattesttype": cattesttype,
-    "Cattestname": cattestname,
-    "Createby": createby,
-    "CreatedAt": createdAt,
-    "Updateby": updateby,
-    "Updatedate": updatedate,
-  };
+  Map<String, dynamic> toJson() => _$LabTestCategoryToJson(this);
 }

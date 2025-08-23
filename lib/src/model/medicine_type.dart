@@ -1,33 +1,23 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<MedicineType> medicineTypeFromJson(String str) => List<MedicineType>.from(json.decode(str).map((x) => MedicineType.fromJson(x)));
+part 'medicine_type.g.dart';
 
-String medicineTypeToJson(List<MedicineType> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class MedicineType {
+  final String id;
+  final String medicineTypeName;
+  final String imageUrl;
+  final String status;
+
   MedicineType({
-    this.id,
-    this.medicinetypename,
-    this.imageUrl,
-    this.status,
+    required this.id,
+    required this.medicineTypeName,
+    required this.imageUrl,
+    required this.status,
   });
 
-  String id;
-  String medicinetypename;
-  String imageUrl;
-  String status;
+  factory MedicineType.fromJson(Map<String, dynamic> json) =>
+      _$MedicineTypeFromJson(json);
 
-  factory MedicineType.fromJson(Map<String, dynamic> json) => MedicineType(
-    id: json["Id"],
-    medicinetypename: json["Medicinetypename"],
-    imageUrl: json["imageUrl"],
-    status: json["Status"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Medicinetypename": medicinetypename,
-    "imageUrl": imageUrl,
-    "Status": status,
-  };
+  Map<String, dynamic> toJson() => _$MedicineTypeToJson(this);
 }

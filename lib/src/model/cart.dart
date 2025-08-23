@@ -1,61 +1,35 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
-List<Cart> cartFromJson(String str) => List<Cart>.from(json.decode(str).map((x) => Cart.fromJson(x)));
+part 'cart.g.dart';
 
-String cartToJson(List<Cart> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class Cart {
+  final String id;
+  final String productId;
+  final String productName;
+  final String productCategoryId;
+  final String productCategoryName;
+  final String productImageUrl;
+  final double productPrice;
+  final int productQty;
+  final String? createdBy;
+  final DateTime? createdAt;
+  final String cartStatus;
+
   Cart({
-    this.id,
-    this.productid,
-    this.productname,
-    this.productcategoryid,
-    this.productcategoryname,
-    this.productimageurl,
-    this.productprice,
-    this.productqnty,
-    this.createdby,
-    this.createdat,
-    this.cartstatus,
+    required this.id,
+    required this.productId,
+    required this.productName,
+    required this.productCategoryId,
+    required this.productCategoryName,
+    required this.productImageUrl,
+    required this.productPrice,
+    required this.productQty,
+    this.createdBy,
+    this.createdAt,
+    required this.cartStatus,
   });
 
-  String id;
-  String productid;
-  String productname;
-  String productcategoryid;
-  String productcategoryname;
-  String productimageurl;
-  String productprice;
-  String productqnty;
-  dynamic createdby;
-  dynamic createdat;
-  String cartstatus;
-
-  factory Cart.fromJson(Map<String, dynamic> json) => Cart(
-    id: json["Id"],
-    productid: json["Productid"],
-    productname: json["Productname"],
-    productcategoryid: json["Productcategoryid"],
-    productcategoryname: json["Productcategoryname"],
-    productimageurl: json["Productimageurl"],
-    productprice: json["Productprice"],
-    productqnty: json["Productqnty"],
-    createdby: json["Createdby"],
-    createdat: json["Createdat"],
-    cartstatus: json["Cartstatus"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Productid": productid,
-    "Productname": productname,
-    "Productcategoryid": productcategoryid,
-    "Productcategoryname": productcategoryname,
-    "Productimageurl": productimageurl,
-    "Productprice": productprice,
-    "Productqnty": productqnty,
-    "Createdby": createdby,
-    "Createdat": createdat,
-    "Cartstatus": cartstatus,
-  };
+  factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);
+  Map<String, dynamic> toJson() => _$CartToJson(this);
 }

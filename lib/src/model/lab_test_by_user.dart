@@ -1,81 +1,45 @@
-// To parse this JSON data, do
-//
-//     final labTestByUser = labTestByUserFromJson(jsonString);
+import 'package:json_annotation/json_annotation.dart';
 
-import 'dart:convert';
+part 'lab_test_by_user.g.dart';
 
-List<LabTestByUser> labTestByUserFromJson(String str) => List<LabTestByUser>.from(json.decode(str).map((x) => LabTestByUser.fromJson(x)));
-
-String labTestByUserToJson(List<LabTestByUser> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
+@JsonSerializable()
 class LabTestByUser {
+  final String id;
+  final String testId;
+  final String testName;
+  final String testCatId;
+  final String catTestName;
+  final String? createdBy;
+  final DateTime? createdAt;
+  final String? updatedBy;
+  final DateTime? updateDate;
+  final String testAmount;
+  final String testFor;
+  final String sampleCollectDate;
+  final String sampleCollectTime;
+  final String paymentType;
+  final String status;
+
   LabTestByUser({
-    this.id,
-    this.testid,
-    this.testName,
-    this.testcatid,
-    this.catTestName,
-    this.createby,
+    required this.id,
+    required this.testId,
+    required this.testName,
+    required this.testCatId,
+    required this.catTestName,
+    this.createdBy,
     this.createdAt,
-    this.updateby,
-    this.updatedate,
-    this.testamount,
-    this.testfor,
-    this.samplecollectdate,
-    this.samplecollecttime,
-    this.paymenttype,
-    this.status,
+    this.updatedBy,
+    this.updateDate,
+    required this.testAmount,
+    required this.testFor,
+    required this.sampleCollectDate,
+    required this.sampleCollectTime,
+    required this.paymentType,
+    required this.status,
   });
 
-  String id;
-  String testid;
-  String testName;
-  String testcatid;
-  String catTestName;
-  dynamic createby;
-  dynamic createdAt;
-  dynamic updateby;
-  dynamic updatedate;
-  String testamount;
-  String testfor;
-  String samplecollectdate;
-  String samplecollecttime;
-  String paymenttype;
-  String status;
+  factory LabTestByUser.fromJson(Map<String, dynamic> json) =>
+      _$LabTestByUserFromJson(json);
 
-  factory LabTestByUser.fromJson(Map<String, dynamic> json) => LabTestByUser(
-    id: json["Id"],
-    testid: json["Testid"],
-    testName: json["TestName"],
-    testcatid: json["Testcatid"],
-    catTestName: json["CatTestName"],
-    createby: json["Createby"],
-    createdAt: json["CreatedAt"],
-    updateby: json["Updateby"],
-    updatedate: json["Updatedate"],
-    testamount: json["Testamount"],
-    testfor: json["Testfor"],
-    samplecollectdate: json["Samplecollectdate"],
-    samplecollecttime: json["Samplecollecttime"],
-    paymenttype: json["Paymenttype"],
-    status: json["Status"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "Id": id,
-    "Testid": testid,
-    "TestName": testName,
-    "Testcatid": testcatid,
-    "CatTestName": catTestName,
-    "Createby": createby,
-    "CreatedAt": createdAt,
-    "Updateby": updateby,
-    "Updatedate": updatedate,
-    "Testamount": testamount,
-    "Testfor": testfor,
-    "Samplecollectdate": samplecollectdate,
-    "Samplecollecttime": samplecollecttime,
-    "Paymenttype": paymenttype,
-    "Status": status,
-  };
+  Map<String, dynamic> toJson() => _$LabTestByUserToJson(this);
 }

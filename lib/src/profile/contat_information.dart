@@ -59,7 +59,7 @@ class _ContactInfoState extends State<ContactInfo> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: Icon(Icons.arrow_back_ios, color: ColorResources.themered),
+          child: Icon(Icons.arrow_back_ios, color: ColorResources.themeRed),
         ),
         centerTitle: true,
         elevation: 0,
@@ -86,7 +86,7 @@ class _ContactInfoState extends State<ContactInfo> {
                     'Contact information\n',
                     style: TextStyle(
                       fontSize: 18,
-                      color: ColorResources.themered,
+                      color: ColorResources.themeRed,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -94,7 +94,7 @@ class _ContactInfoState extends State<ContactInfo> {
                     'Please fill the below details\n',
                     style: TextStyle(
                       fontSize: 14,
-                      color: ColorResources.lightblack,
+                      color: ColorResources.lightBlack,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
@@ -169,7 +169,7 @@ class _ContactInfoState extends State<ContactInfo> {
 
                     child: Text("Add+"),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ColorResources.themered, // Button color
+                      backgroundColor: ColorResources.themeRed, // Button color
                       foregroundColor: Colors.white, // Text color
                       padding: EdgeInsets.symmetric(
                         horizontal: 24,
@@ -191,7 +191,7 @@ class _ContactInfoState extends State<ContactInfo> {
                         child: Text("Save"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              ColorResources.themered, // Button color
+                              ColorResources.themeRed, // Button color
                           foregroundColor: Colors.white, // Text color
                           padding: EdgeInsets.symmetric(
                             horizontal: 24,
@@ -237,7 +237,7 @@ class _ContactInfoState extends State<ContactInfo> {
             padding: const EdgeInsets.all(10.0),
             child: Text(
               '#${index + 1}',
-              style: TextStyle(fontSize: 16, color: ColorResources.lightblack),
+              style: TextStyle(fontSize: 16, color: ColorResources.lightBlack),
             ),
           ),
         ),
@@ -323,7 +323,7 @@ class _ContactInfoState extends State<ContactInfo> {
   void showSnakbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         content: Text(message, style: TextStyle(color: ColorResources.white)),
       ),
     );
@@ -346,14 +346,14 @@ class _ContactInfoState extends State<ContactInfo> {
 
     Emergency emergency = Emergency(
       postcode: postalCodeController.text,
-      userid: userId,
+      userid: userId!,
       address: addressController.text,
       userphone: phoneNumberController.text,
-      createdby: userId,
-      emergencyList: emergencyContactList, createdBy: 'mmislam3',
+      createdBy: userId!,
+      emergencyList: emergencyContactList, createdAt: DateTime.now(),
     );
 
-    print(emergency.toJson());
+
 
     RegistrationResponse response = await authViewModel.saveEmergencyContact(
       emergency,
@@ -370,7 +370,7 @@ class _ContactInfoState extends State<ContactInfo> {
 
   void getContactDetails(BuildContext context) async {
     ContactDetails contactDetails = await authViewModel.getContactDetails(
-      userId,
+      userId!,
     );
 
     if (contactDetails != null) {
@@ -382,16 +382,16 @@ class _ContactInfoState extends State<ContactInfo> {
       });
 
       for (int i = 0; i < contactDetails.emergencyList.length; i++) {
-        emergencyList.add(contactDetails.emergencyList[i].id);
+        //emergencyList.add(contactDetails.emergencyList[i].id!);
         emergencyContactPersonList.add(TextEditingController());
         emergencyContactNumber.add(TextEditingController());
       }
 
       for (int i = 0; i < contactDetails.emergencyList.length; i++) {
         emergencyContactPersonList[i].text =
-            contactDetails.emergencyList[i].emergencycontactperson;
+            contactDetails.emergencyList[i].emergencyContactPerson;
         emergencyContactNumber[i].text =
-            contactDetails.emergencyList[i].emergencycontactphone;
+            contactDetails.emergencyList[i].emergencyContactPhone;
       }
 
       setState(() {});

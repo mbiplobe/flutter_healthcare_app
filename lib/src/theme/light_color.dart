@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 
 class ColorResources {
-  static const Color background = Color(0XFFfefefe);
+  // Background & Surfaces
+  static const Color background = Color(0xFFFEFEFE);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF20262C);
+  static const Color lightBlack = Color(0xFF5F5F60);
 
-  static const Color titleTextColor = const Color(0xff1b1718);
-  static const Color subTitleTextColor = const Color(0xffb9bfcd);
+  // Text Colors
+  static const Color titleTextColor = Color(0xFF1B1718);
+  static const Color subTitleTextColor = Color(0xFFB9BFCD);
 
-  static const Color skyBlue = Color(0xff71b4fb);
-  static const Color lightBlue = Color(0xff7fbcfb);
-  static const Color extraLightBlue = Color(0xffd9eeff);
+  // Primary Brand Colors
+  static const Color purple = Color(0xFF8873F4);
+  static const Color purpleLight = Color(0xFF9489F4);
+  static const Color purpleExtraLight = Color(0xFFB1A5F6);
 
-  static const Color orange = Color(0xfffa8c73);
-  static const Color lightOrange = Color(0xfffa9881);
+  static const Color skyBlue = Color(0xFF71B4FB);
+  static const Color lightBlue = Color(0xFF7FBCFB);
+  static const Color extraLightBlue = Color(0xFFD9EEFF);
 
-  static const Color purple = Color(0xff8873f4);
-  static const Color purpleLight = Color(0xff9489f4);
-  static const Color purpleExtraLight = Color(0xffb1a5f6);
+  static const Color orange = Color(0xFFFA8C73);
+  static const Color lightOrange = Color(0xFFFA9881);
 
-  static const Color grey = Color(0xffb8bfce);
+  static const Color green = Color(0xFF4CD1BC);
+  static const Color lightGreen = Color(0xFF5ED6C3);
 
-  static const Color iconColor = Color(0xffcbd0db);
-  static const Color green = Color(0xff4cd1bc);
-  static const Color lightGreen = Color(0xff5ed6c3);
+  // Neutral / Utility
+  static const Color grey = Color(0xFFB8BFCE);
+  static const Color iconColor = Color(0xFFCBD0DB);
 
-  static const Color black = Color(0xff20262C);
-  static const Color lightblack = Color(0xff5F5F60);
-  // static const Color themered = Color(0xffff5A79);
-  static const Color themered = Color(0xff8BC73C);
+  // Accent / Theme
+  static const Color themeRed = Color(0xFF8BC73C);
 
-  static const Color white = Color(0xffffffff);
-
-  static const Map<int, Color> colorMap = {
+  // Material Swatch Example (White)
+  static const Map<int, Color> _colorMap = {
     50: Color(0x10FFFFFF),
     100: Color(0x20FFFFFF),
     200: Color(0x30FFFFFF),
@@ -40,10 +44,8 @@ class ColorResources {
     600: Color(0x70FFFFFF),
     700: Color(0x80FFFFFF),
     800: Color(0x90FFFFFF),
-    900: Color(0xffFFFFFF),
+    900: Color(0xFFFFFFFF),
   };
 
-  static const MaterialColor MATERIAL_WHITE =
-      MaterialColor(0xffFFFFFF, colorMap);
-//FF5A79
+  static const MaterialColor materialWhite = MaterialColor(0xFFFFFFFF, _colorMap);
 }

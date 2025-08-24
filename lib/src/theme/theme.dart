@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
-
-import 'light_color.dart';
+import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 
 class AppTheme {
   const AppTheme();
   static ThemeData lightTheme = ThemeData.light().copyWith(
-    backgroundColor: LightColor.background,
-    primaryColor: LightColor.purple,
-    cardTheme: CardTheme(color: LightColor.background),
-    iconTheme: IconThemeData(color: LightColor.iconColor),
-    bottomAppBarColor: LightColor.background,
-    dividerColor: LightColor.grey,
-  );
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+    primary: ColorResources.purple,
+    surface: ColorResources.background, // for cards, sheets
+    onPrimary: ColorResources.iconColor, // text/icons on primary color
+    secondary: ColorResources.grey,
+  ),
+  cardTheme: CardThemeData(
+    color: ColorResources.background,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+    ),
+  ),
+  iconTheme: IconThemeData(color: ColorResources.iconColor),
+  dividerTheme: DividerThemeData(
+    color: ColorResources.grey,
+    thickness: 1,
+  ),
+  bottomAppBarTheme: BottomAppBarTheme(
+    color: ColorResources.background,
+  ),
+);
+
 
   static TextStyle titleStyle =
-      const TextStyle(color: LightColor.titleTextColor, fontSize: 16);
+      const TextStyle(color: ColorResources.titleTextColor, fontSize: 16);
   static TextStyle subTitleStyle =
-      const TextStyle(color: LightColor.subTitleTextColor, fontSize: 12);
+      const TextStyle(color: ColorResources.subTitleTextColor, fontSize: 12);
 
   static TextStyle h1Style =
       const TextStyle(fontSize: 24, fontWeight: FontWeight.bold);

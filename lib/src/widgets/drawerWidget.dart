@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 
 class DrawerWidget extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const DrawerWidget({Key key, this.scaffoldKey}) : super(key: key);
+  const DrawerWidget({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   _DrawerWidgetState createState() => _DrawerWidgetState();

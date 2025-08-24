@@ -43,13 +43,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Health Care',
       theme: AppTheme.lightTheme,
-      routes: Routes.getRoute(),
-      onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
-      initialRoute: "SplashPage",
     );
   }
 }

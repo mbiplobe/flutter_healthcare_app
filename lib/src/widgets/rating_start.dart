@@ -2,41 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 
 class RatingStar extends StatefulWidget {
-  RatingStar({Key key, this.rating}) : super(key: key);
-  final double rating;
+  const RatingStar({Key? key, required this.rating}) : super(key: key);
+  final double rating; // e.g., 3.5
 
   @override
-  _RatingStarState createState() => _RatingStarState();
+  State<RatingStar> createState() => _RatingStarState();
 }
 
 class _RatingStarState extends State<RatingStar> {
-  Widget _start(int index) {
-    bool halfStar = false;
-    if ((widget.rating * 2) % 2 != 0) {
-      if (index < widget.rating && index == widget.rating - .5) {
-        halfStar = true;
-      }
+  Widget _buildStar(int index) {
+    if (widget.rating >= index + 1) {
+      return Icon(Icons.star, color: ColorResources.orange);
+    } else if (widget.rating > index && widget.rating < index + 1) {
+      return Icon(Icons.star_half, color: ColorResources.orange);
+    } else {
+      return Icon(Icons.star_border, color: ColorResources.grey);
     }
-
-    return Icon(halfStar ? Icons.star_half : Icons.star,
-        color: index < widget.rating
-            ? ColorResources.orange
-            : ColorResources.grey);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TweenAnimationBuilder<double>(
-        tween: Tween<double>(begin: 0, end: 5),
-        duration: Duration(milliseconds: 500),
-        builder: (context, value, child) {
-          return Wrap(
-              children:
-                  Iterable.generate(value.toInt(), (index) => _start(index))
-                      .toList());
-        },
-      ),
+    return TweenAnimationBuilder<double>(
+      tween: Tween<double>(begin: 0, end: widget.rating),
+      duration: const Duration(milliseconds: 500),
+      builder: (context, value, child) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(5, (index) => _buildStar(index)),
+        );
+      },
     );
   }
 }

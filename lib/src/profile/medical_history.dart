@@ -10,7 +10,7 @@ class MedicalHistory extends StatefulWidget {
 class _MedicalHistoryState extends State<MedicalHistory> {
   var isMedicineTaken = false;
   var isDrugSensitivity = false;
-  List<String> illnessList = new List();
+  List<String> illnessList = new List<String>();
 
   TextEditingController illNameController = new TextEditingController();
 

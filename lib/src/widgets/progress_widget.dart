@@ -1,58 +1,48 @@
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/theme/theme.dart';
 
 class ProgressWidget extends StatefulWidget {
-  ProgressWidget(
-      {Key key,
-      this.value,
-      this.totalValue = 100,
-      this.activeColor,
-      this.backgroundColor,
-      this.title,
-      this.durationTime})
-      : super(key: key);
-  final double totalValue;
+  const ProgressWidget({
+    Key? key,
+    this.value = 0,
+    this.totalValue = 100,
+    this.activeColor = Colors.blue,
+    this.backgroundColor = Colors.grey,
+    this.title,
+    this.durationTime = const Duration(seconds: 1),
+  }) : super(key: key);
+
   final double value;
+  final double totalValue;
   final Color activeColor;
   final Color backgroundColor;
-  final String title;
-  final durationTime;
+  final String? title;
+  final Duration durationTime;
+
   @override
-  _ProgressWidgetState createState() => _ProgressWidgetState();
+  State<ProgressWidget> createState() => _ProgressWidgetState();
 }
 
 class _ProgressWidgetState extends State<ProgressWidget>
     with TickerProviderStateMixin {
-  double progress;
-  Color activeColor;
-  Color backgroundColor;
+  late double progress;
+
   @override
   void initState() {
-    progress = (widget.value * 100) / widget.totalValue;
-    progress = (progress / 100) * 360;
-    activeColor = widget.activeColor;
-    backgroundColor = widget.backgroundColor;
-
     super.initState();
+    // convert value → radians
+    progress = (widget.value / widget.totalValue).clamp(0.0, 1.0) * 2 * pi;
   }
 
   @override
   Widget build(BuildContext context) {
-    final dimenstion = (AppTheme.fullWidth(context) - 10) * .3;
-    if (activeColor == null) {
-      activeColor = Theme.of(context).primaryColor;
-    }
-    if (backgroundColor == null) {
-      backgroundColor = Theme.of(context).disabledColor;
-    }
-    final inCurve = ElasticOutCurve(0.38);
+    final dimension = (AppTheme.fullWidth(context) - 10) * .3;
+
     return Container(
-      height: dimenstion,
-      width: dimenstion,
+      height: dimension,
+      width: dimension,
       alignment: Alignment.center,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -62,29 +52,33 @@ class _ProgressWidgetState extends State<ProgressWidget>
             children: <Widget>[
               TweenAnimationBuilder<double>(
                 tween: Tween<double>(begin: 0, end: progress),
-                duration: Duration(milliseconds: widget.durationTime),
+                duration: widget.durationTime,
                 builder: (context, value, child) {
-                  // print(value);
                   return CustomPaint(
+                    size: Size(dimension, dimension),
                     painter: ProgressPainter(
-                      value,
-                      activeColor,
-                      backgroundColor,
+                      value: value,
+                      activeColor: widget.activeColor,
+                      backgroundColor: widget.backgroundColor,
                     ),
                   );
                 },
               ),
               Text(
-                "${widget.value}",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                "${widget.value.toInt()}",
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
-          SizedBox(height: 40),
-          Text(
-            widget.title,
-            style: TextStyle(fontSize: 14, color: ColorResources.grey),
-          )
+          const SizedBox(height: 20),
+          if (widget.title != null)
+            Text(
+              widget.title!,
+              style: const TextStyle(fontSize: 14, color: ColorResources.grey),
+            )
         ],
       ),
     );
@@ -92,50 +86,52 @@ class _ProgressWidgetState extends State<ProgressWidget>
 }
 
 class ProgressPainter extends CustomPainter {
-  final double value;
+  final double value; // in radians
   final Color activeColor;
   final Color backgroundColor;
 
-  ProgressPainter(this.value, this.activeColor, this.backgroundColor);
+  ProgressPainter({
+    required this.value,
+    required this.activeColor,
+    required this.backgroundColor,
+  });
+
   @override
-  void paint(Canvas canvas, Size size) async {
-    var center1 = Offset(size.width / 2, size.height / 2);
-    Paint active = new Paint()
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    const radius = 40.0;
+
+    final inActive = Paint()
+      ..color = backgroundColor
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8;
+
+    final active = Paint()
       ..color = activeColor
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke
       ..strokeWidth = 7;
 
-    Paint inActive = new Paint()
-      ..color = backgroundColor
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 8;
+    // draw full background circle
     canvas.drawArc(
-        Rect.fromCircle(center: center1, radius: 40), 0, 180, false, inActive);
+      Rect.fromCircle(center: center, radius: radius),
+      0,
+      2 * pi,
+      false,
+      inActive,
+    );
 
-    canvas.drawArc(Rect.fromCircle(center: center1, radius: 40), -90 * pi / 180,
-        value * pi / 180, false, active);
+    // draw active progress arc
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      -pi / 2, // start from top
+      value,
+      false,
+      active,
+    );
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-}
-
-class LinearPointCurve extends Curve {
-  final double pIn;
-  final double pOut;
-
-  LinearPointCurve(this.pIn, this.pOut);
-
-  @override
-  double transform(double x) {
-    // Just a simple bit of linear interpolation math
-    final lowerScale = pOut / pIn;
-    final upperScale = (1.0 - pOut) / (1.0 - pIn);
-    final upperOffset = 1.0 - upperScale;
-    return x < pIn ? x * lowerScale : x * upperScale + upperOffset;
-  }
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }

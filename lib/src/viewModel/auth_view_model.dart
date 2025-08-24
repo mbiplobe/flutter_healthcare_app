@@ -14,7 +14,7 @@ class AuthViewModel extends ChangeNotifier {
 
   Future<RegistrationResponse> saveRegistration(Registration registration) async {
     final response =
-        await http.get('${url.BASE_URL}userRegistraion?username=${registration.firstname}${registration.lastname}&firstname=${registration.firstname}&lastname=${registration.lastname}&useremail=${registration.useremail}&userphone=${registration.userphone}&userpass=${registration.userpass}&address=${registration.address}&gender=${registration.gender}&dob=${registration.dob}');
+        await http.get(Uri.parse('${url.BASE_URL}userRegistraion?username=${registration.firstName}${registration.lastName}&firstname=${registration.firstName}&lastname=${registration.lastName}&useremail=${registration.userEmail}&userphone=${registration.userPhone}&userpass=${registration.userPass}&address=${registration.address}&gender=${registration.gender}&dob=${registration.dob}'));
 
 
     if (response.statusCode == 200) {
@@ -28,7 +28,7 @@ class AuthViewModel extends ChangeNotifier {
 
   Future<List<LoginResponse>> getlogin(String email, String password) async {
     final response =
-    await http.get('${url.BASE_URL}userLogin?email=$email&pass=$password');
+    await http.get(Uri.parse('${url.BASE_URL}userLogin?email=$email&pass=$password'));
 
     if (response.statusCode == 200) {
       List<LoginResponse> loginResponseList;
@@ -44,7 +44,7 @@ class AuthViewModel extends ChangeNotifier {
   Future<RegistrationResponse> saveEmergencyContact(Emergency emergency) async {
     var cartObj = jsonEncode(emergency);
     final response =
-    await http.get('${url.BASE_URL}saveToContact?cartobj=$cartObj');
+    await http.get(Uri.parse('${url.BASE_URL}saveToContact?cartobj=$cartObj'));
 
     if (response.statusCode == 200) {
       return RegistrationResponse.fromJson(jsonDecode(response.body));
@@ -56,7 +56,7 @@ class AuthViewModel extends ChangeNotifier {
 
   Future<ContactDetails> getContactDetails(String userId) async {
     final response = await http.get(
-        '${url.BASE_URL}getContactDetails?userId=$userId');
+        Uri.parse('${url.BASE_URL}getContactDetails?userId=$userId'));
 
     if (response.statusCode == 200) {
       return ContactDetails.fromJson(jsonDecode(response.body));

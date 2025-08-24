@@ -9,16 +9,28 @@ import 'package:http/http.dart' as http;
 
 class AppointmentViewModel extends ChangeNotifier {
   Future<RegistrationResponse> saveAppointment(Appointment appointment) async {
-    final response = await http.get(
-        '${url.BASE_URL}userAppointment?Patientuid=${appointment.patientuid}&Doctorid=${appointment.doctorid}&Dates=${appointment.dates}&Timeid=${appointment.timeid}&Reasons=${appointment.reasons}&payment=${appointment.paymen}');
+  final uri = Uri.parse(
+    '${url.BASE_URL}userAppointment'
+  ).replace(queryParameters: {
+    'Patientuid': appointment.patientuid,
+    'Doctorid': appointment.doctorid,
+    'Dates': appointment.dates,
+    'Timeid': appointment.timeid,
+    'Reasons': appointment.reasons,
+    'payment': appointment.payment,
+  });
 
-    if (response.statusCode == 200) {
-      return RegistrationResponse.fromJson(jsonDecode(response.body));
-    } else {
-      print(response.body);
-      throw Exception('Exception: ${response.statusCode}');
-    }
+  final response = await http.get(uri);
+
+  if (response.statusCode == 200) {
+    return RegistrationResponse.fromJson(jsonDecode(response.body));
+  } else {
+    print(response.body);
+    throw Exception('Exception: ${response.statusCode}');
   }
+}
+
+
 
   Future<RegistrationResponse> updateAppointment(Appointment appointment,String appointmentId) async {
     final response = await http.get(

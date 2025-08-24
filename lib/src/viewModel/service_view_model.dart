@@ -10,7 +10,7 @@ class ServiceViewModel extends ChangeNotifier {
 
   Future<List<Service>> getAllService() async {
     final response =
-        await http.get('${url.BASE_URL}getServices');
+        await http.get(Uri.parse('${url.BASE_URL}getServices'));
 
     if (response.statusCode == 200) {
       List<Service> services;
@@ -26,7 +26,7 @@ class ServiceViewModel extends ChangeNotifier {
 
   Future<List<SubService>> getSubService(String serviceId) async {
     final response =
-    await http.get('${url.BASE_URL}viewServiceCenter?serviceId=$serviceId');
+    await http.get(Uri.parse('${url.BASE_URL}viewServiceCenter?serviceId=$serviceId'));
 
     if (response.statusCode == 200) {
       List<SubService> services;

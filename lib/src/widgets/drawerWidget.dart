@@ -22,14 +22,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             children: [
               Container(
                 height: MediaQuery.of(context).size.height/4,
-                color: ColorResources.lightblack,
+                color: ColorResources.lightBlack,
               ),
               Positioned(
                 top: MediaQuery.of(context).size.height/4,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                     height: MediaQuery.of(context).size.height,
-                    color: ColorResources.themered,
+                    color: ColorResources.themeRed,
                   child: Padding(
                     padding: const EdgeInsets.only(top:70.0,left:20),
                     child: Column(

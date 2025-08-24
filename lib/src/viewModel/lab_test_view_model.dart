@@ -12,7 +12,7 @@ class LabTestViewModel extends ChangeNotifier {
 
   Future<List<LabTestCategory>> getAllLabtest() async {
     final response =
-        await http.get('${url.BASE_URL}getLabtestCat');
+        await http.get(Uri.parse('${url.BASE_URL}getLabtestCat'));
 
     if (response.statusCode == 200) {
       List<LabTestCategory> labTests;
@@ -26,7 +26,7 @@ class LabTestViewModel extends ChangeNotifier {
   }
   Future<List<LabTestByUser>> getAllLabTestByUser(String testFor) async {
     final response =
-        await http.get('${url.BASE_URL}viewLabtestbyUser?TestFor=$testFor');
+        await http.get(Uri.parse('${url.BASE_URL}viewLabtestbyUser?TestFor=$testFor'));
 
     if (response.statusCode == 200) {
       List<LabTestByUser> labTests;
@@ -42,7 +42,7 @@ class LabTestViewModel extends ChangeNotifier {
   Future<RegistrationResponse> cancelLabtest(String id,String userId,String status,String testId,String testCatId) async {
     print('<><><><$id <><><><><$userId');
     final response = await http.get(
-        '${url.BASE_URL}updateLabTestStatus?Id=$id&userid=$userId&Status=$status&testId=$testId&testCatId=$testCatId');
+        Uri.parse('${url.BASE_URL}updateLabTestStatus?Id=$id&userid=$userId&Status=$status&testId=$testId&testCatId=$testCatId'));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -56,7 +56,7 @@ class LabTestViewModel extends ChangeNotifier {
 
   Future<List<LabTestByCategory>> getLabTestByCategory(String testId) async {
     final response =
-        await http.get('${url.BASE_URL}getLabtestbyCat?TestCategoryId=$testId');
+        await http.get(Uri.parse('${url.BASE_URL}getLabtestbyCat?TestCategoryId=$testId'));
 
     if (response.statusCode == 200) {
       List<LabTestByCategory> labTests;
@@ -72,9 +72,9 @@ class LabTestViewModel extends ChangeNotifier {
   Future<RegistrationResponse> saveLabTest(String testId,String testCatId, String testFor,String testAmount,
       String sampleCollectDate,String sampleCollectTime,String paymentType) async {
     final response = await http.get(
-        '${url.BASE_URL}userSaveLabTest?testId=$testId&userid=$testFor&testCatId=$testCatId&testFor=$testFor&testAmount=$testAmount'
+        Uri.parse('${url.BASE_URL}userSaveLabTest?testId=$testId&userid=$testFor&testCatId=$testCatId&testFor=$testFor&testAmount=$testAmount'
             '&sampleCollectDate=$sampleCollectDate&sampleCollectTime=$sampleCollectTime&paymentType=$paymentType'
-            );
+            ));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -87,8 +87,8 @@ class LabTestViewModel extends ChangeNotifier {
   Future<RegistrationResponse> updateLabtest(String id, String testId,String testCatId, String testFor,String testAmount,
       String sampleCollectDate,String sampleCollectTime,String paymentType) async {
     final response = await http.get(
-        '${url.BASE_URL}updateFullLabTest?Id=$id&testId=$testId&userid=$testFor&testCatId=$testCatId&testFor=$testFor&testAmount=$testAmount'
-            '&sampleCollectDate=$sampleCollectDate&sampleCollectTime=$sampleCollectTime&paymentType=$paymentType'
+        Uri.parse('${url.BASE_URL}updateFullLabTest?Id=$id&testId=$testId&userid=$testFor&testCatId=$testCatId&testFor=$testFor&testAmount=$testAmount'
+            '&sampleCollectDate=$sampleCollectDate&sampleCollectTime=$sampleCollectTime&paymentType=$paymentType')
     );
 
     print(response.body);

@@ -34,7 +34,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Color unselectedColor = Colors.blueGrey;
   Gradient unselectedGradient = LinearGradient(colors: [ColorResources.themered, Colors.blueGrey]);
 
-  Color containerColor;
+  late Color containerColor;
   List<Color> containerColors = [
     Color(0xFFFDE1D7),
     Color(0xFFE4EDF5),

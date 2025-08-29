@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/config/route.dart';
-import 'package:flutter_healthcare_app/src/model/appointment_model.dart';
+import 'package:flutter_healthcare_app/src/core/constants.dart';
 import 'package:flutter_healthcare_app/src/viewModel/appointment_view_model.dart';
 import 'package:flutter_healthcare_app/src/viewModel/auth_view_model.dart';
 import 'package:flutter_healthcare_app/src/viewModel/doctor_view_model.dart';
 import 'package:flutter_healthcare_app/src/theme/theme.dart';
 import 'package:flutter_healthcare_app/src/viewModel/eshop_view_model.dart';
 import 'package:flutter_healthcare_app/src/viewModel/lab_test_view_model.dart';
+import 'package:flutter_healthcare_app/src/viewModel/location_viewmodel.dart';
 import 'package:flutter_healthcare_app/src/viewModel/patient_appointment_View_model.dart';
 import 'package:flutter_healthcare_app/src/viewModel/service_view_model.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
+      ChangeNotifierProvider(create: (_) => LocationViewModel()),
       ChangeNotifierProvider(
         create: (context) => DoctorViewModel(),
       ),
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Health Care',
+      title: AppConfigurations.appTitle,
       theme: AppTheme.lightTheme,
       routerConfig: router,
       debugShowCheckedModeBanner: false,

@@ -359,13 +359,11 @@ class _ContactInfoState extends State<ContactInfo> {
       emergency,
     );
 
-    if (response != null) {
-      setState(() {
-        isLoading = false;
-      });
-      Navigator.pop(context);
-      print(response.message);
-    }
+    setState(() {
+      isLoading = false;
+    });
+    Navigator.pop(context);
+    print(response.message);
   }
 
   void getContactDetails(BuildContext context) async {
@@ -373,28 +371,26 @@ class _ContactInfoState extends State<ContactInfo> {
       userId!,
     );
 
-    if (contactDetails != null) {
-      setState(() {
-        isLoading = false;
-        phoneNumberController.text = contactDetails.userphone;
-        postalCodeController.text = contactDetails.postcode;
-        addressController.text = contactDetails.address;
-      });
+    setState(() {
+      isLoading = false;
+      phoneNumberController.text = contactDetails.userphone;
+      postalCodeController.text = contactDetails.postcode;
+      addressController.text = contactDetails.address;
+    });
 
-      for (int i = 0; i < contactDetails.emergencyList.length; i++) {
-        //emergencyList.add(contactDetails.emergencyList[i].id!);
-        emergencyContactPersonList.add(TextEditingController());
-        emergencyContactNumber.add(TextEditingController());
-      }
-
-      for (int i = 0; i < contactDetails.emergencyList.length; i++) {
-        emergencyContactPersonList[i].text =
-            contactDetails.emergencyList[i].emergencyContactPerson;
-        emergencyContactNumber[i].text =
-            contactDetails.emergencyList[i].emergencyContactPhone;
-      }
-
-      setState(() {});
+    for (int i = 0; i < contactDetails.emergencyList.length; i++) {
+      //emergencyList.add(contactDetails.emergencyList[i].id!);
+      emergencyContactPersonList.add(TextEditingController());
+      emergencyContactNumber.add(TextEditingController());
     }
+
+    for (int i = 0; i < contactDetails.emergencyList.length; i++) {
+      emergencyContactPersonList[i].text =
+          contactDetails.emergencyList[i].emergencyContactPerson;
+      emergencyContactNumber[i].text =
+          contactDetails.emergencyList[i].emergencyContactPhone;
+    }
+
+    setState(() {});
   }
 }

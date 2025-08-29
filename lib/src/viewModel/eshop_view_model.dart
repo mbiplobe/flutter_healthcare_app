@@ -3,7 +3,9 @@ import 'package:flutter_healthcare_app/src/model/cart.dart';
 import 'package:flutter_healthcare_app/src/model/medicine.dart';
 import 'package:flutter_healthcare_app/src/model/medicine_type.dart';
 import 'package:flutter_healthcare_app/src/model/order.dart';
-import 'package:flutter_healthcare_app/src/model/orderDetails.dart';
+import 'package:flutter_healthcare_app/src/model/order_details.dart';
+// import 'package:flutter_healthcare_app/src/model/orderDetails.dart';
+// TODO: Create 'orderDetails.dart' in 'lib/src/model/' or update this import to the correct file if it already exists with a different name.
 import 'package:flutter_healthcare_app/src/model/place_order.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'dart:async';
@@ -14,7 +16,7 @@ class EShopViewModel extends ChangeNotifier {
   Future<List<Medicine>> getAllMedicine(String medicineId, String medCompany,
       String medType, String productCategoryId) async {
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/getAllMedicine?MedicineId=$medicineId&MedCompany=$medCompany&medType=$medType&ProductCategoryId=$productCategoryId');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/getAllMedicine?MedicineId=$medicineId&MedCompany=$medCompany&medType=$medType&ProductCategoryId=$productCategoryId'));
 
     if (response.statusCode == 200) {
       List<Medicine> medicines;
@@ -30,7 +32,7 @@ class EShopViewModel extends ChangeNotifier {
 
   Future<List<MedicineType>> getAllMedicineType() async {
     final response =
-        await http.get('http://172.16.61.221:8059/admins.asmx/getMedicineType');
+        await http.get(Uri.parse('http://172.16.61.221:8059/admins.asmx/getMedicineType'));
 
     if (response.statusCode == 200) {
       List<MedicineType> medicines;
@@ -46,7 +48,7 @@ class EShopViewModel extends ChangeNotifier {
 
   Future<List<Cart>> getCart(String userId) async {
     final response = await http
-        .get('http://172.16.61.221:8059/admins.asmx/viewMyCart?userId=$userId');
+        .get(Uri.parse('http://172.16.61.221:8059/admins.asmx/viewMyCart?userId=$userId'));
 
     if (response.statusCode == 200) {
       List<Cart> carts;
@@ -69,7 +71,7 @@ class EShopViewModel extends ChangeNotifier {
       String productQnty,
       String createdBy) async {
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/saveMyCart?productId=$productId&productName=$productName&productCategoryId=$productCategoryId&productCategoryName=$productCategoryName&productPrice=$productPrice&productQnty=$productQnty&createdBy=$createdBy');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/saveMyCart?productId=$productId&productName=$productName&productCategoryId=$productCategoryId&productCategoryName=$productCategoryName&productPrice=$productPrice&productQnty=$productQnty&createdBy=$createdBy'));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -89,7 +91,7 @@ class EShopViewModel extends ChangeNotifier {
       String productQnty,
       String createdBy) async {
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/updateMyCart?cartid=$cartid&productId=$productId&productName=$productName&productCategoryId=$productCategoryId&productCategoryName=$productCategoryName&productPrice=$productPrice&productQnty=$productQnty&createdBy=$createdBy');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/updateMyCart?cartid=$cartid&productId=$productId&productName=$productName&productCategoryId=$productCategoryId&productCategoryName=$productCategoryName&productPrice=$productPrice&productQnty=$productQnty&createdBy=$createdBy'));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -102,7 +104,7 @@ class EShopViewModel extends ChangeNotifier {
   Future<RegistrationResponse> saveOrder(PlaceOrder placeOrder) async {
     var value = jsonEncode(placeOrder);
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/saveToOrder?cartobj=$value');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/saveToOrder?cartobj=$value'));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -114,7 +116,7 @@ class EShopViewModel extends ChangeNotifier {
 
   Future<RegistrationResponse> removeCartItem(String cartid) async {
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/DeleteMyCart?cartid=$cartid');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/DeleteMyCart?cartid=$cartid'));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -128,7 +130,7 @@ class EShopViewModel extends ChangeNotifier {
 
   Future<List<Order>> getAllOrder(String userId) async {
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/viewMyOrder?userId=$userId');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/viewMyOrder?userId=$userId'));
 
     if (response.statusCode == 200) {
       List<Order> orders;
@@ -146,7 +148,7 @@ class EShopViewModel extends ChangeNotifier {
   Future<OrderDetails> getOrderDetails(String userId, String orderId) async {
     print('$userId $orderId');
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/viewMyOrderDetails?userId=$userId&orderId=$orderId');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/viewMyOrderDetails?userId=$userId&orderId=$orderId'));
 
     if (response.statusCode == 200) {
       return OrderDetails.fromJson(jsonDecode(response.body));
@@ -157,7 +159,7 @@ class EShopViewModel extends ChangeNotifier {
 
   Future<RegistrationResponse> deleteOrder(String orderId,String userId) async {
     final response = await http.get(
-        'http://172.16.61.221:8059/admins.asmx/DeleteMyOrder?orderId=$orderId&userId=$userId');
+        Uri.parse('http://172.16.61.221:8059/admins.asmx/DeleteMyOrder?orderId=$orderId&userId=$userId'));
 
     if (response.statusCode == 200) {
       return RegistrationResponse.fromJson(jsonDecode(response.body));

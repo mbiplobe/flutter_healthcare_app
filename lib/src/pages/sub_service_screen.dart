@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/service.dart';
 import 'package:flutter_healthcare_app/src/model/sub_service.dart';
 import 'package:flutter_healthcare_app/src/pages/map_screen.dart';
 
@@ -9,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class SubServicePage extends StatefulWidget {
   
-  String serviceId;
+  final String serviceId;
 
 
   SubServicePage(this.serviceId);
@@ -21,8 +20,8 @@ class SubServicePage extends StatefulWidget {
 class _SubServicePageState extends State<SubServicePage> {
   var isFirst = true;
   var isLoading = true;
-  List<SubService> serviceList = new List();
-  ServiceViewModel serviceViewModel;
+  List<SubService> serviceList = [];
+  late ServiceViewModel serviceViewModel;
 
   List<String> getListElements() {
     var item = List<String>.generate(100, (index) => "Service ${index}");
@@ -31,7 +30,6 @@ class _SubServicePageState extends State<SubServicePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -55,10 +53,10 @@ class _SubServicePageState extends State<SubServicePage> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back, color: ColorResources.themered)),
+            child: Icon(Icons.arrow_back, color: ColorResources.themeRed)),
         title: Text(
           'Services',
-          style: TextStyle(color: ColorResources.themered),
+          style: TextStyle(color: ColorResources.themeRed),
         ),
       ),
       body: Stack(
@@ -77,6 +75,7 @@ class _SubServicePageState extends State<SubServicePage> {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Container(
+        // ignore: deprecated_member_use
         color: ColorResources.white.withOpacity(0.3),
         child: Center(
           child: SizedBox(
@@ -88,6 +87,7 @@ class _SubServicePageState extends State<SubServicePage> {
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   boxShadow: [
                     BoxShadow(
+                      // ignore: deprecated_member_use
                       color: ColorResources.lightBlue.withOpacity(0.2),
                       spreadRadius: 1,
                       blurRadius: 15,
@@ -114,13 +114,13 @@ class _SubServicePageState extends State<SubServicePage> {
   }
 
   Widget getMenus() {
-    var listmenu = getListElements();
+    getListElements();
     var listview = ListView.separated(
         separatorBuilder: (BuildContext context, int index) => Divider(
               thickness: 1,
-              color: ColorResources.themered,
+              color: ColorResources.themeRed,
             ),
-        itemCount: serviceList != null ?serviceList.length :0,
+        itemCount: serviceList.length == 0 ? 0 : serviceList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: (){
@@ -129,15 +129,14 @@ class _SubServicePageState extends State<SubServicePage> {
 
             },
             child: ListTile(
-              title: Text('${serviceList[index].servicecentername}'),
+              title: Text('${serviceList[index].serviceCenterName}'),
               leading: Icon(Icons.star),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: ColorResources.themered,
+                color: ColorResources.themeRed,
               ),
             ),
           );
-          Divider();
         });
     return listview;
   }
@@ -145,13 +144,11 @@ class _SubServicePageState extends State<SubServicePage> {
   void getSubServices(BuildContext context) async {
     List<SubService> services = await serviceViewModel.getSubService(widget.serviceId);
 
-    if (services != null) {
-      setState(() {
-        services.forEach((item) {
-          serviceList.add(item);
-        });
-        isLoading = false;
+    setState(() {
+      services.forEach((item) {
+        serviceList.add(item);
       });
+      isLoading = false;
+    });
     }
-  }
 }

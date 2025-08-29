@@ -10,13 +10,18 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AuthViewModel extends ChangeNotifier {
-
+bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   Future<RegistrationResponse> saveRegistration(Registration registration) async {
+     _isLoading = true;
+    notifyListeners();
     final response =
         await http.get(Uri.parse('${url.BASE_URL}userRegistraion?username=${registration.firstName}${registration.lastName}&firstname=${registration.firstName}&lastname=${registration.lastName}&useremail=${registration.userEmail}&userphone=${registration.userPhone}&userpass=${registration.userPass}&address=${registration.address}&gender=${registration.gender}&dob=${registration.dob}'));
 
 
+    _isLoading = false;
+    notifyListeners();
     if (response.statusCode == 200) {
       return RegistrationResponse.fromJson(jsonDecode(response.body));
     } else {

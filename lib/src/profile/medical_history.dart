@@ -50,7 +50,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
               ),
               new Padding(padding: EdgeInsets.only(top: 10.0)),
               choronicIlnessWidget(context),
-              illnessList != null && illnessList.length > 0
+              illnessList.length > 0
                   ? Padding(
                       padding: const EdgeInsets.only(top: 10.0, bottom: 10),
                       child: GridView.builder(

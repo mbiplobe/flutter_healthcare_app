@@ -10,7 +10,7 @@ class DoctorViewModel extends ChangeNotifier {
 
   Future<List<Doctor>> getAllDoctor(String docName, String latitude,String longitude,String gernder, String rating, String exp) async {
     final response =
-        await http.get('${url.BASE_URL}getDoctors?DocName=$docName&latitude=$latitude&longitude=$longitude&Gender=$gernder&exp=$exp&rating=$rating');
+        await http.get(Uri.parse('${url.BASE_URL}getDoctors?DocName=$docName&latitude=$latitude&longitude=$longitude&Gender=$gernder&exp=$exp&rating=$rating'));
 
     if (response.statusCode == 200) {
       List<Doctor> doctors;
@@ -25,7 +25,7 @@ class DoctorViewModel extends ChangeNotifier {
 
   Future<List<Available>> getAvailibility(String docID) async {
     final response =
-    await http.get('${url.BASE_URL}getAvailibility?DocId=$docID');
+    await http.get(Uri.parse('${url.BASE_URL}getAvailibility?DocId=$docID'));
 
     if (response.statusCode == 200) {
       List<Available> availableTimes;

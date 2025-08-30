@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/model/cart.dart';
 import 'package:flutter_healthcare_app/src/model/view_appointment.dart';
 import 'package:flutter_healthcare_app/src/pages/all_service.dart';
-import 'package:flutter_healthcare_app/src/pages/book_appoint_page.dart';
-import 'package:flutter_healthcare_app/src/pages/doctor/doctor_home_Page.dart';
 import 'package:flutter_healthcare_app/src/pages/doctor_consultant_page.dart';
 import 'package:flutter_healthcare_app/src/pages/eshop/eshop_home_page.dart';
 import 'package:flutter_healthcare_app/src/pages/user/lab_test_page.dart';
@@ -21,22 +19,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
 
-  AppointmentViewModel appointmentViewModel;
-  EShopViewModel eShopViewModel;
+late  AppointmentViewModel appointmentViewModel;
+late  EShopViewModel eShopViewModel;
 
   var firstName = '';
   var lastName = '';
   var userId;
   var usertype;
   var appointmentCount = 0;
-  List<ViewAppointment> viewAppointment = new List<ViewAppointment>();
-  List<Cart> cartList = new List<Cart>();
+  List<ViewAppointment> viewAppointment = [];
+  List<Cart> cartList = [];
 
 
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCustomerInfo(context);
   }
@@ -54,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 150,
-              color: ColorResources.themered,
+              color: ColorResources.themeRed,
               child: Center(
                 child: Text(
                   'Welcome, $firstName $lastName',
@@ -87,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           borderRadius: BorderRadius.all(Radius.circular(10)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: ColorResources.lightblack.withOpacity(.3),
+              color: ColorResources.lightBlack.withOpacity(.3),
               blurRadius: 15,
               offset: Offset(5, 5),
             )
@@ -104,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                     width: 40,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: ColorResources.lightblack.withOpacity(0.2),
+                            color: ColorResources.lightBlack.withOpacity(0.2),
                             width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(130))),
                     child: Center(
@@ -112,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(4.0),
                         child: Icon(
                           Icons.shopping_cart,
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           size: 20,
                         ),
                       ),
@@ -127,12 +124,12 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           'Cart',
                           style: TextStyle(
-                              color: ColorResources.lightblack, fontSize: 14),
+                              color: ColorResources.lightBlack, fontSize: 14),
                         ),
                         Text(
                           'Item: ${cartList != null ? cartList.length : 0}',
                           style: TextStyle(
-                              color: ColorResources.lightblack, fontSize: 14),
+                              color: ColorResources.lightBlack, fontSize: 14),
                         )
                       ],
                     ),
@@ -151,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                     width: 40,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: ColorResources.lightblack.withOpacity(0.2),
+                            color: ColorResources.lightBlack.withOpacity(0.2),
                             width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(130))),
                     child: Center(
@@ -159,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(4.0),
                         child: Icon(
                           Icons.date_range,
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           size: 20,
                         ),
                       ),
@@ -174,12 +171,12 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           'Appointments',
                           style: TextStyle(
-                              color: ColorResources.lightblack, fontSize: 14),
+                              color: ColorResources.lightBlack, fontSize: 14),
                         ),
                         Text(
                           '$appointmentCount',
                           style: TextStyle(
-                              color: ColorResources.lightblack, fontSize: 14),
+                              color: ColorResources.lightBlack, fontSize: 14),
                         )
                       ],
                     ),
@@ -221,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: ColorResources.lightblack.withOpacity(.3),
+                                    color: ColorResources.lightBlack.withOpacity(.3),
                                     blurRadius: 15,
                                     offset: Offset(5, 5),
                                   )
@@ -240,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                   'DOCTOR CONSULTAION',
                                   style:
-                                      TextStyle(color: ColorResources.themered, fontSize: 18),
+                                      TextStyle(color: ColorResources.themeRed, fontSize: 18),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -249,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                                     'Find  a doctor and get appoinment for health care professional for your condition',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: ColorResources.lightblack.withOpacity(0.6),
+                                        color: ColorResources.lightBlack.withOpacity(0.6),
                                         fontSize: 14),
                                   ),
                                 )
@@ -273,7 +270,7 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: ColorResources.lightblack.withOpacity(.3),
+                                    color: ColorResources.lightBlack.withOpacity(.3),
                                     blurRadius: 15,
                                     offset: Offset(5, 5),
                                   )
@@ -292,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                   'MARKETPLACE',
                                   style:
-                                      TextStyle(color: ColorResources.themered, fontSize: 18),
+                                      TextStyle(color: ColorResources.themeRed, fontSize: 18),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -301,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                                     'Browse through our wide range of health products and services',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: ColorResources.lightblack.withOpacity(0.6),
+                                        color: ColorResources.lightBlack.withOpacity(0.6),
                                         fontSize: 14),
                                   ),
                                 )
@@ -324,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: ColorResources.lightblack.withOpacity(.3),
+                                    color: ColorResources.lightBlack.withOpacity(.3),
                                     blurRadius: 15,
                                     offset: Offset(5, 5),
                                   )
@@ -343,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                   'LAB TEST',
                                   style:
-                                  TextStyle(color: ColorResources.themered, fontSize: 18),
+                                  TextStyle(color: ColorResources.themeRed, fontSize: 18),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -352,7 +349,7 @@ class _HomePageState extends State<HomePage> {
                                     'Browse through our wide range of lab test for checkup your healt condition',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: ColorResources.lightblack.withOpacity(0.6),
+                                        color: ColorResources.lightBlack.withOpacity(0.6),
                                         fontSize: 14),
                                   ),
                                 )
@@ -375,7 +372,7 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.all(Radius.circular(10)),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: ColorResources.lightblack.withOpacity(.3),
+                                    color: ColorResources.lightBlack.withOpacity(.3),
                                     blurRadius: 15,
                                     offset: Offset(5, 5),
                                   )
@@ -394,7 +391,7 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                   'SERVICES',
                                   style:
-                                  TextStyle(color: ColorResources.themered, fontSize: 18),
+                                  TextStyle(color: ColorResources.themeRed, fontSize: 18),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
@@ -403,7 +400,7 @@ class _HomePageState extends State<HomePage> {
                                     'Browse through our wide range of services for quick response by the provider',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: ColorResources.lightblack.withOpacity(0.6),
+                                        color: ColorResources.lightBlack.withOpacity(0.6),
                                         fontSize: 14),
                                   ),
                                 )
@@ -427,8 +424,8 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences customerInfo = await SharedPreferences.getInstance();
     setState(() {
       userId = customerInfo.getString('id');
-      firstName = customerInfo.getString('firstName');
-      lastName = customerInfo.getString('lastName');
+      firstName = customerInfo.getString('firstName').toString();
+      lastName = customerInfo.getString('lastName').toString();
       usertype = customerInfo.getString('userType');
       if(userId != null){
         getAllAppointment(context);

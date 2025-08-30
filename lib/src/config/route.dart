@@ -4,6 +4,7 @@ import 'package:flutter_healthcare_app/src/pages/bottomNavigation/dashboard_scre
 import 'package:flutter_healthcare_app/src/pages/bottomNavigation/doctor_dashboard_screen.dart';
 import 'package:flutter_healthcare_app/src/pages/detail_page.dart';
 import 'package:flutter_healthcare_app/src/pages/doctor_consultant_page.dart';
+import 'package:flutter_healthcare_app/src/pages/eshop/eshop_home_page.dart';
 import 'package:flutter_healthcare_app/src/pages/login_page.dart';
 import 'package:flutter_healthcare_app/src/pages/splash_page.dart';
 import 'package:go_router/go_router.dart';
@@ -21,6 +22,10 @@ final GoRouter router = GoRouter(
      GoRoute(
       path: AppRoutes.dashboardRoute,
       builder: (context, state) => DashboardScreen(),
+    ),
+    GoRoute(
+      path: AppRoutes.eshopHomePage,
+      builder: (context, state) => EshopHomePage(),
     ),
      GoRoute(
       path: AppRoutes.doctorDashboardRoute,
@@ -55,4 +60,6 @@ class AppRoutes
   static const dashboardRoute = "/DashboardScreen";
   static const doctorDashboardRoute = "/DoctorDashboardScreen";
   static const loginRoute = "/LoginPage";
+    static const eshopHomePage = "/EshopHomePage";
+    //EshopHomePage
 }

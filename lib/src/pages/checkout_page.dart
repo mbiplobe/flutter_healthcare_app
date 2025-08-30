@@ -19,7 +19,7 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   var cashpayment = false;
   var isLoading = false;
-  EShopViewModel eShopViewModel;
+late  EShopViewModel eShopViewModel;
   TextEditingController commentController = TextEditingController();
   static GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -29,7 +29,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
     return Scaffold(
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -38,7 +37,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 150,
-              color: ColorResources.themered,
+              color: ColorResources.themeRed,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -78,7 +77,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       padding: const EdgeInsets.only(left: 15.0, right: 15),
                       child: Divider(
                         thickness: 1,
-                        color: ColorResources.lightblack.withOpacity(0.7),
+                        color: ColorResources.lightBlack.withOpacity(0.7),
                       ),
                     ),
                     payment(context),
@@ -92,7 +91,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               child: Container(
                 height: 50,
                 width: MediaQuery.of(context).size.width,
-                color: ColorResources.themered,
+                color: ColorResources.themeRed,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(15,5,15,5),
                   child: Row(
@@ -140,7 +139,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             child: Text(
               'Payment',
               style: TextStyle(
-                color: ColorResources.lightblack,
+                color: ColorResources.lightBlack,
                 fontSize: 20,
               ),
             ),
@@ -177,7 +176,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             padding: const EdgeInsets.only(left: 20.0, right: 20),
             child: Divider(
               thickness: 1,
-              color: ColorResources.lightblack.withOpacity(0.5),
+              color: ColorResources.lightBlack.withOpacity(0.5),
             ),
           ),
           Row(
@@ -186,16 +185,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
             children: [
               Checkbox(
                   value: cashpayment,
-                  activeColor: ColorResources.themered,
-                  onChanged: (bool newValue) {
+                  activeColor: ColorResources.themeRed,
+                  onChanged: (newValue) {
                     setState(() {
-                      cashpayment = newValue;
+                      cashpayment = newValue!;
                     });
                   }),
               Text(
                 'Pay with money',
                 style: TextStyle(
-                  color: ColorResources.lightblack,
+                  color: ColorResources.lightBlack,
                   fontSize: 20,
                 ),
               )
@@ -219,11 +218,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               children: [
                 Text(
                   'Product fee',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
                 Text(
                   '${widget.totalPrice} \$',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
               ],
             ),
@@ -236,11 +235,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               children: [
                 Text(
                   'Vat',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
                 Text(
                   '0.00 \$',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
               ],
             ),
@@ -253,11 +252,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               children: [
                 Text(
                   'Tax',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
                 Text(
                   '0.00 \$',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
               ],
             ),
@@ -270,11 +269,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               children: [
                 Text(
                   'Service charge',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
                 Text(
                   '0.00 \$',
-                  style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+                  style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
                 ),
               ],
             ),
@@ -290,10 +289,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
       child: Container(
         height: 80,
         decoration: BoxDecoration(
-            color: ColorResources.lightblack.withOpacity(0.2),
+            color: ColorResources.lightBlack.withOpacity(0.2),
             borderRadius: BorderRadius.all(Radius.circular(10)),
             border: Border.all(
-                color: ColorResources.lightblack.withOpacity(0.5), width: 2)),
+                color: ColorResources.lightBlack.withOpacity(0.5), width: 2)),
         child: TextField(
           keyboardType: TextInputType.multiline,
           maxLines: null,
@@ -350,14 +349,20 @@ class _CheckoutPageState extends State<CheckoutPage> {
     )
         : Text('');
   }
-  void showSnakbar(BuildContext context, String message) {
-    scaffoldKey.currentState.showSnackBar(new SnackBar(
-        backgroundColor: ColorResources.themered,
-        content: new Text(
-          message,
-          style: TextStyle(color: ColorResources.white),
-        )));
-  }
+  void showSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: ColorResources.themeRed,
+      content: Text(
+        message,
+        style: TextStyle(color: ColorResources.white),
+      ),
+    ),
+  );
+}
+
+// Usage:
+// showSnackbar(Scaffold.of(context), "Your message");
 
   void placeOrder()async {
     setState(() {
@@ -369,7 +374,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
       setState(() {
       isLoading = false;
     });
-      showSnakbar(context, response.message);
+      showSnackbar(context, response.message);
     }
 
   }

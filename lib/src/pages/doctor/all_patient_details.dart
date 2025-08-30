@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/appointment_model.dart';
 import 'package:flutter_healthcare_app/src/model/patient_appointment.dart';
 import 'package:flutter_healthcare_app/src/pages/doctor/patient_details_page.dart';
 

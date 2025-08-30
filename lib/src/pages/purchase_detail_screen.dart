@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/model/order.dart';
-import 'package:flutter_healthcare_app/src/model/orderDetails.dart';
+import 'package:flutter_healthcare_app/src/model/order_details.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:flutter_healthcare_app/src/pages/purchase_screen.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
@@ -21,8 +21,8 @@ class PurchaseDetailScreen extends StatefulWidget {
 class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
   var isFirst = true;
   var isLoading = true;
-  EShopViewModel eShopViewModel;
-  OrderDetails order;
+late  EShopViewModel eShopViewModel;
+late  OrderDetails order;
   var subTotal = 0.0;
 
   @override
@@ -38,7 +38,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         title: Text(
           'Purchase details',
           style: TextStyle(fontSize: 18, color: ColorResources.white),
@@ -98,17 +98,17 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                 Text(
                   'MD kamruzzaman',
                   style:
-                      TextStyle(fontSize: 16, color: ColorResources.lightblack),
+                      TextStyle(fontSize: 16, color: ColorResources.lightBlack),
                 ),
                 Text(
                   'Phone',
                   style:
-                      TextStyle(fontSize: 12, color: ColorResources.lightblack),
+                      TextStyle(fontSize: 12, color: ColorResources.lightBlack),
                 ),
                 Text(
                   'Address',
                   style:
-                      TextStyle(fontSize: 12, color: ColorResources.lightblack),
+                      TextStyle(fontSize: 12, color: ColorResources.lightBlack),
                 )
               ],
             ),
@@ -157,7 +157,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                         padding: const EdgeInsets.all(5.0),
                         child: CachedNetworkImage(
                           imageUrl:
-                          "http://172.16.61.221:8059${order.orderList[index].productimageurl}",
+                          "http://172.16.61.221:8059${order.orderList[index].productImageUrl}",
                           height: 80,
                           width: 80,
                           fit: BoxFit.fill,
@@ -175,19 +175,19 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                               '${order.orderList[index].medicineName}',
                               style: TextStyle(
                                   fontSize: 16,
-                                  color: ColorResources.lightblack),
+                                  color: ColorResources.lightBlack),
                             ),
                             Text(
-                              '\$${order.orderList[index].productprice}',
+                              '\$${order.orderList[index].productPrice}',
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: ColorResources.lightblack),
+                                  color: ColorResources.lightBlack),
                             ),
                             Text(
-                              'X ${order.orderList[index].productqnty}',
+                              'X ${order.orderList[index].productQnty}',
                               style: TextStyle(
                                   fontSize: 14,
-                                  color: ColorResources.lightblack),
+                                  color: ColorResources.lightBlack),
                             ),
                           ],
                         ),
@@ -215,15 +215,15 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
           children: [
             Text(
               'Order # ${order != null ? order.orderId : '0' }',
-              style: TextStyle(color: ColorResources.themered, fontSize: 16),
+              style: TextStyle(color: ColorResources.themeRed, fontSize: 16),
             ),
             Text(
               'Placed on: ',
-              style: TextStyle(color: ColorResources.lightblack, fontSize: 14),
+              style: TextStyle(color: ColorResources.lightBlack, fontSize: 14),
             ),
             Text(
               'Payment: ',
-              style: TextStyle(color: ColorResources.lightblack, fontSize: 14),
+              style: TextStyle(color: ColorResources.lightBlack, fontSize: 14),
             ),
           ],
         ),
@@ -351,7 +351,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
   void getSubTotal(List<OrderList> orderList) {
     var total = 0.0;
     orderList.forEach((element) {
-      total += double.parse(element.productprice) * double.parse(element.productqnty);
+      total += double.parse(element.productPrice) * double.parse(element.productQnty);
     });
     setState(() {
       subTotal = total;
@@ -382,14 +382,14 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                           alignment: Alignment.center,
                           child: Text('Do you want to delete this order?',
                             style: TextStyle(
-                              color: ColorResources.lightblack,
+                              color: ColorResources.lightBlack,
                             ),),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Divider(
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           thickness: 0.5,
                         ),
                       ),
@@ -417,7 +417,7 @@ class _PurchaseDetailScreenState extends State<PurchaseDetailScreen> {
                                   child: Center(
                                     child: Text('Yes',
                                       style: TextStyle(
-                                          color: ColorResources.themered
+                                          color: ColorResources.themeRed
                                       ),),
                                   ),
                                 ),

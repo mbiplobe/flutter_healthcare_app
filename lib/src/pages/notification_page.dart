@@ -10,10 +10,10 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).backgroundColor,
+             backgroundColor: Theme.of(context).colorScheme.surface,
         centerTitle: true,
         leading: Icon(Icons.menu,
         color: ColorResources.black,),
@@ -45,7 +45,7 @@ class _NotificationPageState extends State<NotificationPage> {
           child: Text('Recent',
             style: TextStyle(
                 fontSize: 18,
-                color: ColorResources.lightblack.withOpacity(0.7),
+                color: ColorResources.lightBlack.withOpacity(0.7),
                 fontWeight: FontWeight.bold
             ),),
         ),
@@ -58,7 +58,7 @@ class _NotificationPageState extends State<NotificationPage> {
               borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorResources.lightblack.withOpacity(.3),
+                    color: ColorResources.lightBlack.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(5, 5),
                   )
@@ -80,18 +80,18 @@ class _NotificationPageState extends State<NotificationPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Patient name',style: TextStyle(
-                          color: ColorResources.lightblack.withOpacity(0.7),
+                          color: ColorResources.lightBlack.withOpacity(0.7),
                           fontSize: 18
                         ),),
                         Padding(
                           padding: const EdgeInsets.only(top:4,bottom: 4),
                           child: Text('Male, 30 years',style: TextStyle(
-                              color: ColorResources.lightblack.withOpacity(0.5),
+                              color: ColorResources.lightBlack.withOpacity(0.5),
                               fontSize: 14
                           ),),
                         ),
                         Text('Cronic disease',style: TextStyle(
-                            color: ColorResources.lightblack.withOpacity(0.7),
+                            color: ColorResources.lightBlack.withOpacity(0.7),
                             fontSize: 14
                         ),),
                       ],
@@ -102,11 +102,11 @@ class _NotificationPageState extends State<NotificationPage> {
                   children: [
                     Text('18',style: TextStyle(
                       fontSize: 25,
-                      color: ColorResources.lightblack
+                      color: ColorResources.lightBlack
                     ),),
                     Text('Aug, 2020',style: TextStyle(
                         fontSize: 14,
-                        color: ColorResources.lightblack
+                        color: ColorResources.lightBlack
                     ),),
 
                   ],
@@ -114,7 +114,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Icon(Icons.notifications_off,
-                  color: ColorResources.themered,
+                  color: ColorResources.themeRed,
                   size: 40,),
                 )
               ],
@@ -130,7 +130,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorResources.lightblack.withOpacity(.3),
+                    color: ColorResources.lightBlack.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(5, 5),
                   )
@@ -152,18 +152,18 @@ class _NotificationPageState extends State<NotificationPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Patient name',style: TextStyle(
-                            color: ColorResources.lightblack.withOpacity(0.7),
+                            color: ColorResources.lightBlack.withOpacity(0.7),
                             fontSize: 18
                         ),),
                         Padding(
                           padding: const EdgeInsets.only(top:4,bottom: 4),
                           child: Text('Male, 30 years',style: TextStyle(
-                              color: ColorResources.lightblack.withOpacity(0.5),
+                              color: ColorResources.lightBlack.withOpacity(0.5),
                               fontSize: 14
                           ),),
                         ),
                         Text('Cronic disease',style: TextStyle(
-                            color: ColorResources.lightblack.withOpacity(0.7),
+                            color: ColorResources.lightBlack.withOpacity(0.7),
                             fontSize: 14
                         ),),
                       ],
@@ -174,11 +174,11 @@ class _NotificationPageState extends State<NotificationPage> {
                   children: [
                     Text('18',style: TextStyle(
                         fontSize: 25,
-                        color: ColorResources.lightblack
+                        color: ColorResources.lightBlack
                     ),),
                     Text('Aug, 2020',style: TextStyle(
                         fontSize: 14,
-                        color: ColorResources.lightblack
+                        color: ColorResources.lightBlack
                     ),),
 
                   ],
@@ -186,7 +186,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Icon(Icons.notifications_off,
-                    color: ColorResources.themered,
+                    color: ColorResources.themeRed,
                     size: 40,),
                 )
               ],
@@ -202,7 +202,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorResources.lightblack.withOpacity(.3),
+                    color: ColorResources.lightBlack.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(5, 5),
                   )
@@ -224,18 +224,18 @@ class _NotificationPageState extends State<NotificationPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Patient name',style: TextStyle(
-                            color: ColorResources.lightblack.withOpacity(0.7),
+                            color: ColorResources.lightBlack.withOpacity(0.7),
                             fontSize: 18
                         ),),
                         Padding(
                           padding: const EdgeInsets.only(top:4,bottom: 4),
                           child: Text('Male, 30 years',style: TextStyle(
-                              color: ColorResources.lightblack.withOpacity(0.5),
+                              color: ColorResources.lightBlack.withOpacity(0.5),
                               fontSize: 14
                           ),),
                         ),
                         Text('Gives you five star on your service',style: TextStyle(
-                            color: ColorResources.themered.withOpacity(0.7),
+                            color: ColorResources.themeRed.withOpacity(0.7),
                             fontSize: 14
                         ),),
                       ],
@@ -260,7 +260,7 @@ class _NotificationPageState extends State<NotificationPage> {
           child: Text('You missed',
             style: TextStyle(
                 fontSize: 18,
-                color: ColorResources.lightblack.withOpacity(0.7),
+                color: ColorResources.lightBlack.withOpacity(0.7),
                 fontWeight: FontWeight.bold
             ),),
         ),
@@ -269,11 +269,11 @@ class _NotificationPageState extends State<NotificationPage> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: ColorResources.themered,
+                color: ColorResources.themeRed,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorResources.lightblack.withOpacity(.3),
+                    color: ColorResources.lightBlack.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(5, 5),
                   )
@@ -336,7 +336,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       border: Border.all(color: ColorResources.white),
                       boxShadow: [
                         BoxShadow(
-                          color: ColorResources.lightblack.withOpacity(0.3),
+                          color: ColorResources.lightBlack.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 15,
                           offset: Offset(0, 1), // changes position of shadow
@@ -365,7 +365,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorResources.lightblack.withOpacity(.3),
+                    color: ColorResources.lightBlack.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(5, 5),
                   )
@@ -387,18 +387,18 @@ class _NotificationPageState extends State<NotificationPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Patient name',style: TextStyle(
-                            color: ColorResources.lightblack.withOpacity(0.7),
+                            color: ColorResources.lightBlack.withOpacity(0.7),
                             fontSize: 18
                         ),),
                         Padding(
                           padding: const EdgeInsets.only(top:4,bottom: 4),
                           child: Text('Male, 30 years',style: TextStyle(
-                              color: ColorResources.lightblack.withOpacity(0.5),
+                              color: ColorResources.lightBlack.withOpacity(0.5),
                               fontSize: 14
                           ),),
                         ),
                         Text('Appointment reschdule',style: TextStyle(
-                            color: ColorResources.themered,
+                            color: ColorResources.themeRed,
                             fontSize: 14
                         ),),
                       ],
@@ -408,7 +408,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(Icons.info,
-                    color: ColorResources.themered,
+                    color: ColorResources.themeRed,
                     size: 30,),
                 )
               ],
@@ -420,11 +420,11 @@ class _NotificationPageState extends State<NotificationPage> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: ColorResources.themered,
+                color: ColorResources.themeRed,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorResources.lightblack.withOpacity(.3),
+                    color: ColorResources.lightBlack.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(5, 5),
                   )
@@ -487,7 +487,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       border: Border.all(color: ColorResources.white),
                       boxShadow: [
                         BoxShadow(
-                          color: ColorResources.lightblack.withOpacity(0.3),
+                          color: ColorResources.lightBlack.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 15,
                           offset: Offset(0, 1), // changes position of shadow
@@ -516,7 +516,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorResources.lightblack.withOpacity(.3),
+                    color: ColorResources.lightBlack.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(5, 5),
                   )
@@ -538,18 +538,18 @@ class _NotificationPageState extends State<NotificationPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Patient name',style: TextStyle(
-                            color: ColorResources.lightblack.withOpacity(0.7),
+                            color: ColorResources.lightBlack.withOpacity(0.7),
                             fontSize: 18
                         ),),
                         Padding(
                           padding: const EdgeInsets.only(top:4,bottom: 4),
                           child: Text('Male, 30 years',style: TextStyle(
-                              color: ColorResources.lightblack.withOpacity(0.5),
+                              color: ColorResources.lightBlack.withOpacity(0.5),
                               fontSize: 14
                           ),),
                         ),
                         Text('Appointment reschdule',style: TextStyle(
-                            color: ColorResources.themered,
+                            color: ColorResources.themeRed,
                             fontSize: 14
                         ),),
                       ],
@@ -559,7 +559,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(Icons.info,
-                    color: ColorResources.themered,
+                    color: ColorResources.themeRed,
                     size: 30,),
                 )
               ],

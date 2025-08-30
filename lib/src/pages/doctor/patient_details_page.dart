@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/appointment_model.dart';
 import 'package:flutter_healthcare_app/src/model/patient_appointment.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 
@@ -16,9 +15,9 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
+       backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         leading: GestureDetector(
           onTap: (){
@@ -26,7 +25,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
           },
           child: Icon(
             Icons.keyboard_backspace,
-            color: ColorResources.lightblack,
+            color: ColorResources.lightBlack,
           ),
         ),
         actions: [
@@ -42,7 +41,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                   boxShadow: [
                     BoxShadow(
-                      color: ColorResources.lightblack.withOpacity(0.3),
+                      color: ColorResources.lightBlack.withOpacity(0.3),
                       spreadRadius: 1,
                       blurRadius: 15,
                       offset: Offset(0, 1), // changes position of shadow
@@ -52,7 +51,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                 child: Center(
                   child: Icon(
                     Icons.notifications_none,
-                    color: ColorResources.themered,
+                    color: ColorResources.themeRed,
                     size: 20,
                   ),
                 ),
@@ -82,7 +81,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         children: [
           Text(
             'Patient details',
-            style: TextStyle(fontSize: 20, color: ColorResources.lightblack),
+            style: TextStyle(fontSize: 20, color: ColorResources.lightBlack),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,11 +89,11 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             children: [
               Text(
                 'Next',
-                style: TextStyle(fontSize: 14, color: ColorResources.themered),
+                style: TextStyle(fontSize: 14, color: ColorResources.themeRed),
               ),
               Icon(Icons.arrow_forward,
                 size: 15,
-                color: ColorResources.themered,)
+                color: ColorResources.themeRed,)
             ],
           )
 
@@ -106,7 +105,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
   Widget patientInfo(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      color: ColorResources.lightblack.withOpacity(0.1),
+      color: ColorResources.lightBlack.withOpacity(0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -117,12 +116,12 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
               children: [
                 Text(widget.appointment.id,
                 style: TextStyle(
-                  color: ColorResources.themered,
+                  color: ColorResources.themeRed,
                   fontSize: 12
                 ),),
                 Text('Last visit 12 july,2020',
                   style: TextStyle(
-                      color: ColorResources.lightblack,
+                      color: ColorResources.lightBlack,
                       fontSize: 10
                   ),)
               ],
@@ -134,7 +133,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
               padding: const EdgeInsets.only(right:15.0,top: 4),
               child: Text('Old',
               style: TextStyle(
-                color: ColorResources.themered
+                color: ColorResources.themeRed
               ),),
             ),
           ),
@@ -142,7 +141,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             padding: const EdgeInsets.only(left:15.0),
             child: Text(widget.appointment.patientName,
             style: TextStyle(
-              color: ColorResources.lightblack,
+              color: ColorResources.lightBlack,
               fontSize: 16,
               fontWeight: FontWeight.bold
             ),),
@@ -151,7 +150,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             padding: const EdgeInsets.only(left:15.0),
             child: Text('${widget.appointment.gender}, ${widget.appointment.age} years',
               style: TextStyle(
-                  color: ColorResources.lightblack,
+                  color: ColorResources.lightBlack,
                   fontSize: 12,
 
               ),),
@@ -174,7 +173,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                       borderRadius: BorderRadius.all(Radius.circular(100)),
                       boxShadow: [
                         BoxShadow(
-                          color: ColorResources.lightblack.withOpacity(0.3),
+                          color: ColorResources.lightBlack.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 15,
                           offset: Offset(0, 1), // changes position of shadow
@@ -184,7 +183,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                     child: Center(
                       child: Icon(
                         Icons.attach_file,
-                        color: ColorResources.themered,
+                        color: ColorResources.themeRed,
                         size: 20,
                       ),
                     ),
@@ -200,7 +199,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         boxShadow: [
                           BoxShadow(
-                            color: ColorResources.lightblack.withOpacity(0.3),
+                            color: ColorResources.lightBlack.withOpacity(0.3),
                             spreadRadius: 1,
                             blurRadius: 15,
                             offset: Offset(0, 1), // changes position of shadow
@@ -210,7 +209,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                       child: Center(
                         child: Text('RX',
                         style: TextStyle(
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           fontSize: 16
                         ),)
                       ),
@@ -226,7 +225,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         boxShadow: [
                           BoxShadow(
-                            color: ColorResources.lightblack.withOpacity(0.3),
+                            color: ColorResources.lightBlack.withOpacity(0.3),
                             spreadRadius: 1,
                             blurRadius: 15,
                             offset: Offset(0, 1), // changes position of shadow
@@ -236,7 +235,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
                       child: Center(
                         child: Icon(
                           Icons.alarm,
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           size: 20,
                         ),
                       ),
@@ -259,26 +258,26 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
         Text('Reason to visit',style: TextStyle(
-          color: ColorResources.lightblack.withOpacity(0.5),
+          color: ColorResources.lightBlack.withOpacity(0.5),
           fontSize: 18
         ),),
 
         Padding(
           padding: const EdgeInsets.only(top:5.0,bottom: 10),
           child: Text(widget.appointment.reasons,style: TextStyle(
-              color: ColorResources.lightblack.withOpacity(0.5),
+              color: ColorResources.lightBlack.withOpacity(0.5),
               fontSize: 14
           ),),
         ),
           Text('Note',style: TextStyle(
-              color: ColorResources.lightblack.withOpacity(0.5),
+              color: ColorResources.lightBlack.withOpacity(0.5),
               fontSize: 18
           ),),
 
           Padding(
             padding: const EdgeInsets.only(top:5.0,bottom: 10),
             child: Text(widget.appointment.reasons,style: TextStyle(
-                color: ColorResources.lightblack.withOpacity(0.5),
+                color: ColorResources.lightBlack.withOpacity(0.5),
                 fontSize: 14
             ),),
           )
@@ -298,7 +297,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             child: Container(
               width: 150,
               decoration: BoxDecoration(
-                color: ColorResources.themered,
+                color: ColorResources.themeRed,
                 borderRadius: BorderRadius.all(Radius.circular(10))
               ),
               child: Center(child: Padding(
@@ -316,7 +315,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             padding: const EdgeInsets.all(10.0),
             child: Text('Cancel',
             style: TextStyle(
-              color: ColorResources.themered,
+              color: ColorResources.themeRed,
               fontSize: 16,
               fontWeight: FontWeight.bold
             ),),

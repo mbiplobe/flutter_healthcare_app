@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +19,12 @@ class EshopHomePage extends StatefulWidget {
 class _EshopHomePageState extends State<EshopHomePage> {
   TextEditingController _problemController = TextEditingController();
   static GlobalKey<ScaffoldState> homePageScaffoldKey = new GlobalKey<ScaffoldState>();
-  EShopViewModel eShopViewModel;
+late  EShopViewModel eShopViewModel;
 
   var fileName = 'File';
-  List<Medicine> medicineListdata;
-  List<MedicineType> medicineTypeList;
-  List<Cart> cartList = new List();
+  late List<Medicine> medicineListdata=[];
+  late List<MedicineType> medicineTypeList=[];
+  List<Cart> cartList = [];
 
   var isFirst = true;
   var isLoading = true;
@@ -34,12 +33,8 @@ class _EshopHomePageState extends State<EshopHomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCustomerInfo(context);
-    medicineListdata = new List();
-    medicineTypeList = new List();
-
   }
 
   @override
@@ -56,7 +51,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
       key: homePageScaffoldKey,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         elevation: 0,
         title: Text('E-shop',
         style: TextStyle(
@@ -72,7 +67,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => EshopCartScreen()));
                 }else{
-                  showSnakbar(context, 'Cart is empty');
+                  showSnackbarr(context, 'Cart is empty');
                 }
 
               },
@@ -88,7 +83,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
                         borderRadius: BorderRadius.all(Radius.circular(100)),
                         boxShadow: [
                           BoxShadow(
-                            color: ColorResources.lightblack.withOpacity(0.3),
+                            color: ColorResources.lightBlack.withOpacity(0.3),
                             spreadRadius: 1,
                             blurRadius: 15,
                             offset: Offset(0, 1), // changes position of shadow
@@ -98,7 +93,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
                       child: Center(
                         child: Icon(
                           Icons.add_shopping_cart,
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           size: 20,
                         ),
                       ),
@@ -109,7 +104,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
                         height: 20,
                         width: 20,
                         decoration: BoxDecoration(
-                            color: ColorResources.themered,
+                            color: ColorResources.themeRed,
                             borderRadius: BorderRadius.all(Radius.circular(30))
                         ),
                         child: Center(
@@ -145,7 +140,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
   Widget headerpart(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      color: ColorResources.themered,
+      color: ColorResources.themeRed,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -191,7 +186,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top:6.0),
-                                child: Text('${medicineTypeList[index].medicinetypename}',
+                                child: Text('${medicineTypeList[index].medicineTypeName}',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: ColorResources.white
@@ -224,7 +219,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
         child: Text(
           'Top medicine',
           style: TextStyle(
-            color: ColorResources.lightblack.withOpacity(0.7),
+            color: ColorResources.lightBlack.withOpacity(0.7),
             fontSize: 18,
           ),
         ),
@@ -232,13 +227,16 @@ class _EshopHomePageState extends State<EshopHomePage> {
     );
   }
 
-  void showSnakbar(BuildContext context, String message) {
-    homePageScaffoldKey.currentState.showSnackBar(new SnackBar(
-        backgroundColor: ColorResources.themered,
-        content: new Text(
+  showSnackbarr(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorResources.themeRed,
+        content: Text(
           message,
           style: TextStyle(color: ColorResources.white),
-        )));
+        ),
+      ),
+    );
   }
 
   Widget _medicineList(BuildContext context) {
@@ -295,18 +293,18 @@ class _EshopHomePageState extends State<EshopHomePage> {
                             Padding(
                               padding: const EdgeInsets.only(top:5.0),
                               child: Text(
-                                '${medicineListdata[index].medicinename}',
+                                '${medicineListdata[index].medicineName}',
                                 style: TextStyle(
                                     color: ColorResources.black, fontSize: 16,fontWeight: FontWeight.bold),
                               ),
                             ),
                             Text(
-                              '${medicineListdata[index].medicinecompany}',
+                              '${medicineListdata[index].medicineCompany}',
                               style: TextStyle(
                                   color: ColorResources.black, fontSize: 16),
                             ),
                             Text(
-                              '${medicineListdata[index].medicinetypename}',
+                              '${medicineListdata[index].medicineTypeName}',
                               style: TextStyle(
                                   color: ColorResources.black, fontSize: 16),
                             ),
@@ -328,7 +326,7 @@ class _EshopHomePageState extends State<EshopHomePage> {
                                 Padding(
                                   padding: const EdgeInsets.only(right:15.0,bottom: 5),
                                   child: Text(
-                                    '\$${medicineListdata[index].medicineprice}',
+                                    '\$${medicineListdata[index].medicinePrice}',
                                     style: TextStyle(
                                         color: ColorResources.black, fontSize: 16),
                                   ),

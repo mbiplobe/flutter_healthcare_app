@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/appointment_model.dart';
 import 'package:flutter_healthcare_app/src/model/data.dart';
 import 'package:flutter_healthcare_app/src/model/patient_appointment.dart';
 import 'package:flutter_healthcare_app/src/pages/doctor/all_patient_details.dart';
@@ -16,7 +15,7 @@ class DoctorHomePage extends StatefulWidget {
 
 class _DoctorHomePageState extends State<DoctorHomePage> {
 
-  PatientAppointmentViewModel patientAppointmentViewModel;
+  late PatientAppointmentViewModel patientAppointmentViewModel;
 
 
   var selected = 'Upcoming';
@@ -28,7 +27,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
   var firstName ='';
   var lastName ='';
 
-  List<PatientAppointment> patientAppointmentList = new List();
+  List<PatientAppointment> patientAppointmentList = [];
 
   @override
   void initState() {
@@ -43,13 +42,13 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
     patientAppointmentViewModel = Provider.of<PatientAppointmentViewModel>(context);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
+       backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         leading: Icon(
           Icons.menu,
-          color: ColorResources.lightblack,
+          color: ColorResources.lightBlack,
         ),
         actions: [
           Padding(
@@ -64,7 +63,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                   borderRadius: BorderRadius.all(Radius.circular(100)),
                   boxShadow: [
                     BoxShadow(
-                      color: ColorResources.lightblack.withOpacity(0.3),
+                      color: ColorResources.lightBlack.withOpacity(0.3),
                       spreadRadius: 1,
                       blurRadius: 15,
                       offset: Offset(0, 1), // changes position of shadow
@@ -74,7 +73,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                 child: Center(
                   child: Icon(
                     Icons.notifications_none,
-                    color: ColorResources.themered,
+                    color: ColorResources.themeRed,
                     size: 20,
                   ),
                 ),
@@ -127,7 +126,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
       padding: const EdgeInsets.only(top: 10.0, bottom: 10),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        color: ColorResources.lightblack.withOpacity(0.1),
+        color: ColorResources.lightBlack.withOpacity(0.1),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: Wrap(
@@ -146,7 +145,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                     style: TextStyle(
                       decoration: TextDecoration.none,
                       color: selected == 'Upcoming'
-                          ? ColorResources.themered
+                          ? ColorResources.themeRed
                           : Colors.black54,
                       fontSize: 14,
                     )),
@@ -162,7 +161,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                     style: TextStyle(
                         decoration: TextDecoration.none,
                         color: selected == 'Re-schedule'
-                            ? ColorResources.themered
+                            ? ColorResources.themeRed
                             : Colors.black54,
                         fontSize: 14)),
               ),
@@ -177,7 +176,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                     style: TextStyle(
                         decoration: TextDecoration.none,
                         color: selected == 'Canceld'
-                            ? ColorResources.themered
+                            ? ColorResources.themeRed
                             : Colors.black54,
                         fontSize: 14)),
               ),
@@ -192,7 +191,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                     style: TextStyle(
                         decoration: TextDecoration.none,
                         color: selected == 'Completed'
-                            ? ColorResources.themered
+                            ? ColorResources.themeRed
                             : Colors.black54,
                         fontSize: 14)),
               ),
@@ -215,7 +214,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
           borderRadius: BorderRadius.all(Radius.circular(13)),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: ColorResources.lightblack.withOpacity(.3),
+              color: ColorResources.lightBlack.withOpacity(.3),
               blurRadius: 15,
               offset: Offset(5, 5),
             )
@@ -243,11 +242,11 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                   child: GestureDetector(
                       onTap: () {},
                       child:
-                          Icon(Icons.filter_list, color: ColorResources.themered)),
+                          Icon(Icons.filter_list, color: ColorResources.themeRed)),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child: Icon(Icons.search, color: ColorResources.themered),
+                  child: Icon(Icons.search, color: ColorResources.themeRed),
                 ),
               ],
             ),
@@ -265,13 +264,13 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
           padding: const EdgeInsets.only(left:16.0,bottom:5),
           child: Text(
             'Today\'s appointment',
-            style: TextStyle(color: ColorResources.lightblack, fontSize: 18),
+            style: TextStyle(color: ColorResources.lightBlack, fontSize: 18),
           ),
         ),
         Container(
           height: 3,
           width: MediaQuery.of(context).size.width,
-          color: ColorResources.lightblack.withOpacity(0.1),
+          color: ColorResources.lightBlack.withOpacity(0.1),
         )
       ],
     );
@@ -305,7 +304,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                 padding: const EdgeInsets.only(top:10.0,bottom: 10.0),
                                 child: Text('${DateFormat('dd MMM yyyy').format(DateFormat("dd/MM/yyyy").parse(patientAppointmentList[index].dates))}' ,
                                   style: TextStyle(
-                                      color: ColorResources.themered,
+                                      color: ColorResources.themeRed,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold
                                   ),),
@@ -321,7 +320,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                         Container(
                           width: 1,
                           height: 60,
-                          color: ColorResources.lightblack.withOpacity(0.2),
+                          color: ColorResources.lightBlack.withOpacity(0.2),
                         ),
                         Expanded(
                           child: Padding(
@@ -336,7 +335,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                                   ),),
                                 Text('#${patientAppointmentList[index].id}',
                                   style: TextStyle(
-                                    color: ColorResources.themered,
+                                    color: ColorResources.themeRed,
                                     fontSize: 14,
                                   ),),
                                 Text('${patientAppointmentList[index].gender}. ${patientAppointmentList[index].age} years',
@@ -361,7 +360,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                     Container(
                       height: 5,
                       width: MediaQuery.of(context).size.width,
-                      color: ColorResources.lightblack.withOpacity(0.1),
+                      color: ColorResources.lightBlack.withOpacity(0.1),
                     ),
 
                   ],
@@ -370,7 +369,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                   right: 5,
                   top: 5,
                   child: Text('New',style: TextStyle(
-                      color:ColorResources.themered,
+                      color:ColorResources.themeRed,
                       fontSize: 14
                   ),),
                 ),
@@ -383,14 +382,14 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
                       children: [
                         Text('CANCEL',
                           style: TextStyle(
-                              color: ColorResources.themered,
+                              color: ColorResources.themeRed,
                               fontSize: 12
                           ),),
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text('RE-SCHEDULE',
                             style: TextStyle(
-                                color: ColorResources.lightblack,
+                                color: ColorResources.lightBlack,
                                 fontSize: 12
                             ),),
                         ),
@@ -495,8 +494,8 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
     SharedPreferences customerInfo = await SharedPreferences.getInstance();
     id = customerInfo.getString('id');
     userType = customerInfo.getString('userType');
-    firstName = customerInfo.getString('firstName');
-    lastName = customerInfo.getString('lastName');
+    firstName = customerInfo.getString('firstName').toString();
+    lastName = customerInfo.getString('lastName').toString();
 
     if (id != null) {
       getAllPatientAppointment(context);

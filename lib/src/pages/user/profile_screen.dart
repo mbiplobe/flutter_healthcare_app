@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -18,7 +19,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getUserInfo(context);
   }
@@ -27,10 +27,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         elevation: 0,
         leading: GestureDetector(
-          onTap: ()=>Navigator.pop(context),
+          onTap: context.pop,
           child: Icon(
             Icons.arrow_back_ios,
             color: Colors.white,
@@ -50,7 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 50,
-              color: ColorResources.themered,
+              color: ColorResources.themeRed,
             ),
             Positioned(
               top: 50,
@@ -74,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       decoration: BoxDecoration(
           color: ColorResources.white,
           borderRadius: BorderRadius.all(Radius.circular(100)),
-          border: Border.all(color: ColorResources.themered, width: 3)),
+          border: Border.all(color: ColorResources.themeRed, width: 3)),
       child: Center(
         child: Icon(Icons.account_circle_rounded,
         size: 80,),
@@ -95,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Text(
                 'First name',
                 style:
-                    TextStyle(fontSize: 16, color: ColorResources.lightblack),
+                    TextStyle(fontSize: 16, color: ColorResources.lightBlack),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
@@ -107,14 +107,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: Divider(
-                  color: ColorResources.lightblack.withOpacity(0.5),
+                  color: ColorResources.lightBlack.withOpacity(0.5),
                   thickness: 0.5,
                 ),
               ),
               Text(
                 'Last name',
                 style:
-                    TextStyle(fontSize: 16, color: ColorResources.lightblack),
+                    TextStyle(fontSize: 16, color: ColorResources.lightBlack),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
@@ -126,14 +126,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: Divider(
-                  color: ColorResources.lightblack.withOpacity(0.5),
+                  color: ColorResources.lightBlack.withOpacity(0.5),
                   thickness: 0.5,
                 ),
               ),
               Text(
                 'Email',
                 style:
-                    TextStyle(fontSize: 16, color: ColorResources.lightblack),
+                    TextStyle(fontSize: 16, color: ColorResources.lightBlack),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
@@ -145,14 +145,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: Divider(
-                  color: ColorResources.lightblack.withOpacity(0.5),
+                  color: ColorResources.lightBlack.withOpacity(0.5),
                   thickness: 0.5,
                 ),
               ),
               Text(
                 'Phone',
                 style:
-                    TextStyle(fontSize: 16, color: ColorResources.lightblack),
+                    TextStyle(fontSize: 16, color: ColorResources.lightBlack),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
@@ -164,14 +164,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: Divider(
-                  color: ColorResources.lightblack.withOpacity(0.5),
+                  color: ColorResources.lightBlack.withOpacity(0.5),
                   thickness: 0.5,
                 ),
               ),
               Text(
                 'Address',
                 style:
-                    TextStyle(fontSize: 16, color: ColorResources.lightblack),
+                    TextStyle(fontSize: 16, color: ColorResources.lightBlack),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
@@ -183,14 +183,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: Divider(
-                  color: ColorResources.lightblack.withOpacity(0.5),
+                  color: ColorResources.lightBlack.withOpacity(0.5),
                   thickness: 0.5,
                 ),
               ),
               Text(
                 'Gender',
                 style:
-                    TextStyle(fontSize: 16, color: ColorResources.lightblack),
+                    TextStyle(fontSize: 16, color: ColorResources.lightBlack),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
@@ -202,7 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: Divider(
-                  color: ColorResources.lightblack.withOpacity(0.5),
+                  color: ColorResources.lightBlack.withOpacity(0.5),
                   thickness: 0.5,
                 ),
               ),
@@ -216,13 +216,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void getUserInfo(BuildContext context) async {
     SharedPreferences customerInfo = await SharedPreferences.getInstance();
     setState(() {
-      id = customerInfo.getString('id');
-      firstName = customerInfo.getString('firstName');
-      lastName = customerInfo.getString('lastName');
-      email = customerInfo.getString('email');
-      phone = customerInfo.getString('userPhone');
-      gender = customerInfo.getString('gender');
-      address = customerInfo.getString('address');
+      id = customerInfo.getString('id')??'';
+      firstName = customerInfo.getString('firstName')??'';
+      lastName = customerInfo.getString('lastName')??'';
+      email = customerInfo.getString('email')??'';
+      phone = customerInfo.getString('userPhone')??'';
+      gender = customerInfo.getString('gender')??'';
+      address = customerInfo.getString('address')??'';
     });
   }
 }

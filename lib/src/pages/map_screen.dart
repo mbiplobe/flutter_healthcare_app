@@ -17,7 +17,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   Completer<GoogleMapController> _controller = Completer();
-  BitmapDescriptor pinLocationIcon;
+late  BitmapDescriptor pinLocationIcon;
   Set<Marker> _markers = {};
   var isLoading = false;
 
@@ -45,7 +45,7 @@ class _MapScreenState extends State<MapScreen> {
             color: ColorResources.white,
           ),
         ),
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         title: Text(
           'Services',
           style: TextStyle(color: ColorResources.white, fontSize: 18),
@@ -65,7 +65,7 @@ class _MapScreenState extends State<MapScreen> {
 
                 for(int i =0; i<widget.subServiceList.length;i++) {
                   final Uint8List markerIcon = await getBytesFromCanvas(
-                      widget.subServiceList[i].servicecentername.length *20, 70, '${widget.subServiceList[i].servicecentername}');
+                      widget.subServiceList[i].serviceCenterName.length *20, 70, '${widget.subServiceList[i].serviceCenterName}');
                   setState(() {
                     _markers.add(Marker(
                         onTap: (){
@@ -93,7 +93,7 @@ class _MapScreenState extends State<MapScreen> {
   Future<Uint8List> getBytesFromCanvas(int width, int height,String price) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
-    final Paint paint = Paint()..color = ColorResources.themered;
+    final Paint paint = Paint()..color = ColorResources.themeRed;
     final Radius radius = Radius.circular(10.0);
     canvas.drawRRect(
         RRect.fromRectAndCorners(
@@ -114,7 +114,9 @@ class _MapScreenState extends State<MapScreen> {
     painter.paint(canvas, Offset((width * 0.5) - painter.width * 0.5, (height * 0.5) - painter.height * 0.5));
     final img = await pictureRecorder.endRecording().toImage(width, height);
     final data = await img.toByteData(format: ui.ImageByteFormat.png);
-    return data.buffer.asUint8List();
+    Uint8List bytes = data!.buffer.asUint8List();
+    
+    return bytes;
   }
 
   void _openCameraOptions(context, SubService subService) {
@@ -134,30 +136,30 @@ class _MapScreenState extends State<MapScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${subService.servicecentername}',
+                        Text('${subService.serviceCenterName}',
                         style: TextStyle(
                           fontSize: 16,
-                          color: ColorResources.lightblack
+                          color: ColorResources.lightBlack
                         ),),
-                        Text('${subService.ownername}',
+                        Text('${subService.ownerName}',
                           style: TextStyle(
                               fontSize: 14,
-                              color: ColorResources.lightblack
+                              color: ColorResources.lightBlack
                           ),),
                         Text('${subService.email}',
                           style: TextStyle(
                               fontSize: 14,
-                              color: ColorResources.lightblack
+                              color: ColorResources.lightBlack
                           ),),
                         Text('${subService.phone}',
                           style: TextStyle(
                               fontSize: 14,
-                              color: ColorResources.lightblack
+                              color: ColorResources.lightBlack
                           ),),
-                        Text('${subService.servicetypeName}',
+                        Text('${subService.serviceTypeName}',
                           style: TextStyle(
                               fontSize: 14,
-                              color: ColorResources.lightblack
+                              color: ColorResources.lightBlack
                           ),),
                       ],
                     ),
@@ -168,7 +170,7 @@ class _MapScreenState extends State<MapScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Icon(Icons.call,
-                    color: ColorResources.lightblack,),
+                    color: ColorResources.lightBlack,),
                   ),
                 ),
               ],

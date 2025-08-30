@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/pages/doctor_consultant_page.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -12,7 +11,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         title: Text('History',
         style: TextStyle(
           color: ColorResources.white,
@@ -49,7 +48,7 @@ class _HistoryPageState extends State<HistoryPage> {
           Padding(
             padding: const EdgeInsets.only(bottom:10.0),
             child: Text('No history found',
-            style: TextStyle(color: ColorResources.lightblack.withOpacity(0.7),
+            style: TextStyle(color: ColorResources.lightBlack.withOpacity(0.7),
             fontSize: 18),),
           ),
 

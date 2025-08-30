@@ -9,24 +9,25 @@ import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/theme/theme.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List<DoctorModel> doctorDataList;
+  late List<DoctorModel> doctorDataList;
+  
   @override
   void initState() {
-    doctorDataList = doctorMapList.map((x) => DoctorModel.fromJson(x)).toList();
     super.initState();
+    doctorDataList = doctorMapList.map((x) => DoctorModel.fromJson(x)).toList();
   }
 
   Widget _appBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       leading: Icon(
         Icons.short_text,
         size: 30,
@@ -36,17 +37,18 @@ class _HomePageState extends State<HomePage> {
         Icon(
           Icons.notifications_none,
           size: 30,
-          color: LightColor.grey,
+          color: Colors.lightBlue,
         ),
+        const SizedBox(width: 8),
         ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(13)),
           child: Container(
-            // height: 40,
-            // width: 40,
+            height: 40,
+            width: 40,
             decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).colorScheme.surface,
             ),
-            child: Image.asset("assets/user.png", fit: BoxFit.fill),
+            child: Image.asset("assets/user.png", fit: BoxFit.cover),
           ),
         ).p(8),
       ],
@@ -67,13 +69,12 @@ class _HomePageState extends State<HomePage> {
     return Container(
       height: 55,
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(13)),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: LightColor.grey.withOpacity(.3),
+            color: Colors.lightBlue.withOpacity(.3),
             blurRadius: 15,
             offset: Offset(5, 5),
           )
@@ -86,10 +87,11 @@ class _HomePageState extends State<HomePage> {
           hintText: "Search",
           hintStyle: TextStyles.body.subTitleColor,
           suffixIcon: SizedBox(
-              width: 50,
-              child: Icon(Icons.search, color: LightColor.purple)
-                  .alignCenter
-                  .ripple(() {}, borderRadius: BorderRadius.circular(13))),
+            width: 50,
+            child: Icon(Icons.search, color: Colors.lightBlue)
+                .alignCenter
+                .ripple(() {}, borderRadius: BorderRadius.circular(13)),
+          ),
         ),
       ),
     );
@@ -114,20 +116,20 @@ class _HomePageState extends State<HomePage> {
         ),
         SizedBox(
           height: AppTheme.fullHeight(context) * .28,
-          width: AppTheme.fullWidth(context),
           child: ListView(
             scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: 8),
             children: <Widget>[
               _categoryCard("Chemist & Drugist", "350 + Stores",
-                  color: LightColor.green, lightColor: LightColor.lightGreen),
+                  color: ColorResources.green, ColorResources: ColorResources.lightGreen),
               _categoryCard("Covid - 19 Specialist", "899 Doctors",
-                  color: LightColor.skyBlue, lightColor: LightColor.lightBlue),
+                  color: ColorResources.skyBlue, ColorResources: ColorResources.lightBlue),
               _categoryCard("Cardiologists Specialist", "500 + Doctors",
-                  color: LightColor.orange, lightColor: LightColor.lightOrange),
+                  color: ColorResources.orange, ColorResources: ColorResources.lightOrange),
               _categoryCard("Dermatologist", "300 + Doctors",
-                  color: LightColor.green, lightColor: LightColor.lightGreen),
+                  color: ColorResources.green, ColorResources: ColorResources.lightGreen),
               _categoryCard("General Surgeon", "500 + Doctors",
-                  color: LightColor.skyBlue, lightColor: LightColor.lightBlue)
+                  color: ColorResources.skyBlue, ColorResources: ColorResources.lightBlue)
             ],
           ),
         ),
@@ -136,19 +138,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _categoryCard(String title, String subtitle,
-      {Color color, Color lightColor}) {
+      {required Color color, required Color ColorResources}) {
     TextStyle titleStyle = TextStyles.title.bold.white;
     TextStyle subtitleStyle = TextStyles.body.bold.white;
+    
     if (AppTheme.fullWidth(context) < 392) {
       titleStyle = TextStyles.body.bold.white;
       subtitleStyle = TextStyles.bodySm.bold.white;
     }
+    
     return AspectRatio(
       aspectRatio: 6 / 8,
       child: Container(
-        height: 280,
-        width: AppTheme.fullWidth(context) * .3,
-        margin: EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 10),
+        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -156,42 +158,48 @@ class _HomePageState extends State<HomePage> {
             BoxShadow(
               offset: Offset(4, 4),
               blurRadius: 10,
-              color: lightColor.withOpacity(.8),
+              color: ColorResources.withOpacity(.8),
             )
           ],
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          child: Container(
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  top: -20,
-                  left: -20,
-                  child: CircleAvatar(
-                    backgroundColor: lightColor,
-                    radius: 60,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.all(16),
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: -20,
+                    left: -20,
+                    child: CircleAvatar(
+                      backgroundColor: ColorResources,
+                      radius: 60,
+                    ),
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(title, style: titleStyle).hP8,
-                    ),
-                    SizedBox(height: 10),
-                    Flexible(
-                      child: Text(
-                        subtitle,
-                        style: subtitleStyle,
-                      ).hP8,
-                    ),
-                  ],
-                ).p16
-              ],
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Flexible(
+                        child: Text(title, style: titleStyle),
+                      ),
+                      SizedBox(height: 10),
+                      Flexible(
+                        child: Text(
+                          subtitle,
+                          style: subtitleStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
+        ),
       ),
     );
   }
@@ -200,19 +208,22 @@ class _HomePageState extends State<HomePage> {
     return SliverList(
       delegate: SliverChildListDelegate(
         [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text("Top Doctors", style: TextStyles.title.bold),
-              IconButton(
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text("Top Doctors", style: TextStyles.title.bold),
+                IconButton(
                   icon: Icon(
                     Icons.sort,
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () {})
-              // .p(12).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(20))),
-            ],
-          ).hP16,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
           getdoctorWidgetList()
         ],
       ),
@@ -221,9 +232,8 @@ class _HomePageState extends State<HomePage> {
 
   Widget getdoctorWidgetList() {
     return Column(
-        children: doctorDataList.map((x) {
-      return _doctorTile(x);
-    }).toList());
+      children: doctorDataList.map((x) => _doctorTile(x)).toList(),
+    );
   }
 
   Widget _doctorTile(DoctorModel model) {
@@ -236,89 +246,95 @@ class _HomePageState extends State<HomePage> {
           BoxShadow(
             offset: Offset(4, 4),
             blurRadius: 10,
-            color: LightColor.grey.withOpacity(.2),
+            color: ColorResources.grey.withOpacity(.2),
           ),
           BoxShadow(
             offset: Offset(-3, 0),
             blurRadius: 15,
-            color: LightColor.grey.withOpacity(.1),
+            color: ColorResources.grey.withOpacity(.1),
           )
         ],
       ),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-        child: ListTile(
-          contentPadding: EdgeInsets.all(0),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(13)),
-            child: Container(
-              height: 55,
-              width: 55,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: randomColor(),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          onTap: () {
+            Navigator.pushNamed(context, "/DetailPage", arguments: model);
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(13)),
+                child: Container(
+                  height: 55,
+                  width: 55,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: randomColor(),
+                  ),
+                  child: Image.asset(
+                    model.image,
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-              child: Image.asset(
-                model.image,
-                height: 50,
-                width: 50,
-                fit: BoxFit.contain,
+              title: Text(model.name, style: TextStyles.title.bold),
+              subtitle: Text(
+                model.type,
+                style: TextStyles.bodySm.subTitleColor.bold,
+              ),
+              trailing: Icon(
+                Icons.keyboard_arrow_right,
+                size: 30,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),
-          title: Text(model.name, style: TextStyles.title.bold),
-          subtitle: Text(
-            model.type,
-            style: TextStyles.bodySm.subTitleColor.bold,
-          ),
-          trailing: Icon(
-            Icons.keyboard_arrow_right,
-            size: 30,
-            color: Theme.of(context).primaryColor,
-          ),
         ),
-      ).ripple(() {
-        Navigator.pushNamed(context, "/DetailPage", arguments: model);
-      }, borderRadius: BorderRadius.all(Radius.circular(20))),
+      ),
     );
   }
 
   Color randomColor() {
-    var random = Random();
     final colorList = [
       Theme.of(context).primaryColor,
-      LightColor.orange,
-      LightColor.green,
-      LightColor.grey,
-      LightColor.lightOrange,
-      LightColor.skyBlue,
-      LightColor.titleTextColor,
+      ColorResources.orange,
+      ColorResources.green,
+      ColorResources.grey,
+      ColorResources.lightOrange,
+      ColorResources.skyBlue,
+      ColorResources.titleTextColor,
       Colors.red,
       Colors.brown,
-      LightColor.purpleExtraLight,
-      LightColor.skyBlue,
+      ColorResources.purpleExtraLight,
+      ColorResources.skyBlue,
     ];
-    var color = colorList[random.nextInt(colorList.length)];
-    return color;
+    return colorList[Random().nextInt(colorList.length)];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
-      backgroundColor: Theme.of(context).backgroundColor,
+     // appBar: _appBar,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: CustomScrollView(
         slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 _header(),
                 _searchField(),
                 _category(),
               ],
             ),
           ),
-          _doctorsList()
+          _doctorsList(),
         ],
       ),
     );

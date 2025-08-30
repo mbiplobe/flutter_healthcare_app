@@ -31,7 +31,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
     }
 
     Widget _Sgap() {
-      return Container(height: 20.0, color: Theme.of(context).backgroundColor);
+      return Container(height: 20.0, color: Theme.of(context).colorScheme.surface);
     }
 
     Widget _Menus(){
@@ -46,7 +46,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:3, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.account_circle, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.account_circle, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Personal Details', style: TextStyle (fontSize: 18),),
@@ -64,7 +64,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:3, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.contact_mail, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.contact_mail, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Contact Information', style: TextStyle (fontSize: 18),),
@@ -82,7 +82,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:3, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.history, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.history, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Medical history', style: TextStyle (fontSize: 18),),
@@ -99,7 +99,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:3, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.payment, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.payment, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Payment', style: TextStyle (fontSize: 18),),
@@ -117,7 +117,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:3, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.shopping_cart, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.shopping_cart, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Purchase list', style: TextStyle (fontSize: 18),),
@@ -134,7 +134,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:3, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.verified_user, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.verified_user, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Active member code', style: TextStyle (fontSize: 18),),
@@ -152,7 +152,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:3, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.history_edu, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.history_edu, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Lab Test Summary', style: TextStyle (fontSize: 18),),
@@ -169,7 +169,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
               padding: const EdgeInsets.only(left:20.0, top:50, bottom: 15),
               child: Row(
                   children:<Widget>[
-                    Icon(Icons.exit_to_app, color: ColorResources.themered, size: 24,),
+                    Icon(Icons.exit_to_app, color: ColorResources.themeRed, size: 24,),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: Text('Logout', style: TextStyle (fontSize: 18),),
@@ -185,9 +185,9 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
 
 
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         centerTitle: true,
         title: Text('M Care ', style: TextStyle (color: ColorResources.white),),
       ),
@@ -237,14 +237,14 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
                           alignment: Alignment.center,
                           child: Text('Do you want to logout?',
                             style: TextStyle(
-                              color: ColorResources.lightblack,
+                              color: ColorResources.lightBlack,
                             ),),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Divider(
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           thickness: 0.5,
                         ),
                       ),
@@ -272,7 +272,7 @@ class _UserProfileMenuState extends State<UserProfileMenu> {
                                   child: Center(
                                     child: Text('Yes',
                                       style: TextStyle(
-                                          color: ColorResources.themered
+                                          color: ColorResources.themeRed
                                       ),),
                                   ),
                                 ),

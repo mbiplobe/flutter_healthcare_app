@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' hide DatePickerTheme;
 import 'package:flutter_healthcare_app/src/model/lab_test_by_category.dart';
 import 'package:flutter_healthcare_app/src/model/lab_test_category.dart';
 import 'package:flutter_healthcare_app/src/pages/bottomNavigation/dashboard_screen.dart';
@@ -13,29 +13,30 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LabTestPage extends StatefulWidget {
-  String labTestId;
-  String testId;
-  String testCatId;
-  String testAmount;
-  String sampleCollectDate;
-  String sampleCollectTime;
-  String paymentType;
+  String? labTestId;
+  String? testId;
+  String? testCatId;
+  String? testAmount;
+  String? sampleCollectDate;
+  String? sampleCollectTime;
+  String? paymentType;
 
-  LabTestPage(
-      {this.labTestId,
-      this.testId,
-      this.testCatId,
-      this.testAmount,
-      this.sampleCollectDate,
-      this.sampleCollectTime,
-      this.paymentType});
+  LabTestPage({
+    this.labTestId,
+    this.testId,
+    this.testCatId,
+    this.testAmount,
+    this.sampleCollectDate,
+    this.sampleCollectTime,
+    this.paymentType,
+  });
 
   @override
   _LabTestPageState createState() => _LabTestPageState();
 }
 
 class _LabTestPageState extends State<LabTestPage> {
-  LabTestViewModel labTestViewModel;
+late  LabTestViewModel labTestViewModel;
   TextEditingController _problemController = TextEditingController();
   static GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -48,8 +49,8 @@ class _LabTestPageState extends State<LabTestPage> {
   var amount;
   var testId;
   var id;
-  List<LabTestCategory> labTestCategoryList = new List();
-  List<LabTestByCategory> labTestByCategoryList = new List();
+  List<LabTestCategory> labTestCategoryList = [];
+  List<LabTestByCategory> labTestByCategoryList = [];
 
   var isFirst = true;
   Map<String, Object> labTestCategoryMap = HashMap<String, Object>();
@@ -59,7 +60,6 @@ class _LabTestPageState extends State<LabTestPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCustomerInfo(context);
     setModValue(context);
@@ -78,13 +78,14 @@ class _LabTestPageState extends State<LabTestPage> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         elevation: 0,
         leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.keyboard_backspace)),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.keyboard_backspace),
+        ),
       ),
       body: Stack(
         children: [
@@ -97,7 +98,7 @@ class _LabTestPageState extends State<LabTestPage> {
               ],
             ),
           ),
-          loading(context)
+          loading(context),
         ],
       ),
     );
@@ -106,7 +107,7 @@ class _LabTestPageState extends State<LabTestPage> {
   Widget headerpart(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      color: ColorResources.themered,
+      color: ColorResources.themeRed,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -114,30 +115,21 @@ class _LabTestPageState extends State<LabTestPage> {
             padding: const EdgeInsets.only(top: 10.0, left: 15, bottom: 10),
             child: Text(
               'Lab test',
-              style: TextStyle(
-                color: ColorResources.white,
-                fontSize: 20,
-              ),
+              style: TextStyle(color: ColorResources.white, fontSize: 20),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 30),
             child: Text(
               'Find your test from the below',
-              style: TextStyle(
-                color: ColorResources.white,
-                fontSize: 16,
-              ),
+              style: TextStyle(color: ColorResources.white, fontSize: 16),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 15, bottom: 10),
             child: Text(
               'Test category',
-              style: TextStyle(
-                color: ColorResources.white,
-                fontSize: 16,
-              ),
+              style: TextStyle(color: ColorResources.white, fontSize: 16),
             ),
           ),
           Padding(
@@ -146,45 +138,44 @@ class _LabTestPageState extends State<LabTestPage> {
               height: 50,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: ColorResources.white,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: ColorResources.black.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 15,
-                      offset: Offset(0, 1), // changes position of shadow
-                    ),
-                  ]),
+                color: ColorResources.white,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorResources.black.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 15,
+                    offset: Offset(0, 1), // changes position of shadow
+                  ),
+                ],
+              ),
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: DropdownButton(
                     hint: Text(
                       selectTestCategory != null ? selectTestCategory : '',
-                      style:
-                          TextStyle(color: ColorResources.black, fontSize: 16),
+                      style: TextStyle(
+                        color: ColorResources.black,
+                        fontSize: 16,
+                      ),
                     ),
                     isExpanded: true,
                     iconSize: 30.0,
                     underline: Text(''),
                     style: TextStyle(color: ColorResources.black, fontSize: 18),
-                    items: labTestCategoryMap.keys.map(
-                      (val) {
-                        return DropdownMenuItem<String>(
-                          value: val,
-                          child: Text(val),
-                        );
-                      },
-                    ).toList(),
-                    onChanged: (val) {
-                      setState(
-                        () {
-                          selectTestCategory = val;
-                          labtestId = labTestCategoryMap['$val'];
-                          getLabTestById(context, labtestId);
-                        },
+                    items: labTestCategoryMap.keys.map((val) {
+                      return DropdownMenuItem<String>(
+                        value: val,
+                        child: Text(val),
                       );
+                    }).toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        selectTestCategory = val;
+                        labtestId = labTestCategoryMap['$val'];
+                        getLabTestById(context, labtestId);
+                      });
                     },
                   ),
                 ),
@@ -195,10 +186,7 @@ class _LabTestPageState extends State<LabTestPage> {
             padding: const EdgeInsets.only(left: 15, bottom: 10),
             child: Text(
               'Choose Test',
-              style: TextStyle(
-                color: ColorResources.white,
-                fontSize: 16,
-              ),
+              style: TextStyle(color: ColorResources.white, fontSize: 16),
             ),
           ),
           Padding(
@@ -207,16 +195,17 @@ class _LabTestPageState extends State<LabTestPage> {
               height: 50,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: ColorResources.white,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: ColorResources.black.withOpacity(0.2),
-                      spreadRadius: 1,
-                      blurRadius: 15,
-                      offset: Offset(0, 1), // changes position of shadow
-                    ),
-                  ]),
+                color: ColorResources.white,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorResources.black.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 15,
+                    offset: Offset(0, 1), // changes position of shadow
+                  ),
+                ],
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -226,47 +215,55 @@ class _LabTestPageState extends State<LabTestPage> {
                         hint: Text(
                           selectTest != null ? selectTest : '',
                           style: TextStyle(
-                              color: ColorResources.black, fontSize: 16),
+                            color: ColorResources.black,
+                            fontSize: 16,
+                          ),
                         ),
                         isExpanded: true,
                         iconSize: 30.0,
                         underline: Text(''),
                         style: TextStyle(
-                            color: ColorResources.black, fontSize: 18),
-                        items: labTestByCategoryList.map(
-                          (LabTestByCategory val) {
-                            return DropdownMenuItem<LabTestByCategory>(
-                              value: val,
-                              child: Text(val.testname),
-                            );
-                          },
-                        ).toList(),
-                        onChanged: (LabTestByCategory val) {
-                          setState(
-                            () {
-                              selectTest = val.testname;
-                              labtestId = val.id;
-                              amount = val.testamount;
-                            },
+                          color: ColorResources.black,
+                          fontSize: 18,
+                        ),
+                        items: labTestByCategoryList.map((
+                          LabTestByCategory val,
+                        ) {
+                          return DropdownMenuItem<LabTestByCategory>(
+                            value: val,
+                            child: Text(val.testName),
                           );
+                        }).toList(),
+                        onChanged: (LabTestByCategory? value) {
+                          if (value != null) {
+                            setState(() {
+                              selectTest = value.testName;
+                              testId = value.id;
+                              amount = value.testAmount;
+                            });
+                          }
                         },
                       ),
                     ),
                   ),
                   Container(
-                      width: 1, height: 50, color: ColorResources.themered),
+                    width: 1,
+                    height: 50,
+                    color: ColorResources.themeRed,
+                  ),
                   SizedBox(
                     width: 100,
                     child: Center(
                       child: Text(
                         '${amount != null ? '$amount /-' : ''}',
                         style: TextStyle(
-                            color: ColorResources.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                          color: ColorResources.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -275,10 +272,7 @@ class _LabTestPageState extends State<LabTestPage> {
             padding: const EdgeInsets.only(left: 15, bottom: 10),
             child: Text(
               'Choose your prefered time',
-              style: TextStyle(
-                color: ColorResources.white,
-                fontSize: 16,
-              ),
+              style: TextStyle(color: ColorResources.white, fontSize: 16),
             ),
           ),
           Padding(
@@ -296,17 +290,20 @@ class _LabTestPageState extends State<LabTestPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                            color: ColorResources.white,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorResources.black.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 15,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
-                              ),
-                            ]),
+                          color: ColorResources.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorResources.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 15,
+                              offset: Offset(
+                                0,
+                                1,
+                              ), // changes position of shadow
+                            ),
+                          ],
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10.0, right: 5),
                           child: Row(
@@ -315,14 +312,15 @@ class _LabTestPageState extends State<LabTestPage> {
                                 child: Text(
                                   '$day',
                                   style: TextStyle(
-                                      color: ColorResources.black,
-                                      fontSize: 14),
+                                    color: ColorResources.black,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ),
                               Icon(
                                 Icons.calendar_today_outlined,
-                                color: ColorResources.themered,
-                              )
+                                color: ColorResources.themeRed,
+                              ),
                             ],
                           ),
                         ),
@@ -341,34 +339,40 @@ class _LabTestPageState extends State<LabTestPage> {
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                            color: ColorResources.white,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorResources.black.withOpacity(0.2),
-                                spreadRadius: 1,
-                                blurRadius: 15,
-                                offset:
-                                    Offset(0, 1), // changes position of shadow
-                              ),
-                            ]),
+                          color: ColorResources.white,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorResources.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 15,
+                              offset: Offset(
+                                0,
+                                1,
+                              ), // changes position of shadow
+                            ),
+                          ],
+                        ),
                         child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 10.0, right: 5.0),
+                          padding: const EdgeInsets.only(
+                            left: 10.0,
+                            right: 5.0,
+                          ),
                           child: Row(
                             children: [
                               Expanded(
                                 child: Text(
                                   '$time',
                                   style: TextStyle(
-                                      color: ColorResources.black,
-                                      fontSize: 14),
+                                    color: ColorResources.black,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ),
                               Icon(
                                 Icons.alarm_sharp,
-                                color: ColorResources.themered,
-                              )
+                                color: ColorResources.themeRed,
+                              ),
                             ],
                           ),
                         ),
@@ -378,7 +382,7 @@ class _LabTestPageState extends State<LabTestPage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -394,37 +398,29 @@ class _LabTestPageState extends State<LabTestPage> {
             padding: const EdgeInsets.all(10.0),
             child: Text(
               'Payment',
-              style: TextStyle(
-                color: ColorResources.lightblack,
-                fontSize: 20,
-              ),
+              style: TextStyle(color: ColorResources.lightBlack, fontSize: 20),
             ),
           ),
           Padding(
             padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 4 - 25,
-                right: MediaQuery.of(context).size.width / 4 - 25),
+              left: MediaQuery.of(context).size.width / 4 - 25,
+              right: MediaQuery.of(context).size.width / 4 - 25,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Image.asset(
-                    'assets/paypal.png',
-                  ),
+                  child: Image.asset('assets/paypal.png'),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Image.asset(
-                    'assets/visa.png',
-                  ),
+                  child: Image.asset('assets/visa.png'),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Image.asset(
-                    'assets/mastercard.png',
-                  ),
-                )
+                  child: Image.asset('assets/mastercard.png'),
+                ),
               ],
             ),
           ),
@@ -432,7 +428,7 @@ class _LabTestPageState extends State<LabTestPage> {
             padding: const EdgeInsets.only(left: 20.0, right: 20),
             child: Divider(
               thickness: 1,
-              color: ColorResources.lightblack.withOpacity(0.5),
+              color: ColorResources.lightBlack.withOpacity(0.5),
             ),
           ),
           Row(
@@ -440,22 +436,23 @@ class _LabTestPageState extends State<LabTestPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Checkbox(
-                  value: cashpayment,
-                  activeColor: ColorResources.themered,
-                  onChanged: (bool newValue) {
-                    setState(() {
-                      cashpayment = newValue;
-                    });
-                  }),
+                value: cashpayment,
+                activeColor: ColorResources.themeRed,
+                onChanged: (newValue) {
+                  setState(() {
+                    cashpayment = newValue!;
+                  });
+                },
+              ),
               Text(
                 'Pay with money',
                 style: TextStyle(
-                  color: ColorResources.lightblack,
+                  color: ColorResources.lightBlack,
                   fontSize: 20,
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -469,11 +466,13 @@ class _LabTestPageState extends State<LabTestPage> {
         child: SizedBox(
           height: 50,
           width: MediaQuery.of(context).size.width,
-          child: RaisedButton(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorResources.themeRed,
+            ),
             onPressed: () {
               checkField(context);
             },
-            color: ColorResources.themered,
             child: Text(
               widget.testId == null ? 'Add to cart' : 'Update labtest',
               style: TextStyle(color: ColorResources.white, fontSize: 18),
@@ -485,36 +484,44 @@ class _LabTestPageState extends State<LabTestPage> {
   }
 
   void openTimePicker(BuildContext context) {
-    DatePicker.showTime12hPicker(context, showTitleActions: true,
-        onChanged: (date) {
-      setState(() {
-        time = DateFormat('hh:mm aa').format(date);
-      });
-    }, onConfirm: (date) {
-      setState(() {
-        time = DateFormat('hh:mm aa').format(date);
-      });
-    }, currentTime: DateTime.now(), locale: LocaleType.en);
+    DatePicker.showTime12hPicker(
+      context,
+      showTitleActions: true,
+      onChanged: (date) {
+        setState(() {
+          time = DateFormat('hh:mm aa').format(date);
+        });
+      },
+      onConfirm: (date) {
+        setState(() {
+          time = DateFormat('hh:mm aa').format(date);
+        });
+      },
+      currentTime: DateTime.now(),
+      locale: LocaleType.en,
+    );
   }
 
   void openDayPicker(BuildContext context) {
-    DatePicker.showDatePicker(context,
-        showTitleActions: true,
-        theme: DatePickerTheme(
-            doneStyle: TextStyle(color: ColorResources.themered, fontSize: 16),
-            cancelStyle: TextStyle(color: ColorResources.white, fontSize: 16)),
-        minTime: DateTime.now(),
-        maxTime: DateTime(2050, 12, 30),
-        onChanged: (date) {}, onConfirm: (date) {
+  DatePicker.showDatePicker(
+    context,
+    showTitleActions: true,
+    minTime: DateTime.now(),
+    maxTime: DateTime(2050, 12, 30),
+    onChanged: (date) {
+      // optional: handle live change
+    },
+    onConfirm: (date) {
       String formattedDate = DateFormat('dd/MM/yyyy').format(date);
       setState(() {
         day = formattedDate;
       });
     },
-        currentTime: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
-        locale: LocaleType.en);
-  }
+    currentTime: DateTime.now().add(Duration(days: 1)),
+    locale: LocaleType.en,
+  );
+}
+
 
   void getAllLabtest(BuildContext context) async {
     List<LabTestCategory> labtests = await labTestViewModel.getAllLabtest();
@@ -525,11 +532,11 @@ class _LabTestPageState extends State<LabTestPage> {
       labtests.forEach((lab) {
         setState(() {
           labTestCategoryList.add(lab);
-          labTestCategoryMap['${lab.cattestname}'] = lab.id;
+          labTestCategoryMap['${lab.catTestName}'] = lab.id;
         });
       });
       setState(() {
-        selectTestCategory = labTestCategoryList[0].cattestname;
+        selectTestCategory = labTestCategoryList[0].catTestName;
         labtestId = labTestCategoryList[0].id;
         getLabTestById(context, labtestId);
       });
@@ -538,7 +545,7 @@ class _LabTestPageState extends State<LabTestPage> {
         labTestCategoryList.forEach((element) {
           if (element.id == widget.testCatId) {
             setState(() {
-              selectTestCategory = element.cattestname;
+              selectTestCategory = element.catTestName;
             });
           }
         });
@@ -547,8 +554,8 @@ class _LabTestPageState extends State<LabTestPage> {
   }
 
   void getLabTestById(BuildContext context, String id) async {
-    List<LabTestByCategory> labtestByCat =
-        await labTestViewModel.getLabTestByCategory(id);
+    List<LabTestByCategory> labtestByCat = await labTestViewModel
+        .getLabTestByCategory(id);
 
     if (labtestByCat != null) {
       labTestByCategoryList.clear();
@@ -558,15 +565,15 @@ class _LabTestPageState extends State<LabTestPage> {
         });
       });
       setState(() {
-        selectTest = labTestByCategoryList[0].testname;
+        selectTest = labTestByCategoryList[0].testName;
         testId = labTestByCategoryList[0].id;
-        amount = labTestByCategoryList[0].testamount;
+        amount = labTestByCategoryList[0].testAmount;
       });
       if (widget.testId != null) {
         labTestByCategoryList.forEach((element) {
           if (element.id == widget.testId) {
             setState(() {
-              selectTest = element.testname;
+              selectTest = element.testName;
               amount = widget.testAmount;
             });
           }
@@ -588,16 +595,17 @@ class _LabTestPageState extends State<LabTestPage> {
                   height: 120,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: ColorResources.white,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: ColorResources.lightBlue.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 15,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ]),
+                      color: ColorResources.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorResources.lightBlue.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 15,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     child: Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -617,28 +625,32 @@ class _LabTestPageState extends State<LabTestPage> {
         : Text('');
   }
 
-  void showSnakbar(BuildContext context, String message) {
-    scaffoldKey.currentState.showSnackBar(new SnackBar(
-        backgroundColor: ColorResources.themered,
-        content: new Text(
-          message,
-          style: TextStyle(color: ColorResources.white),
-        )));
-  }
+  void showSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: ColorResources.themeRed,
+      content: Text(
+        message,
+        style: TextStyle(color: ColorResources.white),
+      ),
+    ),
+  );
+}
+
 
   void checkField(BuildContext context) {
     if (day == 'dd/mm/yyyy') {
-      showSnakbar(context, 'Please select date');
+      showSnackbar(context, 'Please select date');
     } else if (time == '00.00') {
-      showSnakbar(context, 'please select time');
+      showSnackbar(context, 'please select time');
     } else if (!cashpayment) {
-      showSnakbar(context, 'Select payment method');
+      showSnackbar(context, 'Select payment method');
     } else {
       setState(() {
         isLoading = true;
       });
 
-        saveDataIntoDb(context);
+      saveDataIntoDb(context);
     }
   }
 
@@ -650,21 +662,29 @@ class _LabTestPageState extends State<LabTestPage> {
   }
 
   void saveDataIntoDb(BuildContext context) async {
-
     RegistrationResponse response;
 
-    if(widget.testId != null){
-      response = await labTestViewModel.updateLabtest(widget.labTestId,
-          testId, labtestId, id, amount, day, time, 'Cash');
-    }else {
+    if (widget.testId != null) {
+      response = await labTestViewModel.updateLabtest(
+        widget.testId.toString(),
+        testId,
+        labtestId,
+        id,
+        amount,
+        day,
+        time,
+        'Cash',
+      );
+    } else {
       response = await labTestViewModel.saveLabTest(
-          testId,
-          labtestId,
-          id,
-          amount,
-          day,
-          time,
-          'Cash');
+        testId,
+        labtestId,
+        id,
+        amount,
+        day,
+        time,
+        'Cash',
+      );
     }
 
     if (response != null) {
@@ -676,12 +696,11 @@ class _LabTestPageState extends State<LabTestPage> {
           day = 'dd/mm/yyyy';
           time = '00.00';
         });
-        showSnakbar(context, response.message);
-      //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DashboardScreen()));
+        showSnackbar(context, response.message);
+        //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DashboardScreen()));
       } else {
-        showSnakbar(context, response.message);
+        showSnackbar(context, response.message);
       }
-
     }
   }
 
@@ -691,8 +710,8 @@ class _LabTestPageState extends State<LabTestPage> {
         testId = widget.testId;
         labtestId = widget.testCatId;
         cashpayment = true;
-        day = widget.sampleCollectDate;
-        time = widget.sampleCollectTime;
+        day = widget.sampleCollectDate!;
+        time = widget.sampleCollectTime!.toString();
         amount = widget.testAmount;
       });
     }

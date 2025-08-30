@@ -12,12 +12,12 @@ class PurchaseScreen extends StatefulWidget {
 }
 
 class _PurchaseScreenState extends State<PurchaseScreen> {
-  List<Order> orderList = new List();
+  List<Order> orderList = [];
   var isLoading = true;
   var isFirst = true;
   var notFound = false;
   var userId;
-  EShopViewModel eShopViewModel;
+  late EShopViewModel eShopViewModel;
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
     eShopViewModel = Provider.of<EShopViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         centerTitle: true,
         title: Text('Purchase list',
         style: TextStyle(
@@ -64,7 +64,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                       color: ColorResources.white,
                       boxShadow: [
                         BoxShadow(
-                          color: ColorResources.lightblack.withOpacity(0.3),
+                          color: ColorResources.lightBlack.withOpacity(0.3),
                           spreadRadius: 1,
                           blurRadius: 3,
                           offset: Offset(0, 1), // changes position of shadow
@@ -79,26 +79,26 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Order ${orderList[index].orderid != null ? orderList[index].orderid:'' }',
+                                Text('Order ${orderList[index].orderId != null ? orderList[index].orderId:'' }',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: ColorResources.lightblack
+                                  color: ColorResources.lightBlack
                                 ),),
                                 Padding(
                                   padding: const EdgeInsets.only(top:4.0),
-                                  child: Text('${orderList[index].orderdate != null ? orderList[index].orderdate:'' }',
+                                  child: Text('${orderList[index].orderDate != null ? orderList[index].orderDate:'' }',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: ColorResources.lightblack
+                                      color: ColorResources.lightBlack
                                     ),
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top:4.0),
-                                  child: Text('${orderList[index].orderstatus != null ? orderList[index].orderstatus:'' }',
+                                  child: Text('${orderList[index].orderStatus != null ? orderList[index].orderStatus:'' }',
                                     style: TextStyle(
                                         fontSize: 12,
-                                      color: orderList[index].orderstatus == 'Pending' ? ColorResources.lightOrange:ColorResources.themered
+                                      color: orderList[index].orderStatus == 'Pending' ? ColorResources.lightOrange:ColorResources.themeRed
                                     ),),
                                 ),
                               ],
@@ -109,7 +109,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                           padding: const EdgeInsets.all(10.0),
                           child: Text('View details >>',
                             style: TextStyle(
-                              color: ColorResources.themered,
+                              color: ColorResources.themeRed,
                               fontSize: 12
                             ),
                           ),

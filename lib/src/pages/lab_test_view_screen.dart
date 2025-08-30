@@ -16,12 +16,12 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
 
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  LabTestViewModel labTestViewModel;
+  late LabTestViewModel labTestViewModel;
   var isFirst = true;
   var userId;
   var isLoading = true;
   var isNotFound = false;
-  List<LabTestByUser> labTestByUserList = new List();
+  List<LabTestByUser> labTestByUserList = [];
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         leading: Text(''),
         title: Text('Lab Test',
         style: TextStyle(
@@ -95,9 +95,9 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${labTestByUserList[index].samplecollectdate != null ? labTestByUserList[index].samplecollectdate:'Not found'}',
+                            Text('${labTestByUserList[index].sampleCollectDate != null ? labTestByUserList[index].sampleCollectDate:'Not found'}',
                             style: TextStyle(
-                              color: ColorResources.lightblack,
+                              color: ColorResources.lightBlack,
                               fontSize: 14
                             ),),
                             Padding(
@@ -115,9 +115,9 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                               ),),
                             Padding(
                               padding: const EdgeInsets.only(top:4.0),
-                              child: Text('${labTestByUserList[index].paymenttype != null ? labTestByUserList[index].paymenttype:'Not found'}',
+                              child: Text('${labTestByUserList[index].paymentType != null ? labTestByUserList[index].paymentType:'Not found'}',
                                 style: TextStyle(
-                                    color: ColorResources.lightblack,
+                                    color: ColorResources.lightBlack,
                                     fontSize: 14
                                 ),),
                             ),
@@ -132,15 +132,15 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.alarm,
-                            color: ColorResources.themered,),
-                            Text('${labTestByUserList[index].samplecollectdate != null ? labTestByUserList[index].samplecollectdate:'Not found'}',
+                            color: ColorResources.themeRed,),
+                            Text('${labTestByUserList[index].sampleCollectDate != null ? labTestByUserList[index].sampleCollectDate:'Not found'}',
                             style: TextStyle(
-                              color: ColorResources.themered,
+                              color: ColorResources.themeRed,
                               fontSize: 14
                             ),),
-                            Text('${labTestByUserList[index].samplecollecttime != null ? labTestByUserList[index].samplecollecttime:'Not found'}',
+                            Text('${labTestByUserList[index].sampleCollectTime != null ? labTestByUserList[index].sampleCollectTime:'Not found'}',
                               style: TextStyle(
-                                  color: ColorResources.themered,
+                                  color: ColorResources.themeRed,
                                   fontSize: 14
                               ),),
 
@@ -176,8 +176,8 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                     Row(
                       children: [
                         GestureDetector(
-                          onTap:()=> openModificationDialog(context,labTestByUserList[index].id,labTestByUserList[index].testid,labTestByUserList[index].testcatid,
-                              labTestByUserList[index].testamount,labTestByUserList[index].samplecollectdate,labTestByUserList[index].samplecollecttime,labTestByUserList[index].paymenttype),
+                          onTap:()=> openModificationDialog(context,labTestByUserList[index].id,labTestByUserList[index].testId,labTestByUserList[index].testCatId,
+                              labTestByUserList[index].testAmount,labTestByUserList[index].sampleCollectDate,labTestByUserList[index].sampleCollectDate,labTestByUserList[index].paymentType),
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -198,7 +198,7 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                         Padding(
                           padding: const EdgeInsets.only(left:10.0),
                           child: GestureDetector(
-                            onTap:()=> openConfirmationDialog(context,labTestByUserList[index].id,labTestByUserList[index].testid,labTestByUserList[index].testcatid),
+                            onTap:()=> openConfirmationDialog(context,labTestByUserList[index].id,labTestByUserList[index].testId,labTestByUserList[index].testCatId),
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -350,7 +350,7 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
     }else if(status == 'Cancel'){
       color = ColorResources.lightOrange;
     }else if(status == 'Completed'){
-      color = ColorResources.themered;
+      color = ColorResources.themeRed;
     }else {
       color = ColorResources.white;
     }
@@ -381,14 +381,14 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                           alignment: Alignment.center,
                           child: Text('Do you want to cancel the labtest?',
                           style: TextStyle(
-                            color: ColorResources.lightblack,
+                            color: ColorResources.lightBlack,
                           ),),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Divider(
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           thickness: 0.5,
                         ),
                       ),
@@ -416,7 +416,7 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                                   child: Center(
                                     child: Text('Yes',
                                       style: TextStyle(
-                                          color: ColorResources.themered
+                                          color: ColorResources.themeRed
                                       ),),
                                   ),
                                 ),
@@ -459,14 +459,14 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                           alignment: Alignment.center,
                           child: Text('Do you want to edit the labtest?',
                             style: TextStyle(
-                              color: ColorResources.lightblack,
+                              color: ColorResources.lightBlack,
                             ),),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Divider(
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           thickness: 0.5,
                         ),
                       ),
@@ -494,7 +494,7 @@ class _LabTestViewPageState extends State<LabTestViewPage> {
                                   child: Center(
                                     child: Text('Yes',
                                       style: TextStyle(
-                                          color: ColorResources.themered
+                                          color: ColorResources.themeRed
                                       ),),
                                   ),
                                 ),

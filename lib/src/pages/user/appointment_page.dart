@@ -4,27 +4,26 @@ import 'package:flutter_healthcare_app/src/model/doctor.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:flutter_healthcare_app/src/model/view_appointment.dart';
 import 'package:flutter_healthcare_app/src/pages/book_appoint_page.dart';
-import 'package:flutter_healthcare_app/src/pages/doctor_consultant_page.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/viewModel/appointment_view_model.dart';
 import 'package:flutter_healthcare_app/src/viewModel/doctor_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppointmentPage extends StatefulWidget {
-  String appointmentId;
-  String timeId;
-  String appointmentDate;
-  String reason;
-  String paymenthod;
+  String? appointmentId;
+  String? timeId;
+  String? appointmentDate;
+  String? reason;
+  String? paymenthod;
 
   AppointmentPage(
-      {this.appointmentId,
-      this.timeId,
-      this.appointmentDate,
-      this.reason,
-      this.paymenthod});
+      { this.appointmentId,
+       this.timeId,
+       this.appointmentDate,
+       this.reason,
+       this.paymenthod
+      });
 
   @override
   _AppointmentPageState createState() => _AppointmentPageState();
@@ -33,18 +32,17 @@ class AppointmentPage extends StatefulWidget {
 class _AppointmentPageState extends State<AppointmentPage> {
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  AppointmentViewModel appointmentViewModel;
-  DoctorViewModel doctorViewModel;
+late  AppointmentViewModel appointmentViewModel;
+late  DoctorViewModel doctorViewModel;
   var isFirst = true;
   var id;
   var userType;
   var isLoading = true;
   var isNotFound = false;
-  List<ViewAppointment> appointmentList = new List();
+  List<ViewAppointment> appointmentList = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getCustomerInfo(context);
   }
@@ -56,7 +54,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         leading: Text(''),
         title: Text(
           'Appointment',
@@ -113,7 +111,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                   Text(
                                     '${appointmentList[index].dates != null ? appointmentList[index].dates : 'Not found'}',
                                     style: TextStyle(
-                                        color: ColorResources.lightblack,
+                                        color: ColorResources.lightBlack,
                                         fontSize: 14),
                                   ),
                                   Padding(
@@ -136,7 +134,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                     child: Text(
                                       '${appointmentList[index].reasons != null ? appointmentList[index].reasons : 'Not found'}',
                                       style: TextStyle(
-                                          color: ColorResources.lightblack,
+                                          color: ColorResources.lightBlack,
                                           fontSize: 14),
                                     ),
                                   ),
@@ -150,18 +148,18 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                 children: [
                                   Icon(
                                     Icons.alarm,
-                                    color: ColorResources.themered,
+                                    color: ColorResources.themeRed,
                                   ),
                                   Text(
                                     '${appointmentList[index].dates != null ? appointmentList[index].dates : 'Not found'}',
                                     style: TextStyle(
-                                        color: ColorResources.themered,
+                                        color: ColorResources.themeRed,
                                         fontSize: 14),
                                   ),
                                   Text(
                                     '${appointmentList[index].appointmentTime != null ? appointmentList[index].appointmentTime : 'Not found'}',
                                     style: TextStyle(
-                                        color: ColorResources.themered,
+                                        color: ColorResources.themeRed,
                                         fontSize: 14),
                                   ),
                                 ],
@@ -203,13 +201,13 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                       onTap: () => openModificationDialog(
                                           context,
                                           appointmentList[index].id,
-                                          appointmentList[index].doctorid,
+                                          appointmentList[index].doctorId,
                                           appointmentList[index].doctorName,
                                           appointmentList[index].speciality,
-                                          appointmentList[index].timeid,
+                                          appointmentList[index].timeId,
                                           appointmentList[index].dates,
                                           appointmentList[index].reasons,
-                                          appointmentList[index].paymethod),
+                                          appointmentList[index].payMethod),
                                       child: Container(
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.all(
@@ -386,7 +384,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
     } else if (status == 'Cancelled') {
       color = ColorResources.lightOrange;
     } else if (status == 'Completed') {
-      color = ColorResources.themered;
+      color = ColorResources.themeRed;
     } else {
       color = ColorResources.white;
     }
@@ -416,14 +414,14 @@ class _AppointmentPageState extends State<AppointmentPage> {
                         child: Text(
                           'Do you want to cancel the appointment?',
                           style: TextStyle(
-                            color: ColorResources.lightblack,
+                            color: ColorResources.lightBlack,
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Divider(
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           thickness: 0.5,
                         ),
                       ),
@@ -453,7 +451,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                     child: Text(
                                       'Yes',
                                       style: TextStyle(
-                                          color: ColorResources.themered),
+                                          color: ColorResources.themeRed),
                                     ),
                                   ),
                                 ),
@@ -503,14 +501,14 @@ class _AppointmentPageState extends State<AppointmentPage> {
                         child: Text(
                           'Do you want to edit the appointment?',
                           style: TextStyle(
-                            color: ColorResources.lightblack,
+                            color: ColorResources.lightBlack,
                           ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Divider(
-                          color: ColorResources.themered,
+                          color: ColorResources.themeRed,
                           thickness: 0.5,
                         ),
                       ),
@@ -549,7 +547,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                                     child: Text(
                                       'Yes',
                                       style: TextStyle(
-                                          color: ColorResources.themered),
+                                          color: ColorResources.themeRed),
                                     ),
                                   ),
                                 ),
@@ -596,7 +594,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
 
     if (availables != null) {
       Doctor doctor =
-          new Doctor(id: doctorid, name: doctorName, specialist: speciality);
+          new Doctor(id: doctorid, name: doctorName, specialist: speciality, latitude: '');
 
       print(timeid);
       Navigator.pop(context);

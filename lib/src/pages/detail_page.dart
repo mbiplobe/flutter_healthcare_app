@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/viewModel/doctor_view_model.dart';
 import 'package:flutter_healthcare_app/src/model/available.dart';
 import 'package:flutter_healthcare_app/src/model/doctor.dart';
-import 'package:flutter_healthcare_app/src/pages/book_appoint_page.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/theme/theme.dart';
@@ -11,25 +10,27 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
-  final Doctor doctor;
-  DetailPage({Key key, this.doctor}) : super(key: key);
+  final Doctor? doctor;
+
+  const DetailPage({super.key, this.doctor});
+
 
   @override
   _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
-  Doctor model;
-  DoctorViewModel doctorViewModel;
+late  Doctor model;
+late  DoctorViewModel doctorViewModel;
   var isFirst = true;
-  List<Available> availableList;
+late  List<Available> availableList;
   RegExp exp = RegExp(r"\r\n", multiLine: true, caseSensitive: true);
 
   @override
   void initState() {
-    model = widget.doctor;
+    model = widget.doctor!;
     super.initState();
-    availableList = new List();
+    availableList = [];
   }
 
   Widget _appbar() {
@@ -59,7 +60,7 @@ class _DetailPageState extends State<DetailPage> {
     }
     doctorViewModel = Provider.of<DoctorViewModel>(context);
     if (isFirst) {
-      getAvailableTime(widget.doctor.id);
+      getAvailableTime(widget.doctor!.id);
       setState(() {
         isFirst = false;
       });
@@ -104,7 +105,7 @@ class _DetailPageState extends State<DetailPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                model.name,
+                                model.name!,
                                 style: titleStyle,
                               ),
                               SizedBox(
@@ -117,7 +118,7 @@ class _DetailPageState extends State<DetailPage> {
                             ],
                           ),
                           subtitle: Text(
-                            model.specialist.replaceAll(exp, ', '),
+                            model.specialist!.replaceAll(exp, ', '),
                             style: TextStyles.bodySm.subTitleColor.bold,
                           ),
                         ),
@@ -188,7 +189,7 @@ class _DetailPageState extends State<DetailPage> {
                           style: titleStyle,
                         ),
                         Text(
-                          model.education,
+                          model.education!,
                           style: TextStyles.body,
                         ).vP4,
                         Divider(
@@ -197,7 +198,7 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         Text("About", style: titleStyle).vP16,
                         Text(
-                          model.about,
+                          model.about!,
                           style: TextStyles.body.subTitleColor,
                         ),
                         Row(
@@ -213,7 +214,7 @@ class _DetailPageState extends State<DetailPage> {
                                       color: ColorResources.grey.withAlpha(50)),
                                   child: Icon(
                                     Icons.call,
-                                    color: ColorResources.themered,
+                                    color: ColorResources.themeRed,
                                   ),
                                 ).ripple(
                                   () {
@@ -237,7 +238,7 @@ class _DetailPageState extends State<DetailPage> {
                                       color: ColorResources.grey.withAlpha(50)),
                                   child: Icon(
                                     Icons.chat_bubble,
-                                    color: ColorResources.themered,
+                                    color: ColorResources.themeRed,
                                   ),
                                 ).ripple(
                                   () {
@@ -253,22 +254,35 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                             Column(
                               children: [
-                                FlatButton(
-                                  color: ColorResources.themered,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                BookAppointmentPage(
-                                                    model, availableList)));
-                                  },
-                                  child: Text(
-                                    "Make an appointment",
-                                    style: TextStyles.titleNormal.white,
-                                  ).p(10),
-                                ),
+                                ElevatedButton(
+  style: ElevatedButton.styleFrom(
+    backgroundColor: ColorResources.themeRed,
+    foregroundColor: Colors.white, // Text and icon color
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+    padding: const EdgeInsets.all(16),
+    elevation: 2, // Subtle shadow
+  ),
+  onPressed: () {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => BookAppointmentPage(
+    //       model: model!, // Use named parameters for clarity
+    //       availableList: availableList,
+    //     ),
+    //   ),
+    // );
+  },
+  child: Text(
+    "Make an appointment",
+    style: TextStyles.titleNormal.copyWith(
+      color: Colors.white,
+      fontWeight: FontWeight.w600,
+    ),
+  ),
+),
                                 Text(
                                     'consultation fee : \$ ${model.fees} / hour')
                               ],

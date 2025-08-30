@@ -10,18 +10,17 @@ import 'package:flutter_healthcare_app/src/viewModel/auth_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../theme/light_color.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  AuthViewModel authViewModel;
+late  AuthViewModel authViewModel;
   var isLoading = false;
   static GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -38,13 +37,13 @@ class _LoginPageState extends State<LoginPage> {
 
   checkUserField() {
     if (userValueHolder.text.isEmpty) {
-      showSnakbar(context, 'Please input your email');
+      showSnackbar(context, 'Please input your email');
     } else if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(userValueHolder.text)) {
-      showSnakbar(context, 'Please input valid email');
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    ).hasMatch(userValueHolder.text)) {
+      showSnackbar(context, 'Please input valid email');
     } else if (passValueHolder.text.isEmpty) {
-      showSnakbar(context, 'Please input your password');
+      showSnackbar(context, 'Please input your password');
     } else {
       getTextInputData();
     }
@@ -59,17 +58,23 @@ class _LoginPageState extends State<LoginPage> {
       checkUser(user, password);
 
       if (userValueHolder.text == 'doc' && passValueHolder.text == 'doc') {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (_) => DoctorDashboardScreen()));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => DoctorDashboardScreen()),
+        );
       }
       if (userValueHolder.text == 'user' && passValueHolder.text == 'user') {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+          context,
+          MaterialPageRoute(builder: (_) => DashboardScreen()),
+        );
       }
       if (userValueHolder.text == 'delivery' &&
           passValueHolder.text == 'delivery') {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => DeliveryHomePage()));
+          context,
+          MaterialPageRoute(builder: (_) => DeliveryHomePage()),
+        );
       }
     });
   }
@@ -97,29 +102,34 @@ class _LoginPageState extends State<LoginPage> {
 
     Widget _helpText() {
       return Wrap(
-          direction: Axis.horizontal,
-          alignment: WrapAlignment.center,
-          spacing: 20.0,
-          children: <Widget>[
-            Text("Don't have account?").vP8,
-            GestureDetector(
-              onTap: () {
-                // do what you need to do when "Click here" gets clicked
-                setState(() {
-                  print("Register clicked");
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (_) => RegisterPage()));
-                });
-              },
-              child: Text("Register",
-                  style: TextStyle(
-                    decoration: TextDecoration.none,
-                    color: ColorResources.themered,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  )),
-            ).vP8,
-          ]);
+        direction: Axis.horizontal,
+        alignment: WrapAlignment.center,
+        spacing: 20.0,
+        children: <Widget>[
+          Text("Don't have account?").vP8,
+          GestureDetector(
+            onTap: () {
+              // do what you need to do when "Click here" gets clicked
+              setState(() {
+                print("Register clicked");
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => RegisterPage()),
+                );
+              });
+            },
+            child: Text(
+              "Register",
+              style: TextStyle(
+                decoration: TextDecoration.none,
+                color: ColorResources.themeRed,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          ).vP8,
+        ],
+      );
     }
 
     Widget _LoginInputs() {
@@ -140,24 +150,30 @@ class _LoginPageState extends State<LoginPage> {
                     color: ColorResources.grey.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(3, 3),
-                  )
+                  ),
                 ],
               ),
               child: TextField(
                 controller: userValueHolder,
                 decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
                   border: InputBorder.none,
                   hintText: "User name or email",
                   hintStyle: TextStyles.body.subTitleColor,
                   suffixIcon: SizedBox(
-                      width: 55,
-                      child: Icon(Icons.account_circle,
-                              color: ColorResources.themered)
-                          .alignCenter
-                          .ripple(() {},
-                              borderRadius: BorderRadius.circular(13))),
+                    width: 55,
+                    child:
+                        Icon(
+                          Icons.account_circle,
+                          color: ColorResources.themeRed,
+                        ).alignCenter.ripple(
+                          () {},
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                  ),
                 ),
               ),
             ),
@@ -173,43 +189,50 @@ class _LoginPageState extends State<LoginPage> {
                     color: ColorResources.grey.withOpacity(.3),
                     blurRadius: 15,
                     offset: Offset(3, 3),
-                  )
+                  ),
                 ],
               ),
               child: TextField(
                 controller: passValueHolder,
                 obscureText: true,
                 decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
                   border: InputBorder.none,
                   hintText: "Password",
                   hintStyle: TextStyles.body.subTitleColor,
                   suffixIcon: SizedBox(
-                      width: 55,
-                      child: Icon(Icons.lock, color: ColorResources.themered)
-                          .alignCenter
-                          .ripple(() {},
-                              borderRadius: BorderRadius.circular(13))),
+                    width: 55,
+                    child: Icon(Icons.lock, color: ColorResources.themeRed)
+                        .alignCenter
+                        .ripple(() {}, borderRadius: BorderRadius.circular(13)),
+                  ),
                 ),
               ),
             ),
             _Sgap(),
             Container(
-                child: SizedBox(
-              width: 200.00,
-              height: 55,
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(13.0),
-                    side: BorderSide(color: ColorResources.themered)),
-                onPressed: checkUserField,
-                color: ColorResources.themered,
-                textColor: Colors.white,
-                child:
-                    Text("Login".toUpperCase(), style: TextStyle(fontSize: 14)),
+              child: SizedBox(
+                width: 200.00,
+                height: 55,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        ColorResources.themeRed, // button background
+                    foregroundColor: Colors.white, // text color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(13.0),
+                      side: BorderSide(color: ColorResources.themeRed),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  ),
+                  onPressed: checkUserField,
+                  child: Text("LOGIN", style: TextStyle(fontSize: 14)),
+                ),
               ),
-            )),
+            ),
           ],
         ),
       );
@@ -218,29 +241,27 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement build
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         children: [
           Container(
             child: CustomScrollView(
               slivers: <Widget>[
                 SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      _Bgap(),
-                      _head(),
-                      _LoginInputs(),
-                      _Sgap(),
-                      _helpText(),
-                      //  _loginForm(),
-                    ],
-                  ),
+                  delegate: SliverChildListDelegate([
+                    _Bgap(),
+                    _head(),
+                    _LoginInputs(),
+                    _Sgap(),
+                    _helpText(),
+                    //  _loginForm(),
+                  ]),
                 ),
                 //_doctorsList()
               ],
             ),
           ),
-          loading(context)
+          loading(context),
         ],
       ),
     );
@@ -259,16 +280,17 @@ class _LoginPageState extends State<LoginPage> {
                   height: 120,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: ColorResources.white,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: ColorResources.lightBlue.withOpacity(0.2),
-                            spreadRadius: 1,
-                            blurRadius: 15,
-                            offset: Offset(0, 1), // changes position of shadow
-                          ),
-                        ]),
+                      color: ColorResources.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorResources.lightBlue.withOpacity(0.2),
+                          spreadRadius: 1,
+                          blurRadius: 15,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     child: Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -293,44 +315,53 @@ class _LoginPageState extends State<LoginPage> {
       isLoading = true;
     });
 
-    List<LoginResponse> loginResponse =
-        await authViewModel.getlogin(user, password);
+    List<LoginResponse> loginResponse = await authViewModel.getlogin(
+      user,
+      password,
+    );
 
     if (loginResponse != null) {
       setState(() {
         isLoading = false;
       });
 
-      if(loginResponse[0].id.isNotEmpty){
+      if (loginResponse[0].id.isNotEmpty) {
         saveDataIntoSharedPref(loginResponse[0]);
 
         if (loginResponse[0].usertype == 'Patient') {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+            context,
+            MaterialPageRoute(builder: (_) => DashboardScreen()),
+          );
         } else {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (_) => DoctorDashboardScreen()));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => DoctorDashboardScreen()),
+          );
         }
-      }else{
-        showSnakbar(context, 'Invalid username or password');
+      } else {
+        showSnackbar(context, 'Invalid username or password');
       }
-
     } else {
       setState(() {
         isLoading = false;
       });
-      showSnakbar(context, 'Invalid username or password');
+      showSnackbar(context, 'Invalid username or password');
     }
   }
 
-  void showSnakbar(BuildContext context, String message) {
-    scaffoldKey.currentState.showSnackBar(new SnackBar(
-        backgroundColor: ColorResources.themered,
-        content: new Text(
-          message,
-          style: TextStyle(color: ColorResources.white),
-        )));
-  }
+  void showSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: ColorResources.themeRed,
+      content: Text(
+        message,
+        style: TextStyle(color: ColorResources.white),
+      ),
+    ),
+  );
+}
+
 
   void saveDataIntoSharedPref(LoginResponse loginResponse) async {
     SharedPreferences customerInfo = await SharedPreferences.getInstance();
@@ -339,9 +370,8 @@ class _LoginPageState extends State<LoginPage> {
     customerInfo.setString('lastName', loginResponse.lastName);
     customerInfo.setString('userType', loginResponse.usertype);
     customerInfo.setString('email', loginResponse.email);
-    customerInfo.setString('userPhone', loginResponse.userphone);
-    customerInfo.setString('gender', loginResponse.gender);
-    customerInfo.setString('address', loginResponse.address);
-
+    customerInfo.setString('userPhone', loginResponse.userphone!);
+    customerInfo.setString('gender', loginResponse.gender!);
+    customerInfo.setString('address', loginResponse.address!);
   }
 }

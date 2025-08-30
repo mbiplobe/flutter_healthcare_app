@@ -28,11 +28,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool showSelectedLabels = false;
   bool showUnselectedLabels = false;
 
-  Color selectedColor = ColorResources.themered;
-  Gradient selectedGradient = LinearGradient(colors: [ColorResources.themered, Colors.amber]);
+  Color selectedColor = ColorResources.themeRed;
+  Gradient selectedGradient = LinearGradient(colors: [ColorResources.themeRed, Colors.amber]);
 
   Color unselectedColor = Colors.blueGrey;
-  Gradient unselectedGradient = LinearGradient(colors: [ColorResources.themered, Colors.blueGrey]);
+  Gradient unselectedGradient = LinearGradient(colors: [ColorResources.themeRed, Colors.blueGrey]);
 
   late Color containerColor;
   List<Color> containerColors = [
@@ -50,7 +50,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     HomePage(),
     AppointmentPage(),
     HistoryPage(),
-    //UserProfilePage(),
     UserProfileMenu(),
   ];
 

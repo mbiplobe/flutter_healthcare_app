@@ -11,7 +11,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
-  TabController _tabController;
+late  TabController _tabController;
 
 
   @override
@@ -32,7 +32,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                 children: <Widget>[
                   Container(
                     height: MediaQuery.of(context).size.height,
-                    color: ColorResources.themered,
+                    color: ColorResources.themeRed,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -57,7 +57,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                             children: [
                               ResponsiveGridCol(
                                 child: Container(
-                                  color: ColorResources.themered,
+                                  color: ColorResources.themeRed,
                                   width: MediaQuery.of(context).size.width,
                                   child: TabBar(
                                     indicatorWeight: 3,

@@ -14,8 +14,8 @@ class ServicePage extends StatefulWidget {
 class _ServicePageState extends State<ServicePage> {
   var isFirst = true;
   var isLoading = true;
-  List<Service> serviceList = new List();
-  ServiceViewModel serviceViewModel;
+  List<Service> serviceList = [];
+late  ServiceViewModel serviceViewModel;
 
   List<String> getListElements() {
     var item = List<String>.generate(100, (index) => "Service ${index}");
@@ -48,10 +48,10 @@ class _ServicePageState extends State<ServicePage> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back, color: ColorResources.themered)),
+            child: Icon(Icons.arrow_back, color: ColorResources.themeRed)),
         title: Text(
           'Services',
-          style: TextStyle(color: ColorResources.themered),
+          style: TextStyle(color: ColorResources.themeRed),
         ),
       ),
       body: Stack(
@@ -111,7 +111,7 @@ class _ServicePageState extends State<ServicePage> {
     var listview = ListView.separated(
         separatorBuilder: (BuildContext context, int index) => Divider(
               thickness: 1,
-              color: ColorResources.themered,
+              color: ColorResources.themeRed,
             ),
         itemCount: serviceList != null ?serviceList.length :0,
         itemBuilder: (context, index) {
@@ -125,7 +125,7 @@ class _ServicePageState extends State<ServicePage> {
               leading: Icon(Icons.star),
               trailing: Icon(
                 Icons.arrow_forward_ios,
-                color: ColorResources.themered,
+                color: ColorResources.themeRed,
               ),
             ),
           );

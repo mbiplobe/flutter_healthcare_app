@@ -1,6 +1,5 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/data.dart';
 import 'package:flutter_healthcare_app/src/model/medicine.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
@@ -14,20 +13,20 @@ class _MedicationPageState extends State<MedicationPage> {
   TextEditingController _problemController = TextEditingController();
 
   var fileName = 'File';
-  List<Medicine> medicineListdata;
+late  List<Medicine> medicineListdata;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    medicineListdata = new List();
+    medicineListdata = [];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorResources.themered,
+        backgroundColor: ColorResources.themeRed,
         elevation: 0,
         leading: GestureDetector(
             onTap: () {
@@ -38,7 +37,7 @@ class _MedicationPageState extends State<MedicationPage> {
       floatingActionButton: new FloatingActionButton(
           elevation: 0.0,
           child: new Icon(Icons.add_shopping_cart),
-          backgroundColor: ColorResources.themered,
+          backgroundColor: ColorResources.themeRed,
           onPressed: () {}),
       body: Column(
         children: [
@@ -53,7 +52,7 @@ class _MedicationPageState extends State<MedicationPage> {
   Widget headerpart(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      color: ColorResources.themered,
+      color: ColorResources.themeRed,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -81,11 +80,11 @@ class _MedicationPageState extends State<MedicationPage> {
             padding: const EdgeInsets.only(left: 15, right: 15),
             child: GestureDetector(
               onTap: () async {
-                FilePickerResult result = await FilePicker.platform.pickFiles();
+                FilePickerResult? result = await FilePicker.platform.pickFiles();
 
                 if (result != null) {
                   setState(() {
-                    fileName = result.names[0];
+                    fileName = result.names[0]!;
                   });
                 }
               },
@@ -129,7 +128,7 @@ class _MedicationPageState extends State<MedicationPage> {
                       child: Text(
                         '$fileName',
                         style: TextStyle(
-                            color: ColorResources.lightblack, fontSize: 14),
+                            color: ColorResources.lightBlack, fontSize: 14),
                       ),
                     )
                   ],
@@ -161,14 +160,14 @@ class _MedicationPageState extends State<MedicationPage> {
               Text(
                 'Select Medication',
                 style: TextStyle(
-                  color: ColorResources.lightblack.withOpacity(0.7),
+                  color: ColorResources.lightBlack.withOpacity(0.7),
                   fontSize: 18,
                 ),
               ),
               Text(
                 'View all',
                 style: TextStyle(
-                  color: ColorResources.themered,
+                  color: ColorResources.themeRed,
                   fontSize: 18,
                 ),
               )
@@ -190,7 +189,7 @@ class _MedicationPageState extends State<MedicationPage> {
         borderRadius: BorderRadius.all(Radius.circular(13)),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: ColorResources.lightblack.withOpacity(.3),
+            color: ColorResources.lightBlack.withOpacity(.3),
             blurRadius: 15,
             offset: Offset(5, 5),
           )
@@ -213,7 +212,7 @@ class _MedicationPageState extends State<MedicationPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.search, color: ColorResources.themered),
+            child: Icon(Icons.search, color: ColorResources.themeRed),
           ),
         ],
       ),
@@ -231,7 +230,7 @@ class _MedicationPageState extends State<MedicationPage> {
             padding: const EdgeInsets.all(5.0),
             child: Container(
               decoration: BoxDecoration(
-                color: ColorResources.themered,
+                color: ColorResources.themeRed,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 boxShadow: [
                   BoxShadow(
@@ -261,26 +260,26 @@ class _MedicationPageState extends State<MedicationPage> {
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(10),
                               bottomRight: Radius.circular(10)),
-                          color: ColorResources.themered.withOpacity(0.7)),
+                          color: ColorResources.themeRed.withOpacity(0.7)),
                       child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top:5.0),
                             child: Text(
-                              '${medicineListdata[index].medicinename}',
+                              '${medicineListdata[index].medicineName}',
                               style: TextStyle(
                                   color: ColorResources.black, fontSize: 16,fontWeight: FontWeight.bold),
                             ),
                           ),
                           Text(
-                            '${medicineListdata[index].medicinecompany}',
+                            '${medicineListdata[index].medicineCompany}',
                             style: TextStyle(
                                 color: ColorResources.black, fontSize: 16),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(bottom:5.0),
                             child: Text(
-                              '\$${medicineListdata[index].medicineprice}/each',
+                              '\$${medicineListdata[index].medicinePrice}/each',
                               style: TextStyle(
                                   color: ColorResources.black, fontSize: 16),
                             ),
@@ -301,7 +300,7 @@ class _MedicationPageState extends State<MedicationPage> {
                       ),
                       child: Center(
                         child: Icon(Icons.check,
-                        color: ColorResources.themered,
+                        color: ColorResources.themeRed,
                         size: 20,),
                       ),
                     ),

@@ -56,7 +56,7 @@ class _PurchaseScreenState extends State<PurchaseScreen> {
                 child: GestureDetector(
                   onTap: (){
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => PurchaseDetailScreen(userId, orderList[index].orderid)));
+                        context, MaterialPageRoute(builder: (_) => PurchaseDetailScreen(userId, orderList[index].orderId)));
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,

@@ -16,6 +16,6 @@ class Appointment {
   factory Appointment.fromJson(Map<String, dynamic> json) =>
       _$AppointmentFromJson(json);
 
-  Appointment({ this.patientUid,  this.doctorId,  this.date,  this.timeId,  this.reason,  this.payment});
+  Appointment({ this.doctorId,this.patientUid,    this.date,  this.timeId,  this.reason,  this.payment});
   Map<String, dynamic> toJson() => _$AppointmentToJson(this);
 }

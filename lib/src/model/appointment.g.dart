@@ -7,12 +7,12 @@ part of 'appointment.dart';
 // **************************************************************************
 
 Appointment _$AppointmentFromJson(Map<String, dynamic> json) => Appointment(
-  patientUid: json['patientUid'] as String,
-  doctorId: json['doctorId'] as String,
-  date: json['date'] as String,
-  timeId: json['timeId'] as String,
-  reason: json['reason'] as String,
-  payment: json['payment'] as String,
+  doctorId: json['doctorId'] as String?,
+  patientUid: json['patientUid'] as String?,
+  date: json['date'] as String?,
+  timeId: json['timeId'] as String?,
+  reason: json['reason'] as String?,
+  payment: json['payment'] as String?,
 );
 
 Map<String, dynamic> _$AppointmentToJson(Appointment instance) =>

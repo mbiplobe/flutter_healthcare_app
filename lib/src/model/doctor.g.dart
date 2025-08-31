@@ -8,18 +8,18 @@ part of 'doctor.dart';
 
 Doctor _$DoctorFromJson(Map<String, dynamic> json) => Doctor(
   id: json['id'] as String,
-  name: json['name'] as String,
-  department: json['department'] as String,
-  specialist: json['specialist'] as String,
-  phone: json['phone'] as String,
-  education: json['education'] as String,
+  name: json['name'] as String?,
+  department: json['department'] as String?,
+  specialist: json['specialist'] as String?,
+  phone: json['phone'] as String?,
+  education: json['education'] as String?,
   experience: json['experience'] as String?,
-  about: json['about'] as String,
-  fees: json['fees'] as String,
+  about: json['about'] as String?,
+  fees: json['fees'] as String?,
   joinDate: json['joinDate'] == null
       ? null
       : DateTime.parse(json['joinDate'] as String),
-  photo: json['photo'] as String,
+  photo: json['photo'] as String?,
   gender: json['gender'] as String?,
   isActive: json['isActive'] as bool?,
   createdBy: json['createdBy'] as String?,
@@ -36,10 +36,10 @@ Doctor _$DoctorFromJson(Map<String, dynamic> json) => Doctor(
   viewTime: json['viewTime'] == null
       ? null
       : DateTime.parse(json['viewTime'] as String),
-  doctorRating: json['doctorRating'] as String,
-  location: json['location'] as String,
-  latitude: json['latitude'] as String,
-  longitude: json['longitude'] as String,
+  doctorRating: json['doctorRating'] as String?,
+  location: json['location'] as String?,
+  latitude: json['latitude'] as String?,
+  longitude: json['longitude'] as String?,
   jsonDetails: json['jsonDetails'] as String?,
   queryFlag: json['queryFlag'] as String?,
 );

@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter/material.dart' as DatePicker;
 import 'package:flutter_healthcare_app/src/model/appointment.dart';
 import 'package:flutter_healthcare_app/src/model/available.dart';
 import 'package:flutter_healthcare_app/src/model/doctor.dart';
@@ -477,38 +477,40 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
     );
   }
 
-  void openDayPicker(BuildContext context) {
-    var isFound = false;
-    DatePicker.showDatePicker(
-      context,
-      showTitleActions: true,
-      minTime: DateTime.now(),
-      maxTime: DateTime(2050, 12, 30),
-      onChanged: (date) {},
-      onConfirm: (date) {
-        String formattedDate = DateFormat('dd/MM/yyyy').format(date);
-        setState(() {
-          availableDays.forEach((element) {
-            if (element.toLowerCase() ==
-                DateFormat('EEEE').format(date).toLowerCase()) {
-              showDate = formattedDate;
-              selectDay = element;
-              isFound = true;
-              timeList(context, element);
-            }
-          });
-          if (!isFound) {
-            showSnackbar(context, 'No schdule found');
-            selectDay = 'Day';
-            availableTimes.clear();
-            time = 'Schdule';
-            showDate = 'Select appointment date';
-          }
-        });
-      },
-      currentTime: DateTime.now(),
-      locale: LocaleType.en,
+  Future<void> openDayPicker(BuildContext context) async {
+    final DateTime? date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2050, 12, 30),
     );
+
+    if (date != null) {
+      String formattedDate = DateFormat('dd/MM/yyyy').format(date);
+      bool isFound = false;
+
+      // Make sure this is inside a StatefulWidget to call setState
+      setState(() {
+        for (var element in availableDays) {
+          if (element.toLowerCase() ==
+              DateFormat('EEEE').format(date).toLowerCase()) {
+            showDate = formattedDate;
+            selectDay = element;
+            isFound = true;
+            timeList(context, element);
+            break;
+          }
+        }
+
+        if (!isFound) {
+          showSnackbar(context, 'No schedule found');
+          selectDay = 'Day';
+          availableTimes.clear();
+          time = 'Schedule';
+          showDate = 'Select appointment date';
+        }
+      });
+    }
   }
 
   void timeList(BuildContext context, String val) {
@@ -541,20 +543,17 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
     });
   }
 
-void showSnackbar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      backgroundColor: ColorResources.themeRed,
-      content: Text(
-        message,
-        style: TextStyle(color: ColorResources.white),
+  void showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorResources.themeRed,
+        content: Text(message, style: TextStyle(color: ColorResources.white)),
+        behavior: SnackBarBehavior.floating, // Optional: better appearance
+        margin: const EdgeInsets.all(16), // Optional: for floating behavior
+        duration: const Duration(seconds: 3), // Optional: set duration
       ),
-      behavior: SnackBarBehavior.floating, // Optional: better appearance
-      margin: const EdgeInsets.all(16), // Optional: for floating behavior
-      duration: const Duration(seconds: 3), // Optional: set duration
-    ),
-  );
-}
+    );
+  }
 
   void checkValue(BuildContext context) {
     if (showDate == 'Select appointment date') {

@@ -1,10 +1,9 @@
 import 'dart:collection';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' hide DatePickerTheme;
+import 'package:flutter/material.dart' hide DatePickerTheme;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_healthcare_app/src/model/lab_test_by_category.dart';
 import 'package:flutter_healthcare_app/src/model/lab_test_category.dart';
-import 'package:flutter_healthcare_app/src/pages/bottomNavigation/dashboard_screen.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/viewModel/lab_test_view_model.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
@@ -36,7 +35,7 @@ class LabTestPage extends StatefulWidget {
 }
 
 class _LabTestPageState extends State<LabTestPage> {
-late  LabTestViewModel labTestViewModel;
+  late LabTestViewModel labTestViewModel;
   TextEditingController _problemController = TextEditingController();
   static GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -154,7 +153,7 @@ late  LabTestViewModel labTestViewModel;
                   padding: const EdgeInsets.only(left: 10.0),
                   child: DropdownButton(
                     hint: Text(
-                      selectTestCategory != null ? selectTestCategory : '',
+                      selectTestCategory != null ? selectTestCategory : 'Select Category',
                       style: TextStyle(
                         color: ColorResources.black,
                         fontSize: 16,
@@ -213,7 +212,7 @@ late  LabTestViewModel labTestViewModel;
                       padding: const EdgeInsets.only(left: 10.0),
                       child: DropdownButton(
                         hint: Text(
-                          selectTest != null ? selectTest : '',
+                          selectTest != null ? selectTest : 'Select Test',
                           style: TextStyle(
                             color: ColorResources.black,
                             fontSize: 16,
@@ -484,44 +483,68 @@ late  LabTestViewModel labTestViewModel;
   }
 
   void openTimePicker(BuildContext context) {
-    DatePicker.showTime12hPicker(
+    DatePicker.showTimePicker(
       context,
       showTitleActions: true,
-      onChanged: (date) {
+      onConfirm: (time) {
+        final formattedTime = '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
         setState(() {
-          time = DateFormat('hh:mm aa').format(date);
-        });
-      },
-      onConfirm: (date) {
-        setState(() {
-          time = DateFormat('hh:mm aa').format(date);
+          this.time = formattedTime;
         });
       },
       currentTime: DateTime.now(),
       locale: LocaleType.en,
+      theme: DatePickerTheme(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        itemStyle: TextStyle(
+          color: Theme.of(context).colorScheme.onBackground,
+          fontSize: 18,
+        ),
+        doneStyle: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+        cancelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
+          fontSize: 16,
+        ),
+      ),
     );
   }
 
   void openDayPicker(BuildContext context) {
-  DatePicker.showDatePicker(
-    context,
-    showTitleActions: true,
-    minTime: DateTime.now(),
-    maxTime: DateTime(2050, 12, 30),
-    onChanged: (date) {
-      // optional: handle live change
-    },
-    onConfirm: (date) {
-      String formattedDate = DateFormat('dd/MM/yyyy').format(date);
-      setState(() {
-        day = formattedDate;
-      });
-    },
-    currentTime: DateTime.now().add(Duration(days: 1)),
-    locale: LocaleType.en,
-  );
-}
-
+    DatePicker.showDatePicker(
+      context,
+      showTitleActions: true,
+      minTime: DateTime.now(),
+      maxTime: DateTime(2050, 12, 30),
+      onConfirm: (date) {
+        String formattedDate = DateFormat('dd/MM/yyyy').format(date);
+        setState(() {
+          day = formattedDate;
+        });
+      },
+      currentTime: DateTime.now().add(Duration(days: 1)),
+      locale: LocaleType.en,
+      theme: DatePickerTheme(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        itemStyle: TextStyle(
+          color: Theme.of(context).colorScheme.onBackground,
+          fontSize: 18,
+        ),
+        doneStyle: TextStyle(
+          color: Theme.of(context).colorScheme.primary,
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+        cancelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
+          fontSize: 16,
+        ),
+      ),
+    );
+  }
 
   void getAllLabtest(BuildContext context) async {
     List<LabTestCategory> labtests = await labTestViewModel.getAllLabtest();
@@ -626,17 +649,16 @@ late  LabTestViewModel labTestViewModel;
   }
 
   void showSnackbar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      backgroundColor: ColorResources.themeRed,
-      content: Text(
-        message,
-        style: TextStyle(color: ColorResources.white),
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorResources.themeRed,
+        content: Text(
+          message,
+          style: TextStyle(color: ColorResources.white),
+        ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   void checkField(BuildContext context) {
     if (day == 'dd/mm/yyyy') {

@@ -13,7 +13,8 @@ import 'package:flutter_healthcare_app/src/viewModel/service_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MultiProvider(
+  runApp(
+    MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => LocationViewModel()),
       ChangeNotifierProvider(

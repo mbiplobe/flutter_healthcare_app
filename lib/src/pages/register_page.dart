@@ -3,8 +3,6 @@ import 'package:flutter_healthcare_app/src/config/route.dart';
 import 'package:flutter_healthcare_app/src/core/constants.dart';
 import 'package:flutter_healthcare_app/src/model/registration.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
-import 'package:flutter_healthcare_app/src/pages/register_page.dart'
-    as firstNameValueHolder;
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/theme/extention.dart';
@@ -13,8 +11,6 @@ import 'package:flutter_healthcare_app/src/viewModel/location_viewmodel.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-import '../theme/light_color.dart';
 import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -332,6 +328,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                           Position position =
                               await Geolocator.getCurrentPosition(
+                                // ignore: deprecated_member_use
                                 desiredAccuracy: LocationAccuracy.high,
                               );
 

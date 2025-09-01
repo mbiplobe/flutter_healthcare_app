@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_healthcare_app/src/config/route.dart';
+import 'package:flutter_healthcare_app/src/core/constants.dart';
+import 'package:flutter_healthcare_app/src/core/height_constants.dart';
 import 'package:flutter_healthcare_app/src/model/login_response.dart';
 import 'package:flutter_healthcare_app/src/pages/bottomNavigation/dashboard_screen.dart';
 import 'package:flutter_healthcare_app/src/pages/bottomNavigation/doctor_dashboard_screen.dart';
-import 'package:flutter_healthcare_app/src/pages/delivery/delivery_page.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/theme/extention.dart';
 import 'package:flutter_healthcare_app/src/viewModel/auth_view_model.dart';
+import 'package:flutter_healthcare_app/src/widgets/elevation_button.dart';
+import 'package:flutter_healthcare_app/src/widgets/flat_button_widget.dart';
+import 'package:flutter_healthcare_app/src/widgets/text_input_form.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -20,7 +24,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-late  AuthViewModel authViewModel;
+  late AuthViewModel authViewModel;
   var isLoading = false;
   static GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -37,13 +41,13 @@ late  AuthViewModel authViewModel;
 
   checkUserField() {
     if (userValueHolder.text.isEmpty) {
-      showSnackbar(context, 'Please input your email');
+      showSnackbar(context, AppLoginConstants.inputEmail);
     } else if (!RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+      RegexPatterns.emailPattern,
     ).hasMatch(userValueHolder.text)) {
-      showSnackbar(context, 'Please input valid email');
+      showSnackbar(context, ValidationConstants.invalidEmail);
     } else if (passValueHolder.text.isEmpty) {
-      showSnackbar(context, 'Please input your password');
+      showSnackbar(context, AppLoginConstants.inputPassword);
     } else {
       getTextInputData();
     }
@@ -53,28 +57,20 @@ late  AuthViewModel authViewModel;
     setState(() {
       user = userValueHolder.text;
       password = passValueHolder.text;
-      print(user + password);
 
       checkUser(user, password);
 
-      if (userValueHolder.text == 'doc' && passValueHolder.text == 'doc') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => DoctorDashboardScreen()),
-        );
+      if (userValueHolder.text == TypeofUserConstants.doctor &&
+          passValueHolder.text == TypeofUserConstants.doctor) {
+        context.go(AppRoutes.doctorDashboardRoute);
       }
-      if (userValueHolder.text == 'user' && passValueHolder.text == 'user') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => DashboardScreen()),
-        );
+      if (userValueHolder.text == TypeofUserConstants.patient &&
+          passValueHolder.text == TypeofUserConstants.patient) {
+        context.go(AppRoutes.dashboardRoute);
       }
-      if (userValueHolder.text == 'delivery' &&
-          passValueHolder.text == 'delivery') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => DeliveryHomePage()),
-        );
+      if (userValueHolder.text == TypeofUserConstants.deliveryman &&
+          passValueHolder.text == TypeofUserConstants.deliveryman) {
+        context.go(AppRoutes.deliveryHomePage);
       }
     });
   }
@@ -82,53 +78,18 @@ late  AuthViewModel authViewModel;
   @override
   Widget build(BuildContext context) {
     authViewModel = Provider.of<AuthViewModel>(context);
-    Widget _Bgap() {
-      return Container(height: 120.0, color: Colors.white);
-    }
-
-    Widget _Sgap() {
-      return Container(height: 50.0, color: Colors.white);
-    }
 
     Widget _head() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text("Welcome,", style: TextStyles.h1Style),
-          Text("Please login to access", style: TextStyles.body),
-        ],
-      ).p16;
-    }
-
-    Widget _helpText() {
-      return Wrap(
-        direction: Axis.horizontal,
-        alignment: WrapAlignment.center,
-        spacing: 20.0,
-        children: <Widget>[
-          Text("Don't have account?").vP8,
-          GestureDetector(
-            onTap: () {
-              // do what you need to do when "Click here" gets clicked
-              setState(() {
-                print("Register clicked");
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => RegisterPage()),
-                );
-              });
-            },
-            child: Text(
-              "Register",
-              style: TextStyle(
-                decoration: TextDecoration.none,
-                color: ColorResources.themeRed,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          ).vP8,
-        ],
+      return Container(
+        alignment: Alignment.centerLeft,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(AppLoginConstants.welcomeBack, style: TextStyles.h1Style),
+            Text(AppLoginConstants.signInToContinue, style: TextStyles.body),
+          ],
+        ).p16,
       );
     }
 
@@ -138,127 +99,57 @@ late  AuthViewModel authViewModel;
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(13)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: ColorResources.grey.withOpacity(.3),
-                    blurRadius: 15,
-                    offset: Offset(3, 3),
-                  ),
-                ],
-              ),
-              child: TextField(
-                controller: userValueHolder,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
-                  border: InputBorder.none,
-                  hintText: "User name or email",
-                  hintStyle: TextStyles.body.subTitleColor,
-                  suffixIcon: SizedBox(
-                    width: 55,
-                    child:
-                        Icon(
-                          Icons.account_circle,
-                          color: ColorResources.themeRed,
-                        ).alignCenter.ripple(
-                          () {},
-                          borderRadius: BorderRadius.circular(13),
-                        ),
-                  ),
-                ),
-              ),
+            TextInputWidger(
+              mController: userValueHolder,
+              hintText: AppLoginConstants.userName,
+              isPassword: false,
+              prefixIcon: Icons.person,
             ),
-            Container(
-              height: 55,
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(13)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: ColorResources.grey.withOpacity(.3),
-                    blurRadius: 15,
-                    offset: Offset(3, 3),
-                  ),
-                ],
-              ),
-              child: TextField(
-                controller: passValueHolder,
-                obscureText: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
-                  border: InputBorder.none,
-                  hintText: "Password",
-                  hintStyle: TextStyles.body.subTitleColor,
-                  suffixIcon: SizedBox(
-                    width: 55,
-                    child: Icon(Icons.lock, color: ColorResources.themeRed)
-                        .alignCenter
-                        .ripple(() {}, borderRadius: BorderRadius.circular(13)),
-                  ),
-                ),
-              ),
+            TextInputWidger(
+              mController: passValueHolder,
+              hintText: AppLoginConstants.userName,
+              isPassword: true,
+              prefixIcon: Icons.password,
             ),
-            _Sgap(),
-            Container(
-              child: SizedBox(
-                width: 200.00,
-                height: 55,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        ColorResources.themeRed, // button background
-                    foregroundColor: Colors.white, // text color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13.0),
-                      side: BorderSide(color: ColorResources.themeRed),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  ),
-                  onPressed: checkUserField,
-                  child: Text("LOGIN", style: TextStyle(fontSize: 14)),
-                ),
-              ),
+            SizedBox(height: AppHeightConstants.height10),
+            ElevationbuttonWidget(
+              title: AppLoginConstants.clickHere,
+              onPress: checkUserField,
+              color: ColorResources.themeRed,
+              textColor: Colors.white,
+              borderRadius: AppHeightConstants.height10,
+              elevation: 0,
+              icon: Icons.login,
             ),
           ],
         ),
       );
     }
 
-    // TODO: implement build
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Stack(
         children: [
-          Container(
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverList(
-                  delegate: SliverChildListDelegate([
-                    _Bgap(),
-                    _head(),
-                    _LoginInputs(),
-                    _Sgap(),
-                    _helpText(),
-                    //  _loginForm(),
-                  ]),
-                ),
-                //_doctorsList()
-              ],
+          SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width:  MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _head(),
+                  _LoginInputs(),
+                  FlatButtonWidget(
+                    title: AppLoginConstants.dontHaveAccount,
+                    btnTitle: AppLoginConstants.clickForRegister,
+                    onPress: () {
+                      context.push(AppRoutes.registerPage);
+                    },
+                    textColor: ColorResources.themeRed,
+                  ),
+                ],
+              ),
             ),
           ),
           loading(context),
@@ -273,7 +164,7 @@ late  AuthViewModel authViewModel;
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Container(
-              color: ColorResources.white.withOpacity(0.3),
+              color: ColorResources.white.withValues(alpha: .3),
               child: Center(
                 child: SizedBox(
                   width: 120,
@@ -284,7 +175,9 @@ late  AuthViewModel authViewModel;
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       boxShadow: [
                         BoxShadow(
-                          color: ColorResources.lightBlue.withOpacity(0.2),
+                          color: ColorResources.lightBlue.withValues(
+                            alpha: 0.2,
+                          ),
                           spreadRadius: 1,
                           blurRadius: 15,
                           offset: Offset(0, 1), // changes position of shadow
@@ -295,7 +188,7 @@ late  AuthViewModel authViewModel;
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         child: Image.asset(
-                          'assets/loading.gif',
+                          AssetConstants.loadingGif,
                           height: 300,
                           width: 300,
                           fit: BoxFit.fill,
@@ -319,8 +212,7 @@ late  AuthViewModel authViewModel;
       user,
       password,
     );
-
-    if (loginResponse != null) {
+    if (loginResponse.isNotEmpty) {
       setState(() {
         isLoading = false;
       });
@@ -340,28 +232,24 @@ late  AuthViewModel authViewModel;
           );
         }
       } else {
-        showSnackbar(context, 'Invalid username or password');
+        showSnackbar(context, AppLoginConstants.invalidUserName);
       }
     } else {
       setState(() {
         isLoading = false;
       });
-      showSnackbar(context, 'Invalid username or password');
+      showSnackbar(context, AppLoginConstants.invalidUserName);
     }
   }
 
   void showSnackbar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      backgroundColor: ColorResources.themeRed,
-      content: Text(
-        message,
-        style: TextStyle(color: ColorResources.white),
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: ColorResources.themeRed,
+        content: Text(message, style: TextStyle(color: ColorResources.white)),
       ),
-    ),
-  );
-}
-
+    );
+  }
 
   void saveDataIntoSharedPref(LoginResponse loginResponse) async {
     SharedPreferences customerInfo = await SharedPreferences.getInstance();

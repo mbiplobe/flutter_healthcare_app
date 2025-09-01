@@ -1,16 +1,13 @@
-abstract class SplashConstants
-{
+abstract class SplashConstants {
   static const String splashRoute = '/splash';
   static const String yourHealth = 'Your health';
   static const String byHssTechnovation = 'By HSS technovation';
-
 }
 
-abstract class AssetConstants
-{
+abstract class AssetConstants {
   static const String doctorFace = 'assets/doctor_face.jpg';
   static const String heartBeat = 'assets/heartbeat.png';
-static const String loadingGif = 'assets/loading.gif';
+  static const String loadingGif = 'assets/loading.gif';
   static const String appLogo = 'assets/app_logo.png';
   static const String userPlaceholder = 'assets/user_placeholder.png';
   static const String googleLogo = 'assets/google_logo.png';
@@ -53,10 +50,59 @@ static const String loadingGif = 'assets/loading.gif';
   static const String camera = 'assets/camera.png';
   static const String gallery = 'assets/gallery.png';
   static const String pdf = 'assets/pdf.png';
-  
 }
 
-abstract class AppConfigurations
-{
+abstract class AppConfigurations {
   static const String appTitle = 'Health Care';
+}
+
+abstract class AppLoginConstants {
+  static const String welcomeBack = 'Welcome';
+  static const String signInToContinue = 'Please login to access';
+  static const String userName = 'User name or email or phone';
+
+  static const String email = 'Email';
+  static const String password = 'Password';
+  static const String forgotPassword = 'Forgot Password?';
+  static const String orSignInWith = 'Or sign in with';
+  static const String dontHaveAccount = "Don't have account?";
+  static const String clickHere = ' Login';
+
+  static const String clickForRegister = ' Register';
+  static const String invalidUserName = "Invalid username or password";
+  static const String inputEmail = "Please input your emai";
+  static const String inputPassword = "Please input your password";
+  
+}
+abstract class TypeofUserConstants {
+  static const String doctor = 'doctor';
+  static const String patient = 'patient';
+  static const String deliveryman = 'deliveryman';
+}
+
+abstract class AppRegisterConstants {
+  static const String createAccount = 'Create Account';
+  static const String signUpToContinue = 'Sign up to continue';
+  static const String firstName = 'First Name';
+  static const String lastName = 'Last Name';
+  static const String phoneNumber = 'Phone Number';
+  static const String email = 'Email';
+  static const String password = 'Password';
+  static const String confirmPassword = 'Confirm Password';
+  static const String alreadyHaveAccount = "Already have account?";
+  static const String clickHere = ' Click here';
+}
+
+abstract class ValidationConstants {
+  static const String invalidEmail = 'Please enter a valid email';
+  static const String invalidPassword =
+      'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character';
+  static const String passwordMismatch = 'Passwords do not match';
+}
+
+abstract class RegexPatterns {
+  static const String emailPattern =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  static const String passwordPattern =
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
 }

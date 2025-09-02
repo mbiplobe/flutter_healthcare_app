@@ -26,6 +26,7 @@ class __FlatButtonWidgetStateState extends State<FlatButtonWidget> {
     return Padding(
       padding: const EdgeInsets.all(AppHeightConstants.height15),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text( widget.title,
               style: TextStyle(
@@ -41,9 +42,8 @@ class __FlatButtonWidgetStateState extends State<FlatButtonWidget> {
                 vertical: AppHeightConstants.height15,
               ),
             ),
-            
             child:  Text(
-                    widget.title,
+                    widget.btnTitle,
                     style: TextStyle(
                       color: widget.textColor,
                       fontWeight: FontWeight.bold,

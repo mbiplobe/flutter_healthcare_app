@@ -68,12 +68,25 @@ abstract class AppLoginConstants {
   static const String dontHaveAccount = "Don't have account?";
   static const String clickHere = ' Login';
 
-  static const String clickForRegister = ' Register';
+  static const String clickForRegister = 'Register';
   static const String invalidUserName = "Invalid username or password";
   static const String inputEmail = "Please input your emai";
   static const String inputPassword = "Please input your password";
-  
 }
+
+abstract class AppRegistrationConstants {
+  static const String firstName = 'First Name';
+  static const String lastName = 'Last Name';
+  static const String phoneNumber = 'Phone Number';
+  static const String email = 'Email';
+  static const String password = 'Password';
+  static const String confirmPassword = 'Confirm Password';
+  static const String location = 'Location';
+  static const String age = 'Age';
+  static const String userType = 'Type of User';
+  static const String alreadyHaveAccount = 'Already have account?';
+}
+
 abstract class TypeofUserConstants {
   static const String doctor = 'doctor';
   static const String patient = 'patient';
@@ -98,11 +111,21 @@ abstract class ValidationConstants {
   static const String invalidPassword =
       'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number and one special character';
   static const String passwordMismatch = 'Passwords do not match';
+  static const String emptyfirstName = 'Enter first name';
+  static const String emptylastName = 'Enter last name';
+  static const String emptyphoneNumber = 'Enter phone number';
+  static const String eemptyvalidPhoneNumber = 'Enter valid phone number';
+  static const String emptyemail = 'Enter email';
+  static const String emptypassword = 'Enter password';
+  static const String minPasswordLength = 'Enter at least 6 digit password';
+  static const String emptyLocation = 'Enter location';
+  static const String emptyage = 'Enter your age';
+  static const String emptyvalidAge = 'Enter a valid age (1-120)';
 }
 
 abstract class RegexPatterns {
-  static const String emailPattern =
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-  static const String passwordPattern =
-      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+  static const String emailPattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  static const String passwordPattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+      static const String phonePattern = r'^(?:[+0]9)?[0-9]{10,13}$';
+       
 }

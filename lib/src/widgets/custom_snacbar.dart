@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomSnackbarExample extends StatelessWidget {
-  void showCustomSnackbar(BuildContext context, String message) {
+  void showSnackbar(BuildContext context, String message) {
     final snackBar = SnackBar(
       content: Row(
         children: [
@@ -33,7 +33,7 @@ class CustomSnackbarExample extends StatelessWidget {
       appBar: AppBar(title: Text("Custom Snackbar")),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => showCustomSnackbar(context, "This is a custom snackbar!"),
+          onPressed: () => showSnackbar(context, "This is a custom snackbar!"),
           child: Text("Show Snackbar"),
         ),
       ),

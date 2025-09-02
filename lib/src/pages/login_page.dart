@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/config/route.dart';
 import 'package:flutter_healthcare_app/src/core/constants.dart';
 import 'package:flutter_healthcare_app/src/core/height_constants.dart';
+import 'package:flutter_healthcare_app/src/core/snack_bar.dart';
 import 'package:flutter_healthcare_app/src/model/login_response.dart';
 import 'package:flutter_healthcare_app/src/pages/bottomNavigation/dashboard_screen.dart';
 import 'package:flutter_healthcare_app/src/pages/bottomNavigation/doctor_dashboard_screen.dart';
@@ -41,13 +42,13 @@ class _LoginPageState extends State<LoginPage> {
 
   checkUserField() {
     if (userValueHolder.text.isEmpty) {
-      showSnackbar(context, AppLoginConstants.inputEmail);
+      AppSnackBar.showSnackbar(context, AppLoginConstants.inputEmail);
     } else if (!RegExp(
       RegexPatterns.emailPattern,
     ).hasMatch(userValueHolder.text)) {
-      showSnackbar(context, ValidationConstants.invalidEmail);
+      AppSnackBar.showSnackbar(context, ValidationConstants.invalidEmail);
     } else if (passValueHolder.text.isEmpty) {
-      showSnackbar(context, AppLoginConstants.inputPassword);
+      AppSnackBar.showSnackbar(context, AppLoginConstants.inputPassword);
     } else {
       getTextInputData();
     }
@@ -137,16 +138,21 @@ class _LoginPageState extends State<LoginPage> {
               width:  MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _head(),
                   _LoginInputs(),
-                  FlatButtonWidget(
-                    title: AppLoginConstants.dontHaveAccount,
-                    btnTitle: AppLoginConstants.clickForRegister,
-                    onPress: () {
-                      context.push(AppRoutes.registerPage);
-                    },
-                    textColor: ColorResources.themeRed,
+                  Container(
+                    child: Center(
+                      child: FlatButtonWidget(
+                        title: AppLoginConstants.dontHaveAccount,
+                        btnTitle: AppLoginConstants.clickForRegister,
+                        onPress: () {
+                          context.push(AppRoutes.registerPage);
+                        },
+                        textColor: ColorResources.themeRed,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -232,24 +238,17 @@ class _LoginPageState extends State<LoginPage> {
           );
         }
       } else {
-        showSnackbar(context, AppLoginConstants.invalidUserName);
+        AppSnackBar.showSnackbar(context, AppLoginConstants.invalidUserName);
       }
     } else {
       setState(() {
         isLoading = false;
       });
-      showSnackbar(context, AppLoginConstants.invalidUserName);
+      AppSnackBar.showSnackbar(context, AppLoginConstants.invalidUserName);
     }
   }
 
-  void showSnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: ColorResources.themeRed,
-        content: Text(message, style: TextStyle(color: ColorResources.white)),
-      ),
-    );
-  }
+  
 
   void saveDataIntoSharedPref(LoginResponse loginResponse) async {
     SharedPreferences customerInfo = await SharedPreferences.getInstance();

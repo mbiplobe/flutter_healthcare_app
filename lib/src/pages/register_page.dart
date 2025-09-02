@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/config/route.dart';
 import 'package:flutter_healthcare_app/src/core/constants.dart';
+import 'package:flutter_healthcare_app/src/core/height_constants.dart';
+import 'package:flutter_healthcare_app/src/core/snack_bar.dart';
 import 'package:flutter_healthcare_app/src/model/registration.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
@@ -8,7 +10,9 @@ import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/theme/extention.dart';
 import 'package:flutter_healthcare_app/src/viewModel/auth_view_model.dart';
 import 'package:flutter_healthcare_app/src/viewModel/location_viewmodel.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_healthcare_app/src/widgets/elevation_button.dart';
+import 'package:flutter_healthcare_app/src/widgets/flat_button_widget.dart';
+import 'package:flutter_healthcare_app/src/widgets/text_input_form.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'login_page.dart';
@@ -33,6 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final firstNameValueHolder = TextEditingController();
   final lastNameValueHolder = TextEditingController();
   final passValueHolder = TextEditingController();
+  final confirmPassValueHolder = TextEditingController();
   final phoneValueHolder = TextEditingController();
   final emailValueHolder = TextEditingController();
   final locationValueHolder = TextEditingController();
@@ -88,303 +93,65 @@ class _RegisterPageState extends State<RegisterPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           //user name
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: ColorResources.grey.withOpacity(.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
+          TextInputWidger(
+              mController: firstNameValueHolder,
+              hintText: AppRegistrationConstants.firstName,
+              inputType: TextInputType.text,
+              isPassword: false,
+              prefixIcon: Icons.person,
             ),
-            child: TextField(
-              controller: firstNameValueHolder,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                border: InputBorder.none,
-                hintText: "First name",
-                hintStyle: TextStyles.body.subTitleColor,
-                suffixIcon: SizedBox(
-                  width: 55,
-                  child:
-                      Icon(
-                        Icons.account_circle,
-                        color: ColorResources.themeRed,
-                      ).alignCenter.ripple(
-                        () {},
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                ),
-              ),
+          TextInputWidger(
+              mController: lastNameValueHolder,
+              hintText: AppRegistrationConstants.lastName,
+              inputType: TextInputType.text,
+              isPassword: false,
+              prefixIcon: Icons.person,
             ),
-          ),
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: ColorResources.grey.withOpacity(.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
+          
+            TextInputWidger(
+              mController: phoneValueHolder,
+              hintText: AppRegistrationConstants.phoneNumber,
+              inputType: TextInputType.text,
+              isPassword: false,
+              prefixIcon: Icons.phone,
             ),
-            child: TextField(
-              controller: lastNameValueHolder,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                border: InputBorder.none,
-                hintText: "Last name",
-                hintStyle: TextStyles.body.subTitleColor,
-                suffixIcon: SizedBox(
-                  width: 55,
-                  child:
-                      Icon(
-                        Icons.account_circle,
-                        color: ColorResources.themeRed,
-                      ).alignCenter.ripple(
-                        () {},
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                ),
-              ),
+            TextInputWidger(
+              mController: emailValueHolder,
+              hintText: AppRegistrationConstants.email,
+              inputType: TextInputType.text,
+              isPassword: false,
+              prefixIcon: Icons.email,
             ),
-          ),
-          //User phone
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: ColorResources.grey.withOpacity(.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: phoneValueHolder,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                border: InputBorder.none,
-                hintText: "phone",
-                hintStyle: TextStyles.body.subTitleColor,
-                suffixIcon: SizedBox(
-                  width: 55,
-                  child: Icon(Icons.phone, color: ColorResources.themeRed)
-                      .alignCenter
-                      .ripple(() {}, borderRadius: BorderRadius.circular(13)),
-                ),
-              ),
-            ),
-          ),
-          //email
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: ColorResources.grey.withOpacity(.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: emailValueHolder,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                border: InputBorder.none,
-                hintText: "Email",
-                hintStyle: TextStyles.body.subTitleColor,
-                suffixIcon: SizedBox(
-                  width: 55,
-                  child: Icon(Icons.email, color: ColorResources.themeRed)
-                      .alignCenter
-                      .ripple(() {}, borderRadius: BorderRadius.circular(13)),
-                ),
-              ),
-            ),
-          ),
-          //password
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: ColorResources.grey.withOpacity(.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: passValueHolder,
-              keyboardType: TextInputType.visiblePassword,
-              obscureText: true,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                border: InputBorder.none,
-                hintText: "Password",
-                hintStyle: TextStyles.body.subTitleColor,
-                suffixIcon: SizedBox(
-                  width: 55,
-                  child: Icon(Icons.lock, color: ColorResources.themeRed)
-                      .alignCenter
-                      .ripple(() {}, borderRadius: BorderRadius.circular(13)),
-                ),
-              ),
-            ),
-          ),
 
-          //Location
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  // ignore: deprecated_member_use
-                  color: ColorResources.grey.withOpacity(.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
+             TextInputWidger(
+              mController: passValueHolder,
+              hintText: AppRegistrationConstants.password,
+              inputType: TextInputType.text,
+              isPassword: true,
+              prefixIcon: Icons.password,
             ),
-            child: TextField(
-              controller: locationValueHolder,
-              readOnly: true,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                border: InputBorder.none,
+            TextInputWidger(
+              mController: confirmPassValueHolder,
+              hintText: AppRegistrationConstants.confirmPassword,
+              inputType: TextInputType.text,
+              isPassword: true,
+              prefixIcon: Icons.password,
+            ),
+            TextInputWidger(
+              mController: locationValueHolder,
+              hintText: AppRegistrationConstants.location,
+              inputType: TextInputType.text,
+              isPassword: true,
+              prefixIcon: Icons.location_on,
+            ),
 
-                hintText: "Location",
-                hintStyle: TextStyles.body.subTitleColor,
-                suffixIcon: SizedBox(
-                  width: 55,
-                  child: Icon(Icons.my_location, color: ColorResources.themeRed)
-                      .alignCenter
-                      .ripple(() async {
-                        // Request location permission and get current location
-                        try {
-                          LocationPermission permission =
-                              await Geolocator.requestPermission();
-                          if (permission == LocationPermission.denied) {
-                            showSnackbar(context, 'Location permission denied');
-                            return;
-                          }
-
-                          Position position =
-                              await Geolocator.getCurrentPosition(
-                                // ignore: deprecated_member_use
-                                desiredAccuracy: LocationAccuracy.high,
-                              );
-
-                          setState(() {
-                            locationValueHolder.text =
-                                '${position.latitude.toStringAsFixed(4)}, ${position.longitude.toStringAsFixed(4)}';
-                          });
-                        } catch (e) {
-                          showSnackbar(context, 'Error getting location: $e');
-                        }
-                      }, borderRadius: BorderRadius.circular(13)),
-                ),
-              ),
+            TextInputWidger(
+              mController: ageValueHolder,
+              hintText: AppRegistrationConstants.age,
+              inputType: TextInputType.text,
+              isPassword: true,
+              prefixIcon: Icons.location_on,
             ),
-          ),
-          //Age
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: ColorResources.grey.withOpacity(.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: TextField(
-              controller: ageValueHolder,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                border: InputBorder.none,
-                hintText: "Age",
-                hintStyle: TextStyles.body.subTitleColor,
-                suffixIcon: SizedBox(
-                  width: 55,
-                  child:
-                      Icon(
-                        Icons.filter_vintage,
-                        color: ColorResources.themeRed,
-                      ).alignCenter.ripple(
-                        () {},
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                ),
-              ),
-            ),
-          ),
           //Gender
           Container(
             height: 55,
@@ -395,7 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
               borderRadius: BorderRadius.all(Radius.circular(13)),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: ColorResources.grey.withOpacity(.3),
+                  color: ColorResources.grey.withValues(alpha:.3),
                   blurRadius: 15,
                   offset: Offset(3, 3),
                 ),
@@ -495,29 +262,17 @@ class _RegisterPageState extends State<RegisterPage> {
               ],
             ),
           ),
-          _Sgap(),
-          Container(
-            child: SizedBox(
-              width: 200.00,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: () => getTextInputData(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorResources.themeRed,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(13.0),
-                    side: BorderSide(color: ColorResources.themeRed),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                ),
-                child: Text(
-                  "REGISTER",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-              ),
+      SizedBox(height: AppHeightConstants.height20),
+          
+      ElevationbuttonWidget(
+              title: AppLoginConstants.clickForRegister,
+              onPress: getTextInputData,
+              color: ColorResources.themeRed,
+              textColor: Colors.white,
+              borderRadius: AppHeightConstants.height10,
+              elevation: 0,
+              icon: Icons.login,
             ),
-          ),
         ],
       ),
     );
@@ -534,7 +289,7 @@ class _RegisterPageState extends State<RegisterPage> {
           onTap: () {
             // do what you need to do when "Click here" gets clicked
             setState(() {
-              print("Login clicked");
+              //print("Login clicked");
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (_) => LoginPage()),
@@ -579,25 +334,35 @@ class _RegisterPageState extends State<RegisterPage> {
           body: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Stack(
-              children: [
-                Container(
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      SliverList(
-                        delegate: SliverChildListDelegate([
-                          _Sgap(),
-                          _head(),
-                          _LoginInputs(),
-                          _Sgap(),
-                          _helpText(),
-                        ]),
+            child: Padding(
+              padding: const EdgeInsets.all(AppHeightConstants.height15),
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Container(
+                      // height: MediaQuery.of(context).size.height,
+                      // width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [_head(), _LoginInputs(), SizedBox(height: AppHeightConstants.height20,), Container(
+                    child: Center(
+                      child: FlatButtonWidget(
+                        title: AppRegisterConstants.alreadyHaveAccount,
+                        btnTitle: AppLoginConstants.clickHere,
+                        onPress: () {
+                          context.pop();
+                        },
+                        textColor: ColorResources.themeRed,
                       ),
-                    ],
+                    ),
+                  ),],
+                      ),
+                    ),
                   ),
-                ),
-                loading(context, authViewModel.isLoading),
-              ],
+                  loading(context, authViewModel.isLoading),
+                ],
+              ),
             ),
           ),
         );
@@ -614,70 +379,62 @@ class _RegisterPageState extends State<RegisterPage> {
     final ageString = age.toString().trim();
 
     if (trimmedFirstName.isEmpty) {
-      showSnackbar(context, 'Enter first name');
+      AppSnackBar.showSnackbar(context, ValidationConstants.emptyfirstName);
       return;
     }
 
     if (trimmedEmail.isEmpty) {
-      showSnackbar(context, 'Enter your email');
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptyemail);
       return;
     }
 
     if (!RegExp(
-      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+     RegexPatterns.emailPattern
     ).hasMatch(trimmedEmail)) {
-      showSnackbar(context, 'Enter valid email');
+       AppSnackBar.showSnackbar(context, ValidationConstants.invalidEmail);
       return;
     }
 
     if (trimmedPhone.isEmpty) {
-      showSnackbar(context, 'Enter your phone');
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptyphoneNumber);
       return;
     }
 
-    if (!RegExp(r'^(?:[+0]9)?[0-9]{10,12}$').hasMatch(trimmedPhone)) {
-      showSnackbar(context, 'Enter valid phone number');
+    if (!RegExp(RegexPatterns.phonePattern).hasMatch(trimmedPhone)) {
+       AppSnackBar.showSnackbar(context, ValidationConstants.eemptyvalidPhoneNumber);
       return;
     }
 
     if (trimmedPassword.isEmpty) {
-      showSnackbar(context, 'Enter your password');
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptypassword);
       return;
     }
 
     if (trimmedPassword.length < 6) {
-      showSnackbar(context, 'Enter at least 6 digit password');
+       AppSnackBar.showSnackbar(context, ValidationConstants.minPasswordLength);
       return;
     }
 
     if (trimmedLocation.isEmpty) {
-      showSnackbar(context, 'Enter location');
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptyLocation);
       return;
     }
 
     if (ageString.isEmpty) {
-      showSnackbar(context, 'Enter your age');
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptyage);
       return;
     }
 
     // Convert age to number and validate range
     final ageValue = int.tryParse(ageString);
     if (ageValue == null || ageValue < 1 || ageValue > 120) {
-      showSnackbar(context, 'Enter a valid age (1-120)');
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptyvalidAge);
       return;
     }
 
     sendDatatoDb();
   }
 
-  void showSnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: ColorResources.themeRed,
-        content: Text(message, style: TextStyle(color: Colors.white)),
-      ),
-    );
-  }
 
   void sendDatatoDb() async {
     RegistrationResponse response = await authViewModel.saveRegistration(
@@ -694,7 +451,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
 
-    showSnackbar(context, '${response.message}');
+    AppSnackBar.showSnackbar(context, '${response.message}');
     if (response.success) {
       context.go(AppRoutes.loginRoute);
     }
@@ -706,7 +463,7 @@ class _RegisterPageState extends State<RegisterPage> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Container(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withValues(alpha:0.3),
           child: Center(
             child: SizedBox(
               width: 120,
@@ -717,7 +474,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.lightBlue.withOpacity(0.2),
+                      color: Colors.lightBlue.withValues(alpha: 0.2),
                       spreadRadius: 1,
                       blurRadius: 15,
                       offset: Offset(0, 1),

@@ -5,7 +5,7 @@ import 'package:flutter_healthcare_app/src/model/order_details.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:flutter_healthcare_app/src/pages/purchase_screen.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/viewModel/eshop_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/eshop_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PurchaseDetailScreen extends StatefulWidget {

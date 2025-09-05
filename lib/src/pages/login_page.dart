@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/config/route.dart';
 import 'package:flutter_healthcare_app/src/core/constants.dart';
 import 'package:flutter_healthcare_app/src/core/height_constants.dart';
+import 'package:flutter_healthcare_app/src/core/share_preference.dart';
 import 'package:flutter_healthcare_app/src/core/snack_bar.dart';
 import 'package:flutter_healthcare_app/src/model/login_response.dart';
-import 'package:flutter_healthcare_app/src/pages/bottomNavigation/dashboard_screen.dart';
-import 'package:flutter_healthcare_app/src/pages/bottomNavigation/doctor_dashboard_screen.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/theme/extention.dart';
-import 'package:flutter_healthcare_app/src/viewModel/auth_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/auth_view_model.dart';
 import 'package:flutter_healthcare_app/src/widgets/elevation_button.dart';
 import 'package:flutter_healthcare_app/src/widgets/flat_button_widget.dart';
 import 'package:flutter_healthcare_app/src/widgets/text_input_form.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -224,18 +222,12 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       if (loginResponse[0].id.isNotEmpty) {
-        saveDataIntoSharedPref(loginResponse[0]);
-
-        if (loginResponse[0].usertype == 'Patient') {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => DashboardScreen()),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => DoctorDashboardScreen()),
-          );
+        SharePreferenceManager.saveDataIntoSharedPref(loginResponse[0]);
+        if (loginResponse[0].usertype == TypeofUserConstants.patient) {
+          context.go(AppRoutes.dashboardRoute);
+        } else 
+        {
+          context.go(AppRoutes.doctorDashboardRoute);
         }
       } else {
         AppSnackBar.showSnackbar(context, AppLoginConstants.invalidUserName);
@@ -246,19 +238,5 @@ class _LoginPageState extends State<LoginPage> {
       });
       AppSnackBar.showSnackbar(context, AppLoginConstants.invalidUserName);
     }
-  }
-
-  
-
-  void saveDataIntoSharedPref(LoginResponse loginResponse) async {
-    SharedPreferences customerInfo = await SharedPreferences.getInstance();
-    customerInfo.setString('id', loginResponse.id);
-    customerInfo.setString('firstName', loginResponse.firstName);
-    customerInfo.setString('lastName', loginResponse.lastName);
-    customerInfo.setString('userType', loginResponse.usertype);
-    customerInfo.setString('email', loginResponse.email);
-    customerInfo.setString('userPhone', loginResponse.userphone!);
-    customerInfo.setString('gender', loginResponse.gender!);
-    customerInfo.setString('address', loginResponse.address!);
   }
 }

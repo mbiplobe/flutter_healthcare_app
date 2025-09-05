@@ -5,7 +5,7 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_healthcare_app/src/model/lab_test_by_category.dart';
 import 'package:flutter_healthcare_app/src/model/lab_test_category.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/viewModel/lab_test_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/lab_test_view_model.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

@@ -88,9 +88,9 @@ abstract class AppRegistrationConstants {
 }
 
 abstract class TypeofUserConstants {
-  static const String doctor = 'doctor';
-  static const String patient = 'patient';
-  static const String deliveryman = 'deliveryman';
+  static const String doctor = 'Doctor';
+  static const String patient = 'Patient';
+  static const String deliveryman = 'Delivery Man';
 }
 
 abstract class AppRegisterConstants {
@@ -121,11 +121,20 @@ abstract class ValidationConstants {
   static const String emptyLocation = 'Enter location';
   static const String emptyage = 'Enter your age';
   static const String emptyvalidAge = 'Enter a valid age (1-120)';
+  static const String emptyGender = 'Plese Select Gender';
+   static const String emptyUserType = 'Plese Select User Type';
 }
 
-abstract class RegexPatterns {
+abstract class RegexPatterns 
+{
   static const String emailPattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
   static const String passwordPattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-      static const String phonePattern = r'^(?:[+0]9)?[0-9]{10,13}$';
-       
+  static const String phonePattern = r'^(?:[+0]9)?[0-9]{10,13}$';    
 }
+
+abstract class PersonCatergoryConstant 
+{
+  static const String male = "Male";
+  static const String female = "Female";
+}
+// Male

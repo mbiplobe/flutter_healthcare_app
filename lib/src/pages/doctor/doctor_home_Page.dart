@@ -4,7 +4,7 @@ import 'package:flutter_healthcare_app/src/model/patient_appointment.dart';
 import 'package:flutter_healthcare_app/src/pages/doctor/all_patient_details.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/viewModel/patient_appointment_View_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/patient_appointment_View_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

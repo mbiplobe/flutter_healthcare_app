@@ -16,6 +16,7 @@ Registration _$RegistrationFromJson(Map<String, dynamic> json) => Registration(
   address: json['address'] as String,
   gender: json['gender'] as String,
   dob: json['dob'] as String,
+  userType: json['userType'] as String,
 );
 
 Map<String, dynamic> _$RegistrationToJson(Registration instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$RegistrationToJson(Registration instance) =>
       'address': instance.address,
       'gender': instance.gender,
       'dob': instance.dob,
+      'userType': instance.userType,
     };

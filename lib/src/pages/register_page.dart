@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/config/route.dart';
+import 'package:flutter_healthcare_app/src/controllers/selector_controller.dart';
 import 'package:flutter_healthcare_app/src/core/constants.dart';
 import 'package:flutter_healthcare_app/src/core/height_constants.dart';
 import 'package:flutter_healthcare_app/src/core/snack_bar.dart';
 import 'package:flutter_healthcare_app/src/model/registration.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
+import 'package:flutter_healthcare_app/src/model/selection_model.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
 import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
 import 'package:flutter_healthcare_app/src/theme/extention.dart';
-import 'package:flutter_healthcare_app/src/viewModel/auth_view_model.dart';
-import 'package:flutter_healthcare_app/src/viewModel/location_viewmodel.dart';
+import 'package:flutter_healthcare_app/src/view_model/auth_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/location_viewmodel.dart';
 import 'package:flutter_healthcare_app/src/widgets/elevation_button.dart';
 import 'package:flutter_healthcare_app/src/widgets/flat_button_widget.dart';
+import 'package:flutter_healthcare_app/src/widgets/selection_widget.dart';
 import 'package:flutter_healthcare_app/src/widgets/text_input_form.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
@@ -42,6 +44,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailValueHolder = TextEditingController();
   final locationValueHolder = TextEditingController();
   final ageValueHolder = TextEditingController();
+  final genderValueHolder = SelectorController(PersonCatergoryConstant.male);
+    final userTypeValueHolder = SelectorController(TypeofUserConstants.patient);
 
   String firstName = "";
   String lastName = "";
@@ -50,8 +54,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String email = "";
   String location = "";
   String age = "";
-  String gender = 'Male';
-  String usertype = "General user";
+  String gender = PersonCatergoryConstant.male;
+  String usertype = TypeofUserConstants.patient;
   var isLoading = false;
 
   void getTextInputData() {
@@ -63,17 +67,11 @@ class _RegisterPageState extends State<RegisterPage> {
       email = emailValueHolder.text;
       location = locationValueHolder.text;
       age = ageValueHolder.text;
+      gender= genderValueHolder.selected;
+      usertype = userTypeValueHolder.selected;
     });
 
     checkValue(context);
-  }
-
-  Widget _Bgap() {
-    return Container(height: 120.0, color: Colors.white);
-  }
-
-  Widget _Sgap() {
-    return Container(height: 50.0, color: Colors.white);
   }
 
   Widget _head() {
@@ -92,6 +90,15 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+
+          SelectorWidget(
+            controller: userTypeValueHolder, options: [
+             new SelectionModel(title: TypeofUserConstants.patient, icon: Icons.person_2),
+             new SelectionModel(title: TypeofUserConstants.doctor, icon: Icons.person_3),
+             new SelectionModel(title: TypeofUserConstants.deliveryman, icon: Icons.person),
+            ],
+            
+          ),
           //user name
           TextInputWidger(
               mController: firstNameValueHolder,
@@ -153,114 +160,12 @@ class _RegisterPageState extends State<RegisterPage> {
               prefixIcon: Icons.location_on,
             ),
           //Gender
-          Container(
-            height: 55,
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: ColorResources.grey.withValues(alpha:.3),
-                  blurRadius: 15,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        gender = 'Male';
-                      });
-                    },
-                    child: Container(
-                      height: double.maxFinite,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(13),
-                          bottomLeft: Radius.circular(13),
-                        ),
-                        color: gender == 'Male'
-                            ? ColorResources.themeRed
-                            : Colors.white,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.male,
-                            size: 24,
-                            color: gender == 'Male'
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Text(
-                              'Male',
-                              style: TextStyle(
-                                color: gender == 'Male'
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        gender = 'Female';
-                      });
-                    },
-                    child: Container(
-                      height: double.maxFinite,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(13),
-                          bottomRight: Radius.circular(13),
-                        ),
-                        color: gender == 'Female'
-                            ? ColorResources.themeRed
-                            : Colors.white,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.female,
-                            size: 24,
-                            color: gender == 'Female'
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                          Text(
-                            'Female',
-                            style: TextStyle(
-                              color: gender == 'Female'
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          SelectorWidget(
+            controller: genderValueHolder, options: [
+             new SelectionModel(title: PersonCatergoryConstant.male, icon: Icons.male),
+             new SelectionModel(title: PersonCatergoryConstant.female, icon: Icons.female),
+            ],
+            
           ),
       SizedBox(height: AppHeightConstants.height20),
           
@@ -278,37 +183,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _helpText() {
-    return Wrap(
-      direction: Axis.horizontal,
-      alignment: WrapAlignment.center,
-      spacing: 10.0,
-      children: <Widget>[
-        Text("Already have account?").vP8,
-        GestureDetector(
-          onTap: () {
-            // do what you need to do when "Click here" gets clicked
-            setState(() {
-              //print("Login clicked");
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => LoginPage()),
-              );
-            });
-          },
-          child: Text(
-            "Login",
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              color: ColorResources.themeRed,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-        ).vP8,
-      ],
-    );
-  }
 
   @override
   void dispose() {
@@ -319,6 +193,8 @@ class _RegisterPageState extends State<RegisterPage> {
     emailValueHolder.dispose();
     locationValueHolder.dispose();
     ageValueHolder.dispose();
+    genderValueHolder.dispose();
+    userTypeValueHolder.dispose();
     super.dispose();
   }
 
@@ -345,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [_head(), _LoginInputs(), SizedBox(height: AppHeightConstants.height20,), Container(
+                        children: [_head(), _LoginInputs(), SizedBox(height: AppHeightConstants.height10,), Container(
                     child: Center(
                       child: FlatButtonWidget(
                         title: AppRegisterConstants.alreadyHaveAccount,
@@ -377,6 +253,9 @@ class _RegisterPageState extends State<RegisterPage> {
     final trimmedPassword = password.trim();
     final trimmedLocation = location.trim();
     final ageString = age.toString().trim();
+    final genderValue = gender.toString().trim();
+    final userType = usertype.toString().trim();
+
 
     if (trimmedFirstName.isEmpty) {
       AppSnackBar.showSnackbar(context, ValidationConstants.emptyfirstName);
@@ -425,7 +304,15 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    // Convert age to number and validate range
+     if (genderValue.isEmpty) {
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptyGender);
+      return;
+    }
+
+     if (userType.isEmpty) {
+       AppSnackBar.showSnackbar(context, ValidationConstants.emptyUserType);
+      return;
+    }
     final ageValue = int.tryParse(ageString);
     if (ageValue == null || ageValue < 1 || ageValue > 120) {
        AppSnackBar.showSnackbar(context, ValidationConstants.emptyvalidAge);
@@ -447,7 +334,7 @@ class _RegisterPageState extends State<RegisterPage> {
         userPass: password,
         address: location,
         gender: gender,
-        dob: age,
+        dob: age, userType: '', 
       ),
     );
 

@@ -13,6 +13,7 @@ class Registration {
   final String address;
   final String gender;
   final String dob;
+    final String userType;
 
   Registration({
     required this.username,
@@ -24,5 +25,6 @@ class Registration {
     required this.address,
     required this.gender,
     required this.dob,
+    required this.userType
   });
 }

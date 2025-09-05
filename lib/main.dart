@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_healthcare_app/src/config/route.dart';
 import 'package:flutter_healthcare_app/src/core/constants.dart';
-import 'package:flutter_healthcare_app/src/viewModel/appointment_view_model.dart';
-import 'package:flutter_healthcare_app/src/viewModel/auth_view_model.dart';
-import 'package:flutter_healthcare_app/src/viewModel/doctor_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/appointment_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/auth_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/doctor_view_model.dart';
 import 'package:flutter_healthcare_app/src/theme/theme.dart';
-import 'package:flutter_healthcare_app/src/viewModel/eshop_view_model.dart';
-import 'package:flutter_healthcare_app/src/viewModel/lab_test_view_model.dart';
-import 'package:flutter_healthcare_app/src/viewModel/location_viewmodel.dart';
-import 'package:flutter_healthcare_app/src/viewModel/patient_appointment_View_model.dart';
-import 'package:flutter_healthcare_app/src/viewModel/service_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/eshop_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/lab_test_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/location_viewmodel.dart';
+import 'package:flutter_healthcare_app/src/view_model/patient_appointment_View_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/service_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {

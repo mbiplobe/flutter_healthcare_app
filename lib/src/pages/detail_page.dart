@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/viewModel/doctor_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/doctor_view_model.dart';
 import 'package:flutter_healthcare_app/src/model/available.dart';
 import 'package:flutter_healthcare_app/src/model/doctor.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';

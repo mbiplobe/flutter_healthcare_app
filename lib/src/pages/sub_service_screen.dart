@@ -3,7 +3,7 @@ import 'package:flutter_healthcare_app/src/model/sub_service.dart';
 import 'package:flutter_healthcare_app/src/pages/map_screen.dart';
 
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/viewModel/service_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/service_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SubServicePage extends StatefulWidget {

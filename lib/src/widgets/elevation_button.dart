@@ -41,8 +41,8 @@ class __ElevationbuttonWidgetStateState extends State<ElevationbuttonWidget> {
             borderRadius: BorderRadius.circular(widget.borderRadius),
           ),
           padding: const EdgeInsets.symmetric(
-            vertical: AppHeightConstants.height20,
-            horizontal: AppHeightConstants.height30,
+            vertical: AppHeightConstants.height25,
+            horizontal: AppHeightConstants.height35,
           ),
         ),
         child: widget.icon != null

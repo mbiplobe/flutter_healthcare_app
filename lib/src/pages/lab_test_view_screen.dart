@@ -3,7 +3,7 @@ import 'package:flutter_healthcare_app/src/model/lab_test_by_user.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:flutter_healthcare_app/src/pages/user/lab_test_page.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/viewModel/lab_test_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/lab_test_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

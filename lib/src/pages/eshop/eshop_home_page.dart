@@ -7,7 +7,7 @@ import 'package:flutter_healthcare_app/src/model/medicine_type.dart';
 import 'package:flutter_healthcare_app/src/pages/eshop/eshop_detail_page.dart';
 import 'package:flutter_healthcare_app/src/pages/eshop/eshop_cart_screen.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/viewModel/eshop_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/eshop_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -6,7 +6,7 @@ import 'package:flutter_healthcare_app/src/model/place_order.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:flutter_healthcare_app/src/pages/checkout_page.dart';
 import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/viewModel/eshop_view_model.dart';
+import 'package:flutter_healthcare_app/src/view_model/eshop_view_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';

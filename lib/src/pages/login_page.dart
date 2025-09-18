@@ -212,20 +212,22 @@ class _LoginPageState extends State<LoginPage> {
       isLoading = true;
     });
 
-    List<LoginResponse> loginResponse = await authViewModel.getlogin(
+    LoginResponse loginResponse = await authViewModel.getlogin(
       user,
       password,
     );
-    if (loginResponse.isNotEmpty) {
+    if (loginResponse.success==true) {
       setState(() {
         isLoading = false;
       });
 
-      if (loginResponse[0].id.isNotEmpty) {
-        SharePreferenceManager.saveDataIntoSharedPref(loginResponse[0]);
-        if (loginResponse[0].usertype == TypeofUserConstants.patient) {
+      if (loginResponse.id != 0) {
+        SharePreferenceManager.saveDataIntoSharedPref(loginResponse);
+        if (loginResponse.usertype == TypeofUserConstants.patient) {
           context.go(AppRoutes.dashboardRoute);
-        } else 
+        } else if (loginResponse.usertype == TypeofUserConstants.deliveryman) {
+          context.go(AppRoutes.deliveryHomePage);
+        } else
         {
           context.go(AppRoutes.doctorDashboardRoute);
         }

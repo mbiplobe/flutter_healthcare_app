@@ -718,10 +718,10 @@ class _LabTestPageState extends State<LabTestPage> {
           day = 'dd/mm/yyyy';
           time = '00.00';
         });
-        showSnackbar(context, response.message);
+        showSnackbar(context, response.message!);
         //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DashboardScreen()));
       } else {
-        showSnackbar(context, response.message);
+        showSnackbar(context, response.message!);
       }
     }
   }

@@ -254,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final trimmedLocation = location.trim();
     final ageString = age.toString().trim();
     final genderValue = gender.toString().trim();
-    final userType = usertype.toString().trim();
+    // final userType = usertype.toString().trim();
 
 
     if (trimmedFirstName.isEmpty) {
@@ -309,7 +309,7 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-     if (userType.isEmpty) {
+     if (usertype.isEmpty) {
        AppSnackBar.showSnackbar(context, ValidationConstants.emptyUserType);
       return;
     }
@@ -334,7 +334,8 @@ class _RegisterPageState extends State<RegisterPage> {
         userPass: password,
         address: location,
         gender: gender,
-        dob: age, userType: '', 
+        dob: age, 
+        userType: usertype, 
       ),
     );
 

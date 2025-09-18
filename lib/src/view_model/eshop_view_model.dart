@@ -46,7 +46,7 @@ class EShopViewModel extends ChangeNotifier {
     }
   }
 
-  Future<List<Cart>> getCart(String userId) async {
+  Future<List<Cart>> getCart(int userId) async {
     final response = await http
         .get(Uri.parse('http://172.16.61.221:8059/admins.asmx/viewMyCart?userId=$userId'));
 

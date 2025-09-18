@@ -4,13 +4,13 @@ part 'login_response.g.dart';
 
 @JsonSerializable()
 class LoginResponse {
-  final String id;
+  final int id;
   final String? logname;
-  final String logpass;
+  final String? logpass;
   final String? securPass;
-  final String email;
-  final String firstName;
-  final String lastName;
+  final String? email;
+  final String? firstName;
+  final String? lastName;
   final String? username;
   final String? userphone;
   final String? gender;
@@ -27,35 +27,15 @@ class LoginResponse {
   final DateTime? lastLogin;
   final String? queryFlag;
   final String? confirmPass;
+  final bool? success;
+  final String? message;
 
-  LoginResponse({
-    required this.id,
-    this.logname,
-    required this.logpass,
-    this.securPass,
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    this.username,
-    this.userphone,
-    this.gender,
-    this.userdob,
-    this.address,
-    required this.usertype,
-    this.userid,
-    this.roleid,
-    this.isActive,
-    this.createdBy,
-    this.createdTime,
-    this.updatedBy,
-    this.updatedTime,
-    this.lastLogin,
-    this.queryFlag,
-    this.confirmPass,
-  });
+  
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
+
+  LoginResponse({required this.id, required this.logname, required this.logpass, required this.securPass, required this.email, required this.firstName, required this.lastName, required this.username, required this.userphone, required this.gender, required this.userdob, required this.address, required this.usertype, required this.userid, required this.roleid, required this.isActive, required this.createdBy, required this.createdTime, required this.updatedBy, required this.updatedTime, required this.lastLogin, required this.queryFlag, required this.confirmPass, required this.success, required this.message});
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 }

@@ -374,7 +374,7 @@ late  EShopViewModel eShopViewModel;
       setState(() {
       isLoading = false;
     });
-      showSnackbar(context, response.message);
+      showSnackbar(context, response.message!);
     }
 
   }

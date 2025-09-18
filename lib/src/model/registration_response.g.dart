@@ -10,8 +10,8 @@ RegistrationResponse _$RegistrationResponseFromJson(
   Map<String, dynamic> json,
 ) => RegistrationResponse(
   success: json['success'] as bool,
-  message: json['message'] as String,
-  id: json['id'] as String,
+  message: json['message'] as String?,
+  id: json['id'] as String?,
 );
 
 Map<String, dynamic> _$RegistrationResponseToJson(

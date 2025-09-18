@@ -599,9 +599,9 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
         isLoading = false;
       });
       if (!response.success) {
-        showSnackbar(context, response.message);
+        showSnackbar(context, response.message!);
       } else {
-        showSnackbar(context, response.message);
+        showSnackbar(context, response.message!);
       }
     }
   }

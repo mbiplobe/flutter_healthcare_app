@@ -423,7 +423,7 @@ late  EShopViewModel eShopViewModel;
   void getCustomerInfo(BuildContext context) async{
     SharedPreferences customerInfo = await SharedPreferences.getInstance();
     setState(() {
-      userId = customerInfo.getString('id');
+      userId = customerInfo.getInt('id');
       firstName = customerInfo.getString('firstName').toString();
       lastName = customerInfo.getString('lastName').toString();
       usertype = customerInfo.getString('userType');

@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AppointmentViewModel extends ChangeNotifier {
+  
   Future<RegistrationResponse> saveAppointment(Appointment appointment) async {
     final uri = Uri.parse('${url.BASE_URL}userAppointment').replace(
       queryParameters: {
@@ -55,7 +56,7 @@ class AppointmentViewModel extends ChangeNotifier {
   }
 
   Future<List<ViewAppointment>> getAllAppointment(
-    String id,
+    int id,
     String userType,
   ) async {
     final response = await http.get(

@@ -8,13 +8,13 @@ part of 'login_response.dart';
 
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
-      id: json['id'] as String,
+      id: json['id'] as int,
       logname: json['logname'] as String?,
-      logpass: json['logpass'] as String,
+      logpass: json['logpass'] as String?,
       securPass: json['securPass'] as String?,
-      email: json['email'] as String,
-      firstName: json['firstName'] as String,
-      lastName: json['lastName'] as String,
+      email: json['email'] as String?,
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
       username: json['username'] as String?,
       userphone: json['userphone'] as String?,
       gender: json['gender'] as String?,
@@ -37,6 +37,8 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['lastLogin'] as String),
       queryFlag: json['queryFlag'] as String?,
       confirmPass: json['confirmPass'] as String?,
+      success: json['success'] as bool?,
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
@@ -64,4 +66,6 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
       'lastLogin': instance.lastLogin?.toIso8601String(),
       'queryFlag': instance.queryFlag,
       'confirmPass': instance.confirmPass,
+      'success': instance.success,
+      'message': instance.message,
     };

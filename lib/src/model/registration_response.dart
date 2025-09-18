@@ -5,13 +5,13 @@ part 'registration_response.g.dart';
 @JsonSerializable()
 class RegistrationResponse {
   final bool success;
-  final String message;
-  final String id;
+  final String? message;
+  final String? id;
 
   RegistrationResponse({
     required this.success,
-    required this.message,
-    required this.id,
+     this.message,
+     this.id,
   });
 
   factory RegistrationResponse.fromJson(Map<String, dynamic> json) =>

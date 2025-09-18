@@ -375,7 +375,7 @@ class _EshopDetailPageState extends State<EshopDetailPage> {
 
     if (response != null) {
       await getCartProduct();
-      showSnackbar(context, response.message);
+      showSnackbar(context, response.message!);
       setState(() {
         isLoading = false;
       });

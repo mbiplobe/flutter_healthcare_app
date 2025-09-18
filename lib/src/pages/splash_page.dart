@@ -91,7 +91,7 @@ class _SplashPageState extends State<SplashPage> {
   void getCustomerInfo() async {
     SharedPreferences customerInfo = await SharedPreferences.getInstance();
     setState(() {
-      id = customerInfo.getString('id');
+      id = customerInfo.getInt('id');
       userType = customerInfo.getString('userType');
     });
     Future.delayed(Duration(seconds: 2)).then((_) {

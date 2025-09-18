@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_healthcare_app/src/domains/usecase/auth_usecase.dart';
 import 'package:flutter_healthcare_app/src/model/contact_details.dart';
 import 'package:flutter_healthcare_app/src/model/emergency_contact.dart';
 import 'package:flutter_healthcare_app/src/model/login_response.dart';
@@ -10,46 +11,32 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AuthViewModel extends ChangeNotifier {
-bool _isLoading = false;
+  AuthUsecase authUsecase;
+  AuthViewModel({required this.authUsecase});
+
+  bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Future<RegistrationResponse> saveRegistration(Registration registration) async {
-     _isLoading = true;
+  Future<RegistrationResponse> saveRegistration(
+    Registration registration,
+  ) async {
+    _isLoading = true;
     notifyListeners();
-    final response =
-        await http.get(Uri.parse('${url.BASE_URL}userRegistraion?username=${registration.firstName}${registration.lastName}&firstname=${registration.firstName}&lastname=${registration.lastName}&useremail=${registration.userEmail}&userphone=${registration.userPhone}&userpass=${registration.userPass}&address=${registration.address}&gender=${registration.gender}&dob=${registration.dob}'));
-
-
+    final response = await authUsecase.saveRegistration(registration);
     _isLoading = false;
     notifyListeners();
-    if (response.statusCode == 200) {
-      return RegistrationResponse.fromJson(jsonDecode(response.body));
-    } else {
-      print(response.body);
-      throw Exception('Exception: ${response.statusCode}');
-    }
+    return response;
   }
 
-
-  Future<List<LoginResponse>> getlogin(String email, String password) async {
-    final response =
-    await http.get(Uri.parse('${url.BASE_URL}userLogin?email=$email&pass=$password'));
-
-    if (response.statusCode == 200) {
-      List<LoginResponse> loginResponseList;
-
-      Iterable list = json.decode(response.body);
-      loginResponseList = list.map((model) => LoginResponse.fromJson(model)).toList();
-      return loginResponseList;
-    } else {
-      throw Exception('Exception: ${response.statusCode}');
-    }
+  Future<LoginResponse> getlogin(String email, String password) async {
+    return authUsecase.getlogin(email, password);
   }
 
   Future<RegistrationResponse> saveEmergencyContact(Emergency emergency) async {
     var cartObj = jsonEncode(emergency);
-    final response =
-    await http.get(Uri.parse('${url.BASE_URL}saveToContact?cartobj=$cartObj'));
+    final response = await http.get(
+      Uri.parse('${url.BASE_URL}saveToContact?cartobj=$cartObj'),
+    );
 
     if (response.statusCode == 200) {
       return RegistrationResponse.fromJson(jsonDecode(response.body));
@@ -61,7 +48,8 @@ bool _isLoading = false;
 
   Future<ContactDetails> getContactDetails(String userId) async {
     final response = await http.get(
-        Uri.parse('${url.BASE_URL}getContactDetails?userId=$userId'));
+      Uri.parse('${url.BASE_URL}getContactDetails?userId=$userId'),
+    );
 
     if (response.statusCode == 200) {
       return ContactDetails.fromJson(jsonDecode(response.body));
@@ -69,7 +57,4 @@ bool _isLoading = false;
       throw Exception('Exception: ${response.statusCode}');
     }
   }
-
-
-
 }

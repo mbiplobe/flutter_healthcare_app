@@ -1,4 +1,5 @@
 import 'package:flutter_healthcare_app/src/core/db_constants.dart';
+import 'package:flutter_healthcare_app/src/data/models/appointment_db_model.dart';
 import 'package:flutter_healthcare_app/src/data/models/user.dart';
 import 'package:flutter_healthcare_app/src/model/emergency_contact.dart';
 import 'package:flutter_healthcare_app/src/model/registration.dart';
@@ -21,16 +22,13 @@ class DatabaseHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, DbNameConstants.DatabaseName);
 
-    return await openDatabase(
-      path,
-      version: 2,
-      onCreate: _onCreate,
-    );
+    return await openDatabase(path, version: 2, onCreate: _onCreate);
   }
 
   Future _onCreate(Database db, int version) async {
     try {
       await db.execute(DDLCommandConstants.UserTableCreate);
+      await db.execute(DDLCommandConstants.AppoinrmtmentTableCreate);
       // await db.execute(DDLCommandConstants.EmergencyTableCreate);
     } catch (e) {
       print("Error creating tables: $e");
@@ -79,7 +77,8 @@ class DatabaseHelper {
 
     final result = await db.query(
       DbTableConstants.userTable,
-      where: '${UserTableColumnConstants.email} = ? AND ${UserTableColumnConstants.password} = ?',
+      where:
+          '${UserTableColumnConstants.email} = ? AND ${UserTableColumnConstants.password} = ?',
       whereArgs: [email, password],
       limit: 1,
     );
@@ -89,4 +88,98 @@ class DatabaseHelper {
     }
     return null;
   }
+
+  ////////////////////////////////Appointment Segmentation////////////////////////////////////
+  Future<int> makeAppointment(AppointmentDbModel appointment) async {
+    try {
+      final db = await database;
+      final values = {
+        AppointmentTableColumnConstants.PatientUid: appointment.patient_uid,
+        AppointmentTableColumnConstants.Doctorid: appointment.doctor_id,
+        AppointmentTableColumnConstants.AppointmentDate:
+            appointment.appointment_date,
+        AppointmentTableColumnConstants.AppointmentTime:
+            appointment.appointment_time,
+        AppointmentTableColumnConstants.Reason: appointment.reason,
+        AppointmentTableColumnConstants.PaymentMethod:
+            appointment.payment_method,
+        AppointmentTableColumnConstants.Status: appointment.status,
+        AppointmentTableColumnConstants.CreatedBy: appointment.created_by,
+        AppointmentTableColumnConstants.CreatedAt: appointment.created_at,
+      };
+      return await db.insert(
+        DbTableConstants.AppointmentTable,
+        values,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (e) {
+      print("Insert user error: $e");
+      return -1; // failure code
+    }
+  }
+
+  Future<List<AppointmentDbModel>> fetchAllAppointments(
+    int userId,
+    String userType,
+  ) async {
+    try {
+      final db = await database;
+      final result = await db.query(
+        DbTableConstants.AppointmentTable,
+
+        where: userType == 'patient'
+            ? '${AppointmentTableColumnConstants.PatientUid} = ?'
+            : '${AppointmentTableColumnConstants.Doctorid} = ?',
+        whereArgs: [userId],
+      );
+      return result.map((json) => AppointmentDbModel.fromJson(json)).toList();
+    } catch (e) {
+      print("Fetch appointments error: $e");
+      return [];
+    }
+  }
+
+  Future<int> updateAppointment(AppointmentDbModel appointment) async {
+    try {
+      final db = await database;
+      final values = {
+        AppointmentTableColumnConstants.PatientUid: appointment.patient_uid,
+        AppointmentTableColumnConstants.Doctorid: appointment.doctor_id,
+        AppointmentTableColumnConstants.AppointmentDate:
+            appointment.appointment_date,
+        AppointmentTableColumnConstants.AppointmentTime:
+            appointment.appointment_time,
+        AppointmentTableColumnConstants.Reason: appointment.reason,
+        AppointmentTableColumnConstants.PaymentMethod:
+            appointment.payment_method,
+        AppointmentTableColumnConstants.Status: appointment.status,
+        AppointmentTableColumnConstants.UpdateBy: appointment.updated_by,
+        AppointmentTableColumnConstants.UpdatedAt: appointment.updated_at,
+      };
+      return await db.update(
+        DbTableConstants.AppointmentTable,
+        values,
+        where: '${AppointmentTableColumnConstants.AppointId} = ?',
+        whereArgs: [appointment.id],
+      );
+    } catch (e) {
+      return -1; // failure code
+    }
+  }
+
+  Future<int> cancelAppointment(int appointmentId) async {
+    try {
+      final db = await database;
+      return await db.delete(
+        DbTableConstants.AppointmentTable,
+        where: '${AppointmentTableColumnConstants.AppointId} = ?',
+        whereArgs: [appointmentId],
+      );
+    } catch (e) {
+      print("Cancel appointment error: $e");
+      return -1; // failure code
+    }
+  }
+
+  ////////////////////////////////Appointment Segmentation////////////////////////////////////
 }

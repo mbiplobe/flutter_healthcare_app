@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_healthcare_app/src/domains/usecase/appointment_usecase_interface.dart';
 import 'package:flutter_healthcare_app/src/model/appointment.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
 import 'package:flutter_healthcare_app/src/model/view_appointment.dart';
@@ -8,73 +11,42 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class AppointmentViewModel extends ChangeNotifier {
-  
+  AppointmentUseCase mAppointmentUseCase;
+
+  AppointmentViewModel({required this.mAppointmentUseCase});
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   Future<RegistrationResponse> saveAppointment(Appointment appointment) async {
-    final uri = Uri.parse('${url.BASE_URL}userAppointment').replace(
-      queryParameters: {
-        'Patientuid': appointment.patientUid,
-        'Doctorid': appointment.doctorId,
-        'Dates': appointment.date,
-        'Timeid': appointment.timeId,
-        'Reasons': appointment.reason,
-        'payment': appointment.payment,
-      },
-    );
-
-    final response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      return RegistrationResponse.fromJson(jsonDecode(response.body));
-    } else {
-      print(response.body);
-      throw Exception('Exception: ${response.statusCode}');
-    }
+    _isLoading = true;
+    notifyListeners();
+    final response = await mAppointmentUseCase.saveAppointment(appointment);
+    _isLoading = false;
+    notifyListeners();
+    return response;
   }
 
   Future<RegistrationResponse> updateAppointment(
     Appointment appointment,
     String appointmentId,
   ) async {
-    final uri = Uri.parse('${url.BASE_URL}updateAppointment').replace(
-      queryParameters: {
-        'appointmentId': appointmentId,
-        'userid': appointment.patientUid,
-        'docid': appointment.doctorId,
-        'appointmentDate': appointment.date,
-        'timeId': appointment.timeId,
-        'reason': appointment.reason,
-        'paymentMethod': appointment.payment,
-      },
+    _isLoading = true;
+    notifyListeners();
+    final response = await mAppointmentUseCase.updateAppointment(
+      appointment,
+      int.parse(appointmentId),
     );
-    final response = await http.get(uri);
-    if (response.statusCode == 200) {
-      return RegistrationResponse.fromJson(jsonDecode(response.body));
-    } else {
-      print(response.body);
-      throw Exception('Exception: ${response.statusCode}');
-    }
+    _isLoading = false;
+    notifyListeners();
+    return response;
   }
 
   Future<List<ViewAppointment>> getAllAppointment(
     int id,
     String userType,
   ) async {
-    final response = await http.get(
-      Uri.parse('${url.BASE_URL}getAppointment?userId=$id&userType=$userType'),
-    );
-
-    print(response.body);
-    if (response.statusCode == 200) {
-      List<ViewAppointment> appointment;
-
-      Iterable list = json.decode(response.body);
-      appointment = list
-          .map((model) => ViewAppointment.fromJson(model))
-          .toList();
-      return appointment;
-    } else {
-      throw Exception('Exception: ${response.statusCode}');
-    }
+    
   }
 
   Future<RegistrationResponse> cancelAppointment(String id) async {

@@ -3,6 +3,7 @@ import 'package:flutter_healthcare_app/src/data/repository/appointment_resitory.
 import 'package:flutter_healthcare_app/src/domains/usecase/appointment_usecase_interface.dart';
 import 'package:flutter_healthcare_app/src/model/appointment.dart';
 import 'package:flutter_healthcare_app/src/model/registration_response.dart';
+import 'package:flutter_healthcare_app/src/model/view_appointment.dart';
 
 class AppointmentUsercaseImp implements AppointmentUseCase 
 {
@@ -34,20 +35,26 @@ class AppointmentUsercaseImp implements AppointmentUseCase
   }
 
   @override
-  Future<List<Appointment>> getAllAppointment(int userId, String userType) 
+  Future<List<ViewAppointment>> getAllAppointment(int userId, String userType) 
   {
     return mAppointmentRepository.getAllAppointment(userId, userType).then((appointmentDbModels) {
-      return appointmentDbModels.map((dbModel) => Appointment(
+      return appointmentDbModels.map((dbModel) => ViewAppointment(
+        id: dbModel.id.toString(),
         patientUid: dbModel.patient_uid,
         doctorId: dbModel.doctor_id,
-        date: dbModel.appointment_date,
+        dates: dbModel.appointment_date,
         timeId: dbModel.appointment_time,
-        reason: dbModel.reason,
-        payment: dbModel.payment_method
+        reasons: dbModel.reason??'',
+        payMethod: dbModel.payment_method,
+        status: dbModel.status??'',
+        createdBy: dbModel.created_by,
+        createdTime: dbModel.created_at,
+        updatedBy: dbModel.updated_by,
+        updatedTime: dbModel.updated_at, doctorName: '', speciality: '', doctorDept: '', appointmentTime: ''
       )).toList();
     }).catchError((error) {
       // Handle error appropriately, possibly returning an empty list or rethrowing the error
-      return <Appointment>[];
+      return <ViewAppointment>[];
     });
   }
 

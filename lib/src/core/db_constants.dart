@@ -2,6 +2,7 @@ abstract class DbTableConstants {
   static const String userTable = 'user_table';
   static const String emergencyContactTable = 'emergency_contact_table';
   static const String AppointmentTable = 'appointment_table';
+  static const String DoctorTable = 'doctor_table';
 }
 
 abstract class DbNameConstants {
@@ -47,6 +48,29 @@ abstract class AppointmentTableColumnConstants {
   static const String UpdatedAt = 'updated_at';
 }
 
+abstract class DoctorTableColumnConstants {
+  static const String Id = 'id';
+  static const String Name = 'name';
+  static const String Department = 'department';
+  static const String Specialist = 'specialist';
+  static const String Phone = 'phone';
+  static const String Education = 'education';
+  static const String Experience = 'experience';
+  static const String About = 'about';
+  static const String Fees = 'fees';
+  static const String JoinDate = 'join_date';
+  static const String Photo = 'photo';
+  static const String Gender = 'gender';
+  static const String IsActive = 'is_active';
+  static const String CreatedBy = 'created_by';
+  static const String CreatedTime = 'created_time';
+  static const String UpdatedBy = 'updated_by';
+  static const String UpdatedTime = 'updatedTime';
+  static const String Location = 'location';
+  static const String Latitude = 'latitude';
+  static const String Longitude = 'longitude';
+}
+
 abstract class DDLCommandConstants {
   static const String UserTableCreate =
       '''CREATE TABLE ${DbTableConstants.userTable} (
@@ -87,5 +111,29 @@ abstract class DDLCommandConstants {
     ${AppointmentTableColumnConstants.CreatedAt} TEXT,
     ${AppointmentTableColumnConstants.UpdateBy} TEXT,
     ${AppointmentTableColumnConstants.UpdatedAt} TEXT
+  );''';
+
+  static const String DoctorTableCreate =
+      '''CREATE TABLE ${DbTableConstants.DoctorTable} (
+    ${DoctorTableColumnConstants.Id} TEXT PRIMARY KEY,
+    ${DoctorTableColumnConstants.Name} TEXT,
+    ${DoctorTableColumnConstants.Department} TEXT,
+    ${DoctorTableColumnConstants.Specialist} TEXT,
+    ${DoctorTableColumnConstants.Phone} TEXT,
+    ${DoctorTableColumnConstants.Education} TEXT,
+    ${DoctorTableColumnConstants.Experience} TEXT,
+    ${DoctorTableColumnConstants.About} TEXT,
+    ${DoctorTableColumnConstants.Fees} TEXT,
+    ${DoctorTableColumnConstants.JoinDate} TEXT,
+    ${DoctorTableColumnConstants.Photo} TEXT,
+    ${DoctorTableColumnConstants.Gender} TEXT,
+    ${DoctorTableColumnConstants.IsActive} INTEGER,
+    ${DoctorTableColumnConstants.CreatedBy} TEXT,
+    ${DoctorTableColumnConstants.CreatedTime} TEXT,
+    ${DoctorTableColumnConstants.UpdatedBy} TEXT,
+    ${DoctorTableColumnConstants.UpdatedTime} TEXT,
+    ${DoctorTableColumnConstants.Location} TEXT,
+    ${DoctorTableColumnConstants.Latitude} TEXT,
+    ${DoctorTableColumnConstants.Longitude} TEXT
   );''';
 }

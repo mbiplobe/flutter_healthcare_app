@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_healthcare_app/src/domains/usecase/appointment_usecase_interface.dart';
@@ -46,7 +45,12 @@ class AppointmentViewModel extends ChangeNotifier {
     int id,
     String userType,
   ) async {
-    
+     _isLoading = true;
+    notifyListeners();
+    final response = await mAppointmentUseCase.getAllAppointment(id, userType);
+    _isLoading = false;
+    notifyListeners();
+    return response;
   }
 
   Future<RegistrationResponse> cancelAppointment(String id) async {

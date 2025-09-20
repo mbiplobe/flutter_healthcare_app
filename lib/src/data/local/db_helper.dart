@@ -1,5 +1,6 @@
 import 'package:flutter_healthcare_app/src/core/db_constants.dart';
 import 'package:flutter_healthcare_app/src/data/models/appointment_db_model.dart';
+import 'package:flutter_healthcare_app/src/data/models/doctor_db_model.dart';
 import 'package:flutter_healthcare_app/src/data/models/user.dart';
 import 'package:flutter_healthcare_app/src/model/emergency_contact.dart';
 import 'package:flutter_healthcare_app/src/model/registration.dart';
@@ -29,6 +30,7 @@ class DatabaseHelper {
     try {
       await db.execute(DDLCommandConstants.UserTableCreate);
       await db.execute(DDLCommandConstants.AppoinrmtmentTableCreate);
+      await db.execute(DDLCommandConstants.DoctorTableCreate);
       // await db.execute(DDLCommandConstants.EmergencyTableCreate);
     } catch (e) {
       print("Error creating tables: $e");
@@ -182,4 +184,37 @@ class DatabaseHelper {
   }
 
   ////////////////////////////////Appointment Segmentation////////////////////////////////////
+  ///
+  /// Emergency Contact Segmentation
+  Future<int> insertDoctor(DoctorDbModel doctor) async {
+    try {
+      final db = await database;
+      final values = {
+        DoctorTableColumnConstants.Id: doctor.id,
+        DoctorTableColumnConstants.Name: doctor.name,
+        DoctorTableColumnConstants.Department: doctor.department,
+        DoctorTableColumnConstants.About: doctor.about,
+        DoctorTableColumnConstants.Education: doctor.education,
+        DoctorTableColumnConstants.Experience: doctor.experience,
+        DoctorTableColumnConstants.Gender: doctor.gender,
+        DoctorTableColumnConstants.Fees: doctor.fees,
+        DoctorTableColumnConstants.IsActive: doctor.is_active,
+        DoctorTableColumnConstants.JoinDate: doctor.join_date,
+        DoctorTableColumnConstants.Latitude: doctor.latitude,
+        DoctorTableColumnConstants.Longitude: doctor.longitude,
+        DoctorTableColumnConstants.Location: doctor.location,
+      };
+      return await db.insert(
+        DbTableConstants.DoctorTable,
+        values,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (e) {
+      print("Insert user error: $e");
+      return -1; // failure code
+    }
+  }
+
+
+
 }

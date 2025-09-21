@@ -1,8 +1,11 @@
+import 'package:flutter_healthcare_app/src/data/models/doctor_rating_model.dart';
+
 abstract class DbTableConstants {
   static const String userTable = 'user_table';
   static const String emergencyContactTable = 'emergency_contact_table';
   static const String AppointmentTable = 'appointment_table';
   static const String DoctorTable = 'doctor_table';
+    static const String DoctorRtaingTable = 'doctor_rating_table';
 }
 
 abstract class DbNameConstants {
@@ -48,6 +51,15 @@ abstract class AppointmentTableColumnConstants {
   static const String UpdatedAt = 'updated_at';
 }
 
+abstract class RatingTableColumnConstants {
+  static const String Id = 'id';
+  static const String Doctorid = 'doctor_id';
+  static const String Rating = 'rating';
+  static const String Review = 'review';
+  static const String CreatedBy = 'created_by';
+  static const String CreatedAt = 'created_at';
+}
+
 abstract class DoctorTableColumnConstants {
   static const String Id = 'id';
   static const String Name = 'name';
@@ -72,6 +84,15 @@ abstract class DoctorTableColumnConstants {
 }
 
 abstract class DDLCommandConstants {
+
+    static const String RatingTableCreate =
+      '''CREATE TABLE ${DbTableConstants.DoctorRtaingTable} (
+    ${RatingTableColumnConstants.Id} INTEGER PRIMARY KEY AUTOINCREMENT,
+    ${RatingTableColumnConstants.Rating} TEXT,
+    ${RatingTableColumnConstants.Review} TEXT,
+    ${RatingTableColumnConstants.CreatedBy} TEXT default '',
+       ${RatingTableColumnConstants.CreatedAt} TEXT default sysdate()
+  );''';
   static const String UserTableCreate =
       '''CREATE TABLE ${DbTableConstants.userTable} (
     ${UserTableColumnConstants.id} INTEGER PRIMARY KEY AUTOINCREMENT,

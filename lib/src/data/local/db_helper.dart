@@ -1,6 +1,7 @@
 import 'package:flutter_healthcare_app/src/core/db_constants.dart';
 import 'package:flutter_healthcare_app/src/data/models/appointment_db_model.dart';
 import 'package:flutter_healthcare_app/src/data/models/doctor_db_model.dart';
+import 'package:flutter_healthcare_app/src/data/models/doctor_rating_model.dart';
 import 'package:flutter_healthcare_app/src/data/models/user.dart';
 import 'package:flutter_healthcare_app/src/model/emergency_contact.dart';
 import 'package:flutter_healthcare_app/src/model/registration.dart';
@@ -31,6 +32,7 @@ class DatabaseHelper {
       await db.execute(DDLCommandConstants.UserTableCreate);
       await db.execute(DDLCommandConstants.AppoinrmtmentTableCreate);
       await db.execute(DDLCommandConstants.DoctorTableCreate);
+      await db.execute(DDLCommandConstants.RatingTableCreate);
       // await db.execute(DDLCommandConstants.EmergencyTableCreate);
     } catch (e) {
       print("Error creating tables: $e");
@@ -203,6 +205,54 @@ class DatabaseHelper {
         DoctorTableColumnConstants.Latitude: doctor.latitude,
         DoctorTableColumnConstants.Longitude: doctor.longitude,
         DoctorTableColumnConstants.Location: doctor.location,
+      };
+      return await db.insert(
+        DbTableConstants.DoctorTable,
+        values,
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    } catch (e) {
+      print("Insert user error: $e");
+      return -1; // failure code
+    }
+  }
+
+  Future<List<DoctorDbModel>> fetchAllDoctors() async {
+    try {
+      final db = await database;
+      final result = await db.query(DbTableConstants.DoctorTable);
+      return result.map((json) => DoctorDbModel.fromJson(json)).toList();
+    } catch (e) {
+      print("Fetch doctors error: $e");
+      return [];
+    }
+  }
+
+/// doctor rating by ID
+  Future<List<DoctorRatingModel>> getDoctorRatingByID(int docID) async {
+    try {
+      final db = await database;
+      final result = await db.query(
+       DbTableConstants.DoctorRtaingTable, // Assuming the table name is 'doctor_ratings'
+        where: RatingTableColumnConstants.Doctorid+ ' = ?',
+        whereArgs: [docID],
+      );
+      return result.map((json) => DoctorRatingModel.fromJson(json)).toList();
+    } catch (e) {
+      print("Fetch doctor ratings error: $e");
+      return [];
+    }
+  }
+
+Future<int> insertDoctorRating(DoctorRatingModel doctorRating) async {
+    try {
+      final db = await database;
+      final values = {
+        RatingTableColumnConstants.Id: doctorRating.id,
+        RatingTableColumnConstants.Rating: doctorRating.rating,
+        RatingTableColumnConstants.Review: doctorRating.review,
+        RatingTableColumnConstants.CreatedAt: doctorRating.created_at,
+        RatingTableColumnConstants.CreatedBy: doctorRating.created_by
       };
       return await db.insert(
         DbTableConstants.DoctorTable,

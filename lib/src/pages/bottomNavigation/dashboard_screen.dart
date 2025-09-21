@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/pages/user/appointment_page.dart';
-import 'package:flutter_healthcare_app/src/pages/user/history_page.dart';
-import 'package:flutter_healthcare_app/src/pages/user/home_Page.dart';
-import 'package:flutter_healthcare_app/src/pages/user/user_profile_menus.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
+import 'package:smart_health_care/src/pages/user/appointment_page.dart';
+import 'package:smart_health_care/src/pages/user/history_page.dart';
+import 'package:smart_health_care/src/pages/user/home_Page.dart';
+import 'package:smart_health_care/src/pages/user/user_profile_menus.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
 class DashboardScreen extends StatefulWidget {

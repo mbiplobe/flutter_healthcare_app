@@ -1,6 +1,6 @@
 {
-    "name": "flutter_healthcare_app",
-    "short_name": "flutter_healthcare_app",
+    "name": "smart_health_care",
+    "short_name": "smart_health_care",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

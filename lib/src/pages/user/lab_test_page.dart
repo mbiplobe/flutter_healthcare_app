@@ -2,11 +2,11 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart' hide DatePickerTheme;
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
-import 'package:flutter_healthcare_app/src/model/lab_test_by_category.dart';
-import 'package:flutter_healthcare_app/src/model/lab_test_category.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/view_model/lab_test_view_model.dart';
-import 'package:flutter_healthcare_app/src/model/registration_response.dart';
+import 'package:smart_health_care/src/model/lab_test_by_category.dart';
+import 'package:smart_health_care/src/model/lab_test_category.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smart_health_care/src/view_model/lab_test_view_model.dart';
+import 'package:smart_health_care/src/model/registration_response.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

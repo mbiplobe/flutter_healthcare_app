@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/view_model/doctor_view_model.dart';
-import 'package:flutter_healthcare_app/src/model/available.dart';
-import 'package:flutter_healthcare_app/src/model/doctor.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/theme/text_styles.dart';
-import 'package:flutter_healthcare_app/src/theme/theme.dart';
-import 'package:flutter_healthcare_app/src/theme/extention.dart';
+import 'package:smart_health_care/src/view_model/doctor_view_model.dart';
+import 'package:smart_health_care/src/model/available.dart';
+import 'package:smart_health_care/src/model/doctor.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smart_health_care/src/theme/text_styles.dart';
+import 'package:smart_health_care/src/theme/theme.dart';
+import 'package:smart_health_care/src/theme/extention.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

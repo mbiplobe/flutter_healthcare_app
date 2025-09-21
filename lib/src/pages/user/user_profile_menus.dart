@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/pages/lab_test_view_screen.dart';
-import 'package:flutter_healthcare_app/src/pages/purchase_screen.dart';
-import 'package:flutter_healthcare_app/src/pages/splash_page.dart';
-import 'package:flutter_healthcare_app/src/pages/user/profile_screen.dart';
-import 'package:flutter_healthcare_app/src/profile/contat_information.dart';
-import 'package:flutter_healthcare_app/src/profile/medical_history.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
+import 'package:smart_health_care/src/pages/lab_test_view_screen.dart';
+import 'package:smart_health_care/src/pages/purchase_screen.dart';
+import 'package:smart_health_care/src/pages/splash_page.dart';
+import 'package:smart_health_care/src/pages/user/profile_screen.dart';
+import 'package:smart_health_care/src/profile/contat_information.dart';
+import 'package:smart_health_care/src/profile/medical_history.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class UserProfileMenu extends StatefulWidget {
   @override

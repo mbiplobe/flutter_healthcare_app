@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/theme/theme.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smart_health_care/src/theme/theme.dart';
 
 class ProgressWidget extends StatefulWidget {
   const ProgressWidget({

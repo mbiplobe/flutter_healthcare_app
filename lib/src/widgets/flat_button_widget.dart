@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/core/height_constants.dart';
+import 'package:smart_health_care/src/core/height_constants.dart';
 
 class FlatButtonWidget extends StatefulWidget {
   final String title;

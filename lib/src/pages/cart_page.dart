@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/pages/eshop/eshop_cart_screen.dart';
+import 'package:smart_health_care/src/pages/eshop/eshop_cart_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
 
 import 'package:responsive_grid/responsive_grid.dart';
 

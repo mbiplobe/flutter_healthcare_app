@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/patient_appointment.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
+import 'package:smart_health_care/src/model/patient_appointment.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
 
 class PatientDetailsPage extends StatefulWidget {
   PatientAppointment appointment;

@@ -1,7 +1,7 @@
-import 'package:flutter_healthcare_app/src/data/repository/auth_repositoryImp.dart';
-import 'package:flutter_healthcare_app/src/model/login_response.dart';
-import 'package:flutter_healthcare_app/src/model/registration.dart';
-import 'package:flutter_healthcare_app/src/model/registration_response.dart';
+import 'package:smart_health_care/src/data/repository/auth_repositoryImp.dart';
+import 'package:smart_health_care/src/model/login_response.dart';
+import 'package:smart_health_care/src/model/registration.dart';
+import 'package:smart_health_care/src/model/registration_response.dart';
 
 class AuthUsecase {
   AuthRepositoryimp authRepository;

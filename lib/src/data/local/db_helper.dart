@@ -1,10 +1,10 @@
-import 'package:flutter_healthcare_app/src/core/db_constants.dart';
-import 'package:flutter_healthcare_app/src/data/models/appointment_db_model.dart';
-import 'package:flutter_healthcare_app/src/data/models/doctor_db_model.dart';
-import 'package:flutter_healthcare_app/src/data/models/doctor_rating_model.dart';
-import 'package:flutter_healthcare_app/src/data/models/user.dart';
-import 'package:flutter_healthcare_app/src/model/emergency_contact.dart';
-import 'package:flutter_healthcare_app/src/model/registration.dart';
+import 'package:smart_health_care/src/core/db_constants.dart';
+import 'package:smart_health_care/src/data/models/appointment_db_model.dart';
+import 'package:smart_health_care/src/data/models/doctor_db_model.dart';
+import 'package:smart_health_care/src/data/models/doctor_rating_model.dart';
+import 'package:smart_health_care/src/data/models/user.dart';
+import 'package:smart_health_care/src/model/emergency_contact.dart';
+import 'package:smart_health_care/src/model/registration.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

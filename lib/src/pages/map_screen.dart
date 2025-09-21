@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/sub_service.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
+import 'package:smart_health_care/src/model/sub_service.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 

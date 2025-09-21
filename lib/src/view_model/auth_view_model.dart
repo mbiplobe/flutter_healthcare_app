@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_healthcare_app/src/domains/usecase/auth_usecase.dart';
-import 'package:flutter_healthcare_app/src/model/contact_details.dart';
-import 'package:flutter_healthcare_app/src/model/emergency_contact.dart';
-import 'package:flutter_healthcare_app/src/model/login_response.dart';
-import 'package:flutter_healthcare_app/src/model/registration.dart';
-import 'package:flutter_healthcare_app/src/model/registration_response.dart';
-import 'package:flutter_healthcare_app/src/theme/url.dart';
+import 'package:smart_health_care/src/domains/usecase/auth_usecase.dart';
+import 'package:smart_health_care/src/model/contact_details.dart';
+import 'package:smart_health_care/src/model/emergency_contact.dart';
+import 'package:smart_health_care/src/model/login_response.dart';
+import 'package:smart_health_care/src/model/registration.dart';
+import 'package:smart_health_care/src/model/registration_response.dart';
+import 'package:smart_health_care/src/theme/url.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;

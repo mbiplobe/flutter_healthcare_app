@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/doctor.dart';
-import 'package:flutter_healthcare_app/src/pages/bottomNavigation/dashboard_screen.dart';
-import 'package:flutter_healthcare_app/src/pages/bottomNavigation/doctor_dashboard_screen.dart';
-import 'package:flutter_healthcare_app/src/pages/delivery/delivery_page.dart';
-import 'package:flutter_healthcare_app/src/pages/detail_page.dart';
-import 'package:flutter_healthcare_app/src/pages/doctor_consultant_page.dart';
-import 'package:flutter_healthcare_app/src/pages/eshop/eshop_home_page.dart';
-import 'package:flutter_healthcare_app/src/pages/login_page.dart';
-import 'package:flutter_healthcare_app/src/pages/register_page.dart';
-import 'package:flutter_healthcare_app/src/pages/splash_page.dart';
+import 'package:smart_health_care/src/model/doctor.dart';
+import 'package:smart_health_care/src/pages/bottomNavigation/dashboard_screen.dart';
+import 'package:smart_health_care/src/pages/bottomNavigation/doctor_dashboard_screen.dart';
+import 'package:smart_health_care/src/pages/delivery/delivery_page.dart';
+import 'package:smart_health_care/src/pages/detail_page.dart';
+import 'package:smart_health_care/src/pages/doctor_consultant_page.dart';
+import 'package:smart_health_care/src/pages/eshop/eshop_home_page.dart';
+import 'package:smart_health_care/src/pages/login_page.dart';
+import 'package:smart_health_care/src/pages/register_page.dart';
+import 'package:smart_health_care/src/pages/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(

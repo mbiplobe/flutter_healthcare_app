@@ -1,4 +1,4 @@
-import 'package:flutter_healthcare_app/src/data/models/appointment_db_model.dart';
+import 'package:smart_health_care/src/data/models/appointment_db_model.dart';
 
 abstract class AppointmentRepository {
   Future<int> saveAppointment(AppointmentDbModel appointment);

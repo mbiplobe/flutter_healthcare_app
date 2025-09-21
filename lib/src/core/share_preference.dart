@@ -1,4 +1,4 @@
-import 'package:flutter_healthcare_app/src/model/login_response.dart';
+import 'package:smart_health_care/src/model/login_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharePreferenceManager {

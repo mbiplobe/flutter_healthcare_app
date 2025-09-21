@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/patient_appointment.dart';
-import 'package:flutter_healthcare_app/src/pages/doctor/patient_details_page.dart';
+import 'package:smart_health_care/src/model/patient_appointment.dart';
+import 'package:smart_health_care/src/pages/doctor/patient_details_page.dart';
 
 
 class ALlPatientDetails extends StatefulWidget {

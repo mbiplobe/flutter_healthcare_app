@@ -1,6 +1,6 @@
-import 'package:flutter_healthcare_app/src/model/appointment.dart';
-import 'package:flutter_healthcare_app/src/model/registration_response.dart';
-import 'package:flutter_healthcare_app/src/model/view_appointment.dart';
+import 'package:smart_health_care/src/model/appointment.dart';
+import 'package:smart_health_care/src/model/registration_response.dart';
+import 'package:smart_health_care/src/model/view_appointment.dart';
 
 abstract class AppointmentUseCase {
   

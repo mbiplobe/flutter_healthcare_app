@@ -1,13 +1,13 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/cart.dart';
-import 'package:flutter_healthcare_app/src/model/medicine.dart';
-import 'package:flutter_healthcare_app/src/model/medicine_type.dart';
-import 'package:flutter_healthcare_app/src/pages/eshop/eshop_detail_page.dart';
-import 'package:flutter_healthcare_app/src/pages/eshop/eshop_cart_screen.dart';
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/view_model/eshop_view_model.dart';
+import 'package:smart_health_care/src/model/cart.dart';
+import 'package:smart_health_care/src/model/medicine.dart';
+import 'package:smart_health_care/src/model/medicine_type.dart';
+import 'package:smart_health_care/src/pages/eshop/eshop_detail_page.dart';
+import 'package:smart_health_care/src/pages/eshop/eshop_cart_screen.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smart_health_care/src/view_model/eshop_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

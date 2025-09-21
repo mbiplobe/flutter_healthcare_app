@@ -1,8 +1,8 @@
-import 'package:flutter_healthcare_app/src/data/models/doctor_db_model.dart';
-import 'package:flutter_healthcare_app/src/data/repository/doctor_repository.dart';
-import 'package:flutter_healthcare_app/src/domains/usecase/doctor_usecases.dart';
-import 'package:flutter_healthcare_app/src/model/doctor.dart';
-import 'package:flutter_healthcare_app/src/model/registration_response.dart';
+import 'package:smart_health_care/src/data/models/doctor_db_model.dart';
+import 'package:smart_health_care/src/data/repository/doctor_repository.dart';
+import 'package:smart_health_care/src/domains/usecase/doctor_usecases.dart';
+import 'package:smart_health_care/src/model/doctor.dart';
+import 'package:smart_health_care/src/model/registration_response.dart';
 
 class DoctorUsecasesImp implements DoctorUsecases {
   DoctorRepository doctorRepository;
@@ -59,7 +59,6 @@ class DoctorUsecasesImp implements DoctorUsecases {
 
   @override
   Future<RegistrationResponse> insertDoctor(Doctor doctor) {
-    // TODO: implement insertDoctor
     throw UnimplementedError();
   }
 }

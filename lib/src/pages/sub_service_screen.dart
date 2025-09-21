@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_healthcare_app/src/model/sub_service.dart';
-import 'package:flutter_healthcare_app/src/pages/map_screen.dart';
+import 'package:smart_health_care/src/model/sub_service.dart';
+import 'package:smart_health_care/src/pages/map_screen.dart';
 
-import 'package:flutter_healthcare_app/src/theme/light_color.dart';
-import 'package:flutter_healthcare_app/src/view_model/service_view_model.dart';
+import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smart_health_care/src/view_model/service_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SubServicePage extends StatefulWidget {

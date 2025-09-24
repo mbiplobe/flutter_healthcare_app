@@ -1,14 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/view_model/doctor_view_model.dart';
-import 'package:smart_health_care/src/model/doctor.dart';
-import 'package:smart_health_care/src/pages/notification_page.dart';
-import 'package:smart_health_care/src/theme/extention.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/theme/text_styles.dart';
-import 'package:smart_health_care/src/theme/theme.dart';
-import 'package:smart_health_care/src/widgets/DrawerWidget.dart';
+import 'package:smarthealthcare/src/view_model/doctor_view_model.dart';
+import 'package:smarthealthcare/src/model/doctor.dart';
+import 'package:smarthealthcare/src/pages/notification_page.dart';
+import 'package:smarthealthcare/src/theme/extention.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/theme/text_styles.dart';
+import 'package:smarthealthcare/src/theme/theme.dart';
+import 'package:smarthealthcare/src/widgets/DrawerWidget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:provider/provider.dart';

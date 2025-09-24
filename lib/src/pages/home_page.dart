@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/dactor_model.dart';
-import 'package:smart_health_care/src/model/data.dart';
-import 'package:smart_health_care/src/theme/extention.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/theme/text_styles.dart';
-import 'package:smart_health_care/src/theme/theme.dart';
+import 'package:smarthealthcare/src/model/dactor_model.dart';
+import 'package:smarthealthcare/src/model/data.dart';
+import 'package:smarthealthcare/src/theme/extention.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/theme/text_styles.dart';
+import 'package:smarthealthcare/src/theme/theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

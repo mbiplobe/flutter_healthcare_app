@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/data.dart';
-import 'package:smart_health_care/src/model/patient_appointment.dart';
-import 'package:smart_health_care/src/pages/doctor/all_patient_details.dart';
+import 'package:smarthealthcare/src/model/data.dart';
+import 'package:smarthealthcare/src/model/patient_appointment.dart';
+import 'package:smarthealthcare/src/pages/doctor/all_patient_details.dart';
 import 'package:intl/intl.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/patient_appointment_View_model.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/patient_appointment_View_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

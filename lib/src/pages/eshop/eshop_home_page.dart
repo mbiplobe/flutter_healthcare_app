@@ -1,13 +1,13 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/cart.dart';
-import 'package:smart_health_care/src/model/medicine.dart';
-import 'package:smart_health_care/src/model/medicine_type.dart';
-import 'package:smart_health_care/src/pages/eshop/eshop_detail_page.dart';
-import 'package:smart_health_care/src/pages/eshop/eshop_cart_screen.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/eshop_view_model.dart';
+import 'package:smarthealthcare/src/model/cart.dart';
+import 'package:smarthealthcare/src/model/medicine.dart';
+import 'package:smarthealthcare/src/model/medicine_type.dart';
+import 'package:smarthealthcare/src/pages/eshop/eshop_detail_page.dart';
+import 'package:smarthealthcare/src/pages/eshop/eshop_cart_screen.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/eshop_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

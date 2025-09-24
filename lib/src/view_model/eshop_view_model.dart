@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:smart_health_care/src/model/cart.dart';
-import 'package:smart_health_care/src/model/medicine.dart';
-import 'package:smart_health_care/src/model/medicine_type.dart';
-import 'package:smart_health_care/src/model/order.dart';
-import 'package:smart_health_care/src/model/order_details.dart';
-// import 'package:smart_health_care/src/model/orderDetails.dart';
-// TODO: Create 'orderDetails.dart' in 'lib/src/model/' or update this import to the correct file if it already exists with a different name.
-import 'package:smart_health_care/src/model/place_order.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/model/cart.dart';
+import 'package:smarthealthcare/src/model/medicine.dart';
+import 'package:smarthealthcare/src/model/medicine_type.dart';
+import 'package:smarthealthcare/src/model/order.dart';
+import 'package:smarthealthcare/src/model/order_details.dart';
+import 'package:smarthealthcare/src/model/place_order.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;

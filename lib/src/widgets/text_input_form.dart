@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/core/height_constants.dart';
-import 'package:smart_health_care/src/theme/extention.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/theme/text_styles.dart';
+import 'package:smarthealthcare/src/core/height_constants.dart';
+import 'package:smarthealthcare/src/theme/extention.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/theme/text_styles.dart';
 
 class TextInputWidger extends StatefulWidget {
   final TextEditingController mController;

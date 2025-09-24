@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
 
 class MedicalHistory extends StatefulWidget {
   @override

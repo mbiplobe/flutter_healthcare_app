@@ -1,9 +1,9 @@
-import 'package:smart_health_care/src/data/models/appointment_db_model.dart';
-import 'package:smart_health_care/src/data/repository/appointment_resitory.dart';
-import 'package:smart_health_care/src/domains/usecase/appointment_usecase_interface.dart';
-import 'package:smart_health_care/src/model/appointment.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
-import 'package:smart_health_care/src/model/view_appointment.dart';
+import 'package:smarthealthcare/src/data/models/appointment_db_model.dart';
+import 'package:smarthealthcare/src/data/repository/appointment_resitory.dart';
+import 'package:smarthealthcare/src/domains/usecase/appointment_usecase_interface.dart';
+import 'package:smarthealthcare/src/model/appointment.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/model/view_appointment.dart';
 
 class AppointmentUsercaseImp implements AppointmentUseCase 
 {

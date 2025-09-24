@@ -1,8 +1,8 @@
-import 'package:smart_health_care/src/data/models/doctor_db_model.dart';
-import 'package:smart_health_care/src/data/repository/doctor_repository.dart';
-import 'package:smart_health_care/src/domains/usecase/doctor_usecases.dart';
-import 'package:smart_health_care/src/model/doctor.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/data/models/doctor_db_model.dart';
+import 'package:smarthealthcare/src/data/repository/doctor_repository.dart';
+import 'package:smarthealthcare/src/domains/usecase/doctor_usecases.dart';
+import 'package:smarthealthcare/src/model/doctor.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
 
 class DoctorUsecasesImp implements DoctorUsecases {
   DoctorRepository doctorRepository;

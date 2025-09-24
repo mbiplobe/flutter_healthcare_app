@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/pages/doctor/doctor_home_Page.dart';
-import 'package:smart_health_care/src/pages/doctor/my_account_page.dart';
-import 'package:smart_health_care/src/pages/medication_page.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/pages/doctor/doctor_home_Page.dart';
+import 'package:smarthealthcare/src/pages/doctor/my_account_page.dart';
+import 'package:smarthealthcare/src/pages/medication_page.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
 
 class DoctorDashboardScreen extends StatefulWidget {
   @override

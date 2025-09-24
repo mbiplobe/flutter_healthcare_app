@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/available.dart';
-import 'package:smart_health_care/src/model/doctor.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
-import 'package:smart_health_care/src/model/view_appointment.dart';
-import 'package:smart_health_care/src/pages/book_appoint_page.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/appointment_view_model.dart';
-import 'package:smart_health_care/src/view_model/doctor_view_model.dart';
+import 'package:smarthealthcare/src/model/available.dart';
+import 'package:smarthealthcare/src/model/doctor.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/model/view_appointment.dart';
+import 'package:smarthealthcare/src/pages/book_appoint_page.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/appointment_view_model.dart';
+import 'package:smarthealthcare/src/view_model/doctor_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

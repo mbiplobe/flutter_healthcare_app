@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:smart_health_care/src/model/lab_test_by_category.dart';
-import 'package:smart_health_care/src/model/lab_test_by_user.dart';
-import 'package:smart_health_care/src/model/lab_test_category.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/model/lab_test_by_category.dart';
+import 'package:smarthealthcare/src/model/lab_test_by_user.dart';
+import 'package:smarthealthcare/src/model/lab_test_category.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:smart_health_care/src/theme/url.dart';
+import 'package:smarthealthcare/src/theme/url.dart';
 
 class LabTestViewModel extends ChangeNotifier {
 

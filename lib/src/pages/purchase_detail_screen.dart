@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/order.dart';
-import 'package:smart_health_care/src/model/order_details.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
-import 'package:smart_health_care/src/pages/purchase_screen.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/eshop_view_model.dart';
+import 'package:smarthealthcare/src/model/order.dart';
+import 'package:smarthealthcare/src/model/order_details.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/pages/purchase_screen.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/eshop_view_model.dart';
 import 'package:provider/provider.dart';
 
 class PurchaseDetailScreen extends StatefulWidget {

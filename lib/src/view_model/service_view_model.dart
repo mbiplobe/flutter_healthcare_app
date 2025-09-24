@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:smart_health_care/src/model/service.dart';
-import 'package:smart_health_care/src/model/sub_service.dart';
-import 'package:smart_health_care/src/theme/url.dart';
+import 'package:smarthealthcare/src/model/service.dart';
+import 'package:smarthealthcare/src/model/sub_service.dart';
+import 'package:smarthealthcare/src/theme/url.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;

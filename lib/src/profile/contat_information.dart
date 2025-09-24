@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/contact_details.dart';
-import 'package:smart_health_care/src/model/emergency_contact.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/auth_view_model.dart';
+import 'package:smarthealthcare/src/model/contact_details.dart';
+import 'package:smarthealthcare/src/model/emergency_contact.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

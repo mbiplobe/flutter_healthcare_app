@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/cart.dart';
-import 'package:smart_health_care/src/model/view_appointment.dart';
-import 'package:smart_health_care/src/pages/all_service.dart';
-import 'package:smart_health_care/src/pages/doctor_consultant_page.dart';
-import 'package:smart_health_care/src/pages/eshop/eshop_home_page.dart';
-import 'package:smart_health_care/src/pages/user/lab_test_page.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/appointment_view_model.dart';
-import 'package:smart_health_care/src/view_model/eshop_view_model.dart';
+import 'package:smarthealthcare/src/model/cart.dart';
+import 'package:smarthealthcare/src/model/view_appointment.dart';
+import 'package:smarthealthcare/src/pages/all_service.dart';
+import 'package:smarthealthcare/src/pages/doctor_consultant_page.dart';
+import 'package:smarthealthcare/src/pages/eshop/eshop_home_page.dart';
+import 'package:smarthealthcare/src/pages/user/lab_test_page.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/appointment_view_model.dart';
+import 'package:smarthealthcare/src/view_model/eshop_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

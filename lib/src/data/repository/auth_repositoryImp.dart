@@ -1,11 +1,11 @@
 
-import 'package:smart_health_care/src/data/local/db_helper.dart';
-import 'package:smart_health_care/src/data/models/user.dart';
-import 'package:smart_health_care/src/data/repository/auth_repository.dart';
-import 'package:smart_health_care/src/model/contact_details.dart';
-import 'package:smart_health_care/src/model/emergency_contact.dart';
-import 'package:smart_health_care/src/model/registration.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/data/local/db_helper.dart';
+import 'package:smarthealthcare/src/data/models/user.dart';
+import 'package:smarthealthcare/src/data/repository/auth_repository.dart';
+import 'package:smarthealthcare/src/model/contact_details.dart';
+import 'package:smarthealthcare/src/model/emergency_contact.dart';
+import 'package:smarthealthcare/src/model/registration.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
 
 class AuthRepositoryimp implements AuthRepository {
   final DatabaseHelper mDatabaseHelper;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/place_order.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/eshop_view_model.dart';
+import 'package:smarthealthcare/src/model/place_order.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/eshop_view_model.dart';
 import 'package:provider/provider.dart';
 
 class CheckoutPage extends StatefulWidget {

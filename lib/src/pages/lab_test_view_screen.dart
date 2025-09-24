@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/model/lab_test_by_user.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
-import 'package:smart_health_care/src/pages/user/lab_test_page.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
-import 'package:smart_health_care/src/view_model/lab_test_view_model.dart';
+import 'package:smarthealthcare/src/model/lab_test_by_user.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/pages/user/lab_test_page.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/view_model/lab_test_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

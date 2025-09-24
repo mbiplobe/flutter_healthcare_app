@@ -1,4 +1,4 @@
-package com.thealphamerc.smart_health_care;
+package com.thealphamerc.smarthealthcare;
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity;

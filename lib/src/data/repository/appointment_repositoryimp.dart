@@ -1,6 +1,6 @@
-import 'package:smart_health_care/src/data/local/db_helper.dart';
-import 'package:smart_health_care/src/data/models/appointment_db_model.dart';
-import 'package:smart_health_care/src/data/repository/appointment_resitory.dart';
+import 'package:smarthealthcare/src/data/local/db_helper.dart';
+import 'package:smarthealthcare/src/data/models/appointment_db_model.dart';
+import 'package:smarthealthcare/src/data/repository/appointment_resitory.dart';
 
 class AppointmentRepositoryImp implements AppointmentRepository {
   final DatabaseHelper mDatabaseHelper;

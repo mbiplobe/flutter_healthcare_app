@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:smart_health_care/src/domains/usecase/doctor_usecases.dart';
-import 'package:smart_health_care/src/model/available.dart';
-import 'package:smart_health_care/src/model/doctor.dart';
-import 'package:smart_health_care/src/theme/url.dart';
+import 'package:smarthealthcare/src/domains/usecase/doctor_usecases.dart';
+import 'package:smarthealthcare/src/model/available.dart';
+import 'package:smarthealthcare/src/model/doctor.dart';
+import 'package:smarthealthcare/src/theme/url.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;

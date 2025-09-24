@@ -1,6 +1,6 @@
-import 'package:smart_health_care/src/model/appointment.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
-import 'package:smart_health_care/src/model/view_appointment.dart';
+import 'package:smarthealthcare/src/model/appointment.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/model/view_appointment.dart';
 
 abstract class AppointmentUseCase {
   

@@ -1,7 +1,7 @@
-import 'package:smart_health_care/src/data/repository/auth_repositoryImp.dart';
-import 'package:smart_health_care/src/model/login_response.dart';
-import 'package:smart_health_care/src/model/registration.dart';
-import 'package:smart_health_care/src/model/registration_response.dart';
+import 'package:smarthealthcare/src/data/repository/auth_repositoryImp.dart';
+import 'package:smarthealthcare/src/model/login_response.dart';
+import 'package:smarthealthcare/src/model/registration.dart';
+import 'package:smarthealthcare/src/model/registration_response.dart';
 
 class AuthUsecase {
   AuthRepositoryimp authRepository;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_health_care/src/controllers/selector_controller.dart';
-import 'package:smart_health_care/src/core/height_constants.dart';
-import 'package:smart_health_care/src/model/selection_model.dart';
-import 'package:smart_health_care/src/theme/light_color.dart';
+import 'package:smarthealthcare/src/controllers/selector_controller.dart';
+import 'package:smarthealthcare/src/core/height_constants.dart';
+import 'package:smarthealthcare/src/model/selection_model.dart';
+import 'package:smarthealthcare/src/theme/light_color.dart';
 
 class SelectorWidget extends StatefulWidget {
   final SelectorController controller;

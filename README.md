@@ -5,7 +5,7 @@ The primary focus of this project is to deliver a modern, efficient, and well-st
 
   HomePage                 |    Detail Page        
 :-------------------------:|:-------------------------:
-![](https://github.com/flutter_healthcare_app/smarthealthcare/blob/master/screenshots/screenshot_1.jpg?raw=true)|![](https://github.com/flutter_healthcare_app/smarthealthcare/blob/master/screenshots/screenshot_2.jpg?raw=true)
+![](https://github.com/mbiplobe/flutter_healthcare_app/blob/master/screenshots/screenshot_1.jpg?raw=true)|![](https://github.com/flutter_healthcare_app/smarthealthcare/blob/master/screenshots/screenshot_2.jpg?raw=true)
 
 ## iOS Screenshots
   HomePage                 |    Detail Page      
